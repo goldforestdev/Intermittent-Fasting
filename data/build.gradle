@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
 
@@ -31,4 +35,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // Jetpack - Room
+    implementation "androidx.room:room-runtime:2.1.0-beta01"
+    implementation "androidx.room:room-ktx:2.1.0-beta01"
+    kapt "androidx.room:room-compiler:2.1.0-beta01"
+    androidTestImplementation "androidx.room:room-testing:2.1.0-beta01"
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }
