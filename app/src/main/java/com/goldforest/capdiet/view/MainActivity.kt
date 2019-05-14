@@ -1,26 +1,13 @@
 package com.goldforest.capdiet.view
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.goldforest.capdiet.R
-import com.goldforest.capdiet.base.BaseActivity
-import com.goldforest.capdiet.databinding.ActivityMainBinding
-import com.goldforest.capdiet.viewmodel.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : AppCompatActivity() {
 
-    override val layoutResourceId: Int
-        get() = R.layout.activity_main
-
-    override val viewModel: MainViewModel by viewModel()
-
-    override fun initStartView() {
-
-    }
-
-    override fun initDataBinding() {
-
-    }
-
-    override fun initAfterBinding() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
     }
 }

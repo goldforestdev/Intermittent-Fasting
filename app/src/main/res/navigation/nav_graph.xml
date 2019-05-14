@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/splashFragment">
+
+    <fragment android:id="@+id/splashFragment" android:name="com.goldforest.capdiet.view.SplashFragment"
+              android:label="fragment_splash" tools:layout="@layout/fragment_splash">
+        <action android:id="@+id/action_splashFragment_to_mainFragment" app:destination="@id/mainFragment"/>
+    </fragment>
+    <fragment android:id="@+id/mainFragment" android:name="com.goldforest.capdiet.view.MainFragment"
+              android:label="fragment_main" tools:layout="@layout/fragment_main"/>
+    <fragment android:id="@+id/planFragment" android:name="com.goldforest.capdiet.view.PlanFragment"
+              android:label="fragment_plan" tools:layout="@layout/fragment_plan"/>
+    <fragment android:id="@+id/listFragment" android:name="com.goldforest.capdiet.view.ListFragment"
+              android:label="fragment_list" tools:layout="@layout/fragment_list"/>
+    <fragment android:id="@+id/settingsFragment" android:name="com.goldforest.capdiet.view.SettingsFragment"
+              android:label="fragment_settings" tools:layout="@layout/fragment_settings"/>
+    <fragment android:id="@+id/calendarFragment" android:name="com.goldforest.capdiet.view.CalendarFragment"
+              android:label="fragment_calendar" tools:layout="@layout/fragment_calendar"/>
+</navigation>
