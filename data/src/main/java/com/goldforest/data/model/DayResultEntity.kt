@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.goldforest.domain.model.DayResult
 
 @Entity(
+    tableName = "day_result_entity",
     foreignKeys = [ForeignKey(
         entity = PlanEntity::class,
         parentColumns = arrayOf("id"),

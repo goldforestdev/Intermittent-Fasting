@@ -1,7 +1,14 @@
 package com.goldforest.domain.usercase
 
-import com.goldforest.data.model.Plan
+import com.goldforest.domain.model.Plan
+
 
 interface CreatePlan {
-    fun save(plan: Plan)
+    suspend fun save(vararg plan: Plan)
+
+    suspend fun getAll(): Array<Plan>
+
+    suspend fun get(id: Long): Plan
+
+    suspend fun delete(vararg plan: Plan)
 }

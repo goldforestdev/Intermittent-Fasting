@@ -1,3 +1,13 @@
 package com.goldforest.domain.repository
 
-interface PlanRepository
+import com.goldforest.domain.model.Plan
+
+interface PlanRepository {
+    suspend fun save(vararg plan: Plan)
+
+    suspend fun getAll(): Array<Plan>
+
+    suspend fun get(id: Long): Plan
+
+    suspend fun delete(vararg plan: Plan)
+}

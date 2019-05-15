@@ -36,6 +36,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    implementation project(':domain')
+
     // Jetpack - Room
     implementation "androidx.room:room-runtime:2.1.0-beta01"
     implementation "androidx.room:room-ktx:2.1.0-beta01"
