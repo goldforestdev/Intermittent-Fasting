@@ -11,7 +11,9 @@
                 app:popUpToInclusive="true"/>
     </fragment>
     <fragment android:id="@+id/mainFragment" android:name="com.goldforest.capdiet.view.MainFragment"
-              android:label="fragment_main" tools:layout="@layout/fragment_main"/>
+              android:label="fragment_main" tools:layout="@layout/fragment_main">
+        <action android:id="@+id/action_mainFragment_to_planFragment" app:destination="@id/planFragment"/>
+    </fragment>
     <fragment android:id="@+id/planFragment" android:name="com.goldforest.capdiet.view.PlanFragment"
               android:label="fragment_plan" tools:layout="@layout/fragment_plan"/>
     <fragment android:id="@+id/listFragment" android:name="com.goldforest.capdiet.view.ListFragment"

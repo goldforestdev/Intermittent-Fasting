@@ -7,10 +7,12 @@
             android:layout_height="match_parent"
             tools:context=".view.MainFragment">
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Main Fragment"/>
+        <Button
+                android:id="@+id/btPlanViewTest"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:text="Go Plan Test"
+                android:textSize="23sp"/>
 
     </FrameLayout>
 </layout>
