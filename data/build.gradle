@@ -46,9 +46,3 @@ dependencies {
     kapt "androidx.room:room-compiler:2.1.0-beta01"
     androidTestImplementation "androidx.room:room-testing:2.1.0-beta01"
 }
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
