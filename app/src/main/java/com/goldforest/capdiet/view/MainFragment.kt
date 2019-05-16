@@ -12,8 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
-    override val layoutResourceId: Int
-        get() = R.layout.fragment_main
+    override val layoutResourceId: Int = R.layout.fragment_main
     override val viewModel: MainViewModel by viewModel()
 
 
