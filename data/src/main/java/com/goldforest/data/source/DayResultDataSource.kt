@@ -7,7 +7,7 @@ interface DayResultDataSource {
 
     suspend fun getAll(planId: Long): Array<DayResultEntity>
 
-    suspend fun get(id: Long): DayResultEntity
+    suspend fun get(id: String): DayResultEntity
 
     suspend fun delete(vararg dayResult: DayResultEntity)
 }

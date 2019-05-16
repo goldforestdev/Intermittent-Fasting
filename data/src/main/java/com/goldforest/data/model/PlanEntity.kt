@@ -19,3 +19,5 @@ data class PlanEntity (
 )
 
 fun Plan.toEntity() = PlanEntity(id, planName, type, startTime, endTime, day, startDate, endDate, done)
+
+fun PlanEntity.toModel() = Plan(id, planName, type, startTime, endTime, day, startDate, endDate, done)

@@ -15,7 +15,7 @@ interface DayResultDao : DayResultDataSource {
     override suspend fun getAll(planId: Long): Array<DayResultEntity>
 
     @Query("SELECT * FROM day_result_entity WHERE id=:id")
-    override suspend fun get(id: Long): DayResultEntity
+    override suspend fun get(id: String): DayResultEntity
 
     @Delete
     override suspend fun delete(vararg dayResult: DayResultEntity)

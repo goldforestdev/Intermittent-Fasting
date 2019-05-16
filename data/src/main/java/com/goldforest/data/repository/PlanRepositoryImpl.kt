@@ -1,6 +1,7 @@
 package com.goldforest.data.repository
 
 import com.goldforest.data.model.toEntity
+import com.goldforest.data.model.toModel
 import com.goldforest.data.source.PlanDataSource
 import com.goldforest.domain.model.Plan
 import com.goldforest.domain.repository.PlanRepository
@@ -16,16 +17,13 @@ class PlanRepositoryImpl(
         planRemoteDataSource.save(*planEntityList)
     }
 
-    override suspend fun getAll(): Array<Plan> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override suspend fun getAll(): Array<Plan> = planLocalDataSource.getAll().map { it.toModel() }.toTypedArray()
 
-    override suspend fun get(id: Long): Plan {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override suspend fun get(id: Long): Plan = planLocalDataSource.get(id).toModel()
 
     override suspend fun delete(vararg plan: Plan) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val planEntityList = plan.map { it.toEntity() }.toTypedArray()
+        planLocalDataSource.delete(*planEntityList)
     }
 
 }

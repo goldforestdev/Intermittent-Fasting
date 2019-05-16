@@ -22,3 +22,5 @@ data class DayResultEntity(
 )
 
 fun DayResult.toEntity() = DayResultEntity(id, isSuccess, planId)
+
+fun DayResultEntity.toModel() = DayResult(id, isSuccess, planId)
