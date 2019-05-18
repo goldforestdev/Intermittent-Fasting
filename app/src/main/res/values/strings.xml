@@ -2,5 +2,9 @@
     <string name="app_name">GoldForest Diet</string>
 
     <string name="splash_bottom_text">Copyright<![CDATA[ⓒ]]> 2019 Gold Forest Team.</string>
+    <string name="plan_1_title">간헐적 단식의 종류를 선택 하세요.</string>
+    <string name="plan_type_16_8">16/8 간헐적 단식</string>
+    <string name="plan_type_5_2">5/2 간헐적 단식</string>
+
 
 </resources>
