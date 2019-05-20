@@ -11,4 +11,6 @@ interface PlanDataSource {
     suspend fun get(id: Long): PlanEntity
 
     suspend fun delete(vararg plan: PlanEntity)
+
+    suspend fun getActivePlan(): PlanEntity?
 }

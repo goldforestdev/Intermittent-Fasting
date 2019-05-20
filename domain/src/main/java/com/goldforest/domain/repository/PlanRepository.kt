@@ -10,4 +10,6 @@ interface PlanRepository {
     suspend fun get(id: Long): Plan
 
     suspend fun delete(vararg plan: Plan)
+
+    suspend fun getActivePlan(): Plan
 }

@@ -17,4 +17,7 @@ interface PlanDao : PlanDataSource {
 
     @Delete
     override suspend fun delete(vararg plan: PlanEntity)
+
+    @Query("SELECT * FROM plan_entity WHERE done=0 LIMIT 1")
+    override suspend fun getActivePlan(): PlanEntity?
 }

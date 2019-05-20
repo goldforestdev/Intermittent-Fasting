@@ -23,11 +23,13 @@ class PlanDaoTest {
     private val p3 = PlanEntity(3L, "test plan3", 3, "stime", "etime", 1, "sdate", "edate", true)
     private val p4 = PlanEntity(4L, "test plan4", 4, "stime", "etime", 1, "sdate", "edate", true)
     private val p5 = PlanEntity(5L, "test plan5", 5, "stime", "etime", 1, "sdate", "edate", true)
+    private val activePlan = PlanEntity(6L, "active plan", 6, "stime", "etime", 1, "sdate", "edate", false)
     private val planArray = arrayOf(p1, p2, p3, p4, p5)
 
     @Before
     fun setup() {
-        db = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java).build()
+        db = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java)
+            .build()
         planDao = db.planDao()
 
         runBlocking {
@@ -74,5 +76,18 @@ class PlanDaoTest {
 
         planDao.delete(p5)
         assertEquals(0, planDao.getAll().size)
+    }
+
+    @Test
+    fun getActivePlanTest() = runBlocking {
+        assertEquals(5, planDao.getAll().size)
+        planDao.save(activePlan)
+        assertEquals(6, planDao.getAll().size)
+        assertEquals(activePlan, planDao.getActivePlan())
+    }
+
+    @Test
+    fun `getActivePlanTest-Active_Plan이_존재하지_않으면_Null을_반환해야_한다`() = runBlocking {
+        assertEquals(null, planDao.getActivePlan())
     }
 }

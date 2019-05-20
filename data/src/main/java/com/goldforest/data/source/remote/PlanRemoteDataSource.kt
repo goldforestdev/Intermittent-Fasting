@@ -4,6 +4,7 @@ import com.goldforest.data.model.PlanEntity
 import com.goldforest.data.source.PlanDataSource
 
 class PlanRemoteDataSource: PlanDataSource {
+
     override suspend fun save(vararg plan: PlanEntity) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -20,4 +21,7 @@ class PlanRemoteDataSource: PlanDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override suspend fun getActivePlan(): PlanEntity? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

@@ -5,6 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.goldforest.data.source.PlanDataSource
 import com.goldforest.data.source.local.AppDatabase
+import com.goldforest.domain.exceptions.NotExistPlanException
 import com.goldforest.domain.model.Plan
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import kotlin.math.exp
 
 
 @RunWith(AndroidJUnit4::class)
@@ -81,5 +83,19 @@ class PlanRepositoryImplTest {
 
         planRepository.delete(p5)
         assertEquals(0, planRepository.getAll().size)
+    }
+
+    @Test
+    fun getActivePlanTest() = runBlocking {
+        val activePlan = Plan(6L, "active plan", 6, "stime", "etime", 1, "sdate", "edate", false)
+
+        planRepository.save(activePlan)
+        assertEquals(1, planRepository.getAll().size)
+        assertEquals(activePlan, planRepository.getActivePlan())
+    }
+
+    @Test(expected = NotExistPlanException::class)
+    fun `getActivePlanTest-Active_Plan이_존재하지_않으면_NotExistPlanException을_던져야_한다`() = runBlocking {
+        val plan = planRepository.getActivePlan()
     }
 }
