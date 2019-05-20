@@ -14,6 +14,15 @@ import com.goldforest.capdiet.R
 
 class SplashFragment : Fragment() {
 
+    override fun onStart() {
+        super.onStart()
+        Handler().postDelayed({
+            context?.let {
+                findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+            }
+        }, 2000)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,10 +33,6 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.hide()
-        Handler().postDelayed({
-            context?.let {
-                findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
-            }
-        }, 2500)
+
     }
 }
