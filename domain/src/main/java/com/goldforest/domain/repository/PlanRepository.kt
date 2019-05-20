@@ -1,5 +1,6 @@
 package com.goldforest.domain.repository
 
+import com.goldforest.domain.exceptions.NotExistPlanException
 import com.goldforest.domain.model.Plan
 
 interface PlanRepository {
@@ -11,5 +12,6 @@ interface PlanRepository {
 
     suspend fun delete(vararg plan: Plan)
 
+    @Throws(NotExistPlanException::class)
     suspend fun getActivePlan(): Plan
 }
