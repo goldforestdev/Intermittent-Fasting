@@ -59,34 +59,34 @@ class DayResultDaoTest {
     }
 
     @Test
-    fun getAllTest() = runBlocking {
-        var planArrayFromDb = dayResultDao.getAll(1L)
+    fun getAllByPlanIdTest() = runBlocking {
+        var planArrayFromDb = dayResultDao.getAllByPlanId(1L)
         Assert.assertEquals(3, planArrayFromDb.size)
 
-        planArrayFromDb = dayResultDao.getAll(2L)
+        planArrayFromDb = dayResultDao.getAllByPlanId(2L)
         Assert.assertEquals(2, planArrayFromDb.size)
     }
 
     @Test
     fun deleteTest() = runBlocking {
-        Assert.assertEquals(3, dayResultDao.getAll(1L).size)
+        Assert.assertEquals(3, dayResultDao.getAllByPlanId(1L).size)
 
         dayResultDao.delete(dr1)
-        Assert.assertEquals(2, dayResultDao.getAll(1L).size)
+        Assert.assertEquals(2, dayResultDao.getAllByPlanId(1L).size)
 
         dayResultDao.delete(dr2)
-        Assert.assertEquals(1, dayResultDao.getAll(1L).size)
+        Assert.assertEquals(1, dayResultDao.getAllByPlanId(1L).size)
 
         dayResultDao.delete(dr3)
-        Assert.assertEquals(0, dayResultDao.getAll(1L).size)
+        Assert.assertEquals(0, dayResultDao.getAllByPlanId(1L).size)
 
-        Assert.assertEquals(2, dayResultDao.getAll(2L).size)
+        Assert.assertEquals(2, dayResultDao.getAllByPlanId(2L).size)
 
         dayResultDao.delete(dr4)
-        Assert.assertEquals(1, dayResultDao.getAll(2L).size)
+        Assert.assertEquals(1, dayResultDao.getAllByPlanId(2L).size)
 
         dayResultDao.delete(dr5)
-        Assert.assertEquals(0, dayResultDao.getAll(2L).size)
+        Assert.assertEquals(0, dayResultDao.getAllByPlanId(2L).size)
     }
 
 }

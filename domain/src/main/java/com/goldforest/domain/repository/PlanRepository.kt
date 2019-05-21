@@ -6,8 +6,10 @@ import com.goldforest.domain.model.Plan
 interface PlanRepository {
     suspend fun save(vararg plan: Plan)
 
-    suspend fun getAll(): Array<Plan>
+    @Throws(NotExistPlanException::class)
+    suspend fun getAll(): List<Plan>
 
+    @Throws(NotExistPlanException::class)
     suspend fun get(id: Long): Plan
 
     suspend fun delete(vararg plan: Plan)

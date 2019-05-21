@@ -18,7 +18,7 @@ class PlanRepositoryImpl(
         planRemoteDataSource.save(*planEntityList)
     }
 
-    override suspend fun getAll(): Array<Plan> = planLocalDataSource.getAll().map { it.toModel() }.toTypedArray()
+    override suspend fun getAll(): List<Plan> = planLocalDataSource.getAll().map { it.toModel() }
 
     override suspend fun get(id: Long): Plan = planLocalDataSource.get(id).toModel()
 

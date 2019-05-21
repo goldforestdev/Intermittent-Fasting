@@ -12,7 +12,10 @@ interface DayResultDao : DayResultDataSource {
     override suspend fun save(vararg dayResult: DayResultEntity)
 
     @Query("SELECT * FROM day_result_entity WHERE planId=:planId")
-    override suspend fun getAll(planId: Long): Array<DayResultEntity>
+    override suspend fun getAllByPlanId(planId: Long): Array<DayResultEntity>
+
+    @Query("SELECT * FROM day_result_entity")
+    override suspend fun getAll(): Array<DayResultEntity>
 
     @Query("SELECT * FROM day_result_entity WHERE id=:id")
     override suspend fun get(id: String): DayResultEntity

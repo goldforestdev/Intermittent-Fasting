@@ -8,7 +8,11 @@ class DayResultRemoteDataSource : DayResultDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getAll(planId: Long): Array<DayResultEntity> {
+    override suspend fun getAllByPlanId(planId: Long): Array<DayResultEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun getAll(): Array<DayResultEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

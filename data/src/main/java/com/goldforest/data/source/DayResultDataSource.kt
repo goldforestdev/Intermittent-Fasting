@@ -5,7 +5,9 @@ import com.goldforest.data.model.DayResultEntity
 interface DayResultDataSource {
     suspend fun save(vararg dayResult: DayResultEntity)
 
-    suspend fun getAll(planId: Long): Array<DayResultEntity>
+    suspend fun getAllByPlanId(planId: Long): Array<DayResultEntity>
+
+    suspend fun getAll(): Array<DayResultEntity>
 
     suspend fun get(id: String): DayResultEntity
 

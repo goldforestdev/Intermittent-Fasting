@@ -10,13 +10,16 @@ class DayResultRepositoryImpl(
     private val dayResultLocalDataSource: DayResultDataSource,
     private val dayResultRemoteDataSource: DayResultDataSource
 ): DayResultRepository {
+
     override suspend fun save(vararg dayResult: DayResult) {
         val dayResultEntityList = dayResult.map { it.toEntity() }.toTypedArray()
         dayResultLocalDataSource.save(*dayResultEntityList)
         dayResultRemoteDataSource.save(*dayResultEntityList)
     }
 
-    override suspend fun getAll(planId: Long): Array<DayResult> = dayResultLocalDataSource.getAll(planId).map { it.toModel() }.toTypedArray()
+    override suspend fun getAllByPlanId(planId: Long): List<DayResult> = dayResultLocalDataSource.getAllByPlanId(planId).map { it.toModel() }
+
+    override suspend fun getAll(): List<DayResult> = dayResultLocalDataSource.getAll().map { it.toModel() }
 
     override suspend fun get(id: String): DayResult = dayResultLocalDataSource.get(id).toModel()
 

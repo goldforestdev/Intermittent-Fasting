@@ -63,9 +63,9 @@ class DayResultRepositoryImplTest {
     }
 
     @Test
-    fun getAllTest() = runBlocking {
-        assertEquals(3, dayResultRepository.getAll(1L).size)
-        assertEquals(2, dayResultRepository.getAll(2L).size)
+    fun getAllByPlanIdTest() = runBlocking {
+        assertEquals(3, dayResultRepository.getAllByPlanId(1L).size)
+        assertEquals(2, dayResultRepository.getAllByPlanId(2L).size)
     }
 
     @Test
@@ -76,23 +76,28 @@ class DayResultRepositoryImplTest {
         val dr4 = DayResult("4", 1, 2L)
         val dr5 = DayResult("5", 2, 2L)
 
-        assertEquals(3, dayResultRepository.getAll(1L).size)
+        assertEquals(3, dayResultRepository.getAllByPlanId(1L).size)
 
         dayResultRepository.delete(dr1)
-        assertEquals(2, dayResultRepository.getAll(1L).size)
+        assertEquals(2, dayResultRepository.getAllByPlanId(1L).size)
 
         dayResultRepository.delete(dr2)
-        assertEquals(1, dayResultRepository.getAll(1L).size)
+        assertEquals(1, dayResultRepository.getAllByPlanId(1L).size)
 
         dayResultRepository.delete(dr3)
-        assertEquals(0, dayResultRepository.getAll(1L).size)
+        assertEquals(0, dayResultRepository.getAllByPlanId(1L).size)
 
-        assertEquals(2, dayResultRepository.getAll(2L).size)
+        assertEquals(2, dayResultRepository.getAllByPlanId(2L).size)
 
         dayResultRepository.delete(dr4)
-        assertEquals(1, dayResultRepository.getAll(2L).size)
+        assertEquals(1, dayResultRepository.getAllByPlanId(2L).size)
 
         dayResultRepository.delete(dr5)
-        assertEquals(0, dayResultRepository.getAll(2L).size)
+        assertEquals(0, dayResultRepository.getAllByPlanId(2L).size)
+    }
+
+    @Test
+    fun `getAllTest-without_planId`() = runBlocking {
+        assertEquals(5, dayResultRepository.getAll().size)
     }
 }
