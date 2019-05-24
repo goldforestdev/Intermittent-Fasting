@@ -25,5 +25,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         btPlanViewTest.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_planFragment)
         }
+
+        btCalendarViewTest.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_calendarFragment)
+        }
     }
 }

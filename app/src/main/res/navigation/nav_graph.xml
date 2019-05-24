@@ -13,6 +13,7 @@
     <fragment android:id="@+id/mainFragment" android:name="com.goldforest.capdiet.view.MainFragment"
               android:label="fragment_main" tools:layout="@layout/fragment_main">
         <action android:id="@+id/action_mainFragment_to_planFragment" app:destination="@id/planFragment"/>
+        <action android:id="@+id/action_mainFragment_to_calendarFragment" app:destination="@id/calendarFragment"/>
     </fragment>
     <fragment android:id="@+id/planFragment" android:name="com.goldforest.capdiet.view.PlanFragment"
               android:label="fragment_plan" tools:layout="@layout/fragment_plan"/>
@@ -20,6 +21,6 @@
               android:label="fragment_list" tools:layout="@layout/fragment_list"/>
     <fragment android:id="@+id/settingsFragment" android:name="com.goldforest.capdiet.view.SettingsFragment"
               android:label="fragment_settings" tools:layout="@layout/fragment_settings"/>
-    <fragment android:id="@+id/calendarFragment" android:name="com.goldforest.capdiet.view.CalendarFragment"
-              android:label="fragment_calendar" tools:layout="@layout/fragment_calendar"/>
+    <fragment android:id="@+id/calendarFragment" android:name="com.goldforest.capdiet.view.CalendarMainFragment"
+              android:label="fragment_calendar" tools:layout="@layout/fragment_calendar_main"/>
 </navigation>

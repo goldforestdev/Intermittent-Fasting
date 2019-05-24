@@ -1,5 +1,6 @@
 package com.goldforest.capdiet.di
 
+import com.goldforest.capdiet.viewmodel.CalendarViewModel
 import com.goldforest.capdiet.viewmodel.MainViewModel
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.goldforest.data.di.dataModule
@@ -13,6 +14,7 @@ var viewModelModule = module {
     viewModel {
         MainViewModel()
         PlanViewModel()
+        CalendarViewModel(get())
     }
 }
 
