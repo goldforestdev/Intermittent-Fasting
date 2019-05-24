@@ -1,4 +1,4 @@
-package com.goldforest.capdiet.view
+package com.goldforest.capdiet.view.calendar
 
 import android.os.Bundle
 import android.view.ViewGroup

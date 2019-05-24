@@ -7,7 +7,7 @@ interface DayResultDataSource {
 
     suspend fun getAllByPlanId(planId: Long): Array<DayResultEntity>
 
-    suspend fun getAll(): Array<DayResultEntity>
+    suspend fun getAllByMonth(startTime: Long, endTime: Long): Array<DayResultEntity>
 
     suspend fun get(id: String): DayResultEntity
 

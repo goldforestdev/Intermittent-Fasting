@@ -10,7 +10,7 @@ interface DayResultRepository {
     suspend fun getAllByPlanId(planId: Long): List<DayResult>
 
     @Throws(NotExistDayResultException::class)
-    suspend fun getAll(): List<DayResult>
+    suspend fun getAllByMonth(startTime: Long, endTime: Long): List<DayResult>
 
     @Throws(NotExistDayResultException::class)
     suspend fun get(id: String): DayResult

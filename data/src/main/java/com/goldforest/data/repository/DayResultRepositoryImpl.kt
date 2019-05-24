@@ -19,7 +19,7 @@ class DayResultRepositoryImpl(
 
     override suspend fun getAllByPlanId(planId: Long): List<DayResult> = dayResultLocalDataSource.getAllByPlanId(planId).map { it.toModel() }
 
-    override suspend fun getAll(): List<DayResult> = dayResultLocalDataSource.getAll().map { it.toModel() }
+    override suspend fun getAllByMonth(startTime: Long, endTime: Long): List<DayResult> = dayResultLocalDataSource.getAllByMonth(startTime, endTime).map { it.toModel() }
 
     override suspend fun get(id: String): DayResult = dayResultLocalDataSource.get(id).toModel()
 

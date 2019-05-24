@@ -1,4 +1,4 @@
-package com.goldforest.capdiet.view
+package com.goldforest.capdiet.view.calendar
 
 import android.content.Context
 import android.text.format.DateUtils

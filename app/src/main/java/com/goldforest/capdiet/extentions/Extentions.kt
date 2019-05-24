@@ -42,3 +42,20 @@ fun Long.getDateList(): List<Long> {
 
     return months
 }
+
+fun Long.getStartEndTimes(): Pair<Long, Long> {
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = this
+    calendar.set(Calendar.DAY_OF_MONTH, 1)
+    calendar.set(Calendar.HOUR, 0)
+    calendar.set(Calendar.MINUTE, 0)
+    calendar.set(Calendar.SECOND, 0)
+    calendar.set(Calendar.MILLISECOND, 0)
+
+    val startTime = calendar.timeInMillis
+
+    calendar.add(Calendar.MONTH, 1)
+    val endTime = calendar.timeInMillis
+
+    return startTime to endTime
+}

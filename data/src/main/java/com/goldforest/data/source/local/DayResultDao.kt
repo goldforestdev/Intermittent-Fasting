@@ -14,8 +14,8 @@ interface DayResultDao : DayResultDataSource {
     @Query("SELECT * FROM day_result_entity WHERE planId=:planId")
     override suspend fun getAllByPlanId(planId: Long): Array<DayResultEntity>
 
-    @Query("SELECT * FROM day_result_entity")
-    override suspend fun getAll(): Array<DayResultEntity>
+    @Query("SELECT * FROM day_result_entity WHERE id >= :startTime AND id < :endTime")
+    override suspend fun getAllByMonth(startTime: Long, endTime: Long): Array<DayResultEntity>
 
     @Query("SELECT * FROM day_result_entity WHERE id=:id")
     override suspend fun get(id: String): DayResultEntity

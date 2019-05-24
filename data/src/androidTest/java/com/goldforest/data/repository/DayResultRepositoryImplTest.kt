@@ -3,15 +3,12 @@ package com.goldforest.data.repository
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import com.goldforest.data.model.DayResultEntity
 import com.goldforest.data.model.PlanEntity
 import com.goldforest.data.source.DayResultDataSource
 import com.goldforest.data.source.PlanDataSource
 import com.goldforest.data.source.local.AppDatabase
 import com.goldforest.domain.model.DayResult
-import com.goldforest.domain.model.Plan
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -98,6 +95,8 @@ class DayResultRepositoryImplTest {
 
     @Test
     fun `getAllTest-without_planId`() = runBlocking {
-        assertEquals(5, dayResultRepository.getAll().size)
+        val startTime = 10L
+        val endTime = 20L
+        assertEquals(5, dayResultRepository.getAllByMonth(startTime, endTime).size)
     }
 }

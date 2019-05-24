@@ -3,8 +3,8 @@ package com.goldforest.domain.usecase.impl
 import com.goldforest.domain.exceptions.NotExistDayResultException
 import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.repository.DayResultRepository
-import com.goldforest.domain.usercase.GetAllDayResults
-import com.goldforest.domain.usercase.impl.GetAllDayResultsUsecase
+import com.goldforest.domain.usercase.GetAllDayResultsByMonth
+import com.goldforest.domain.usercase.impl.GetAllDayResultsByMonthUsecase
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -18,12 +18,15 @@ class GetAllDayResultsUsecaseTest {
     @Mock
     private lateinit var dayResultRepository: DayResultRepository
 
-    private lateinit var getAllDayResults: GetAllDayResults
+    private lateinit var getAllDayResults: GetAllDayResultsByMonth
+
+    private val startTime = 10L
+    private val endTime = 20L
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        getAllDayResults = GetAllDayResultsUsecase(dayResultRepository)
+        getAllDayResults = GetAllDayResultsByMonthUsecase(dayResultRepository)
     }
 
     @Test
@@ -36,16 +39,16 @@ class GetAllDayResultsUsecaseTest {
             DayResult("2", 2, 2L)
         )
 
-        `when`(dayResultRepository.getAll()).thenReturn(dayResults)
-        val allDayResults = getAllDayResults.get()
+        `when`(dayResultRepository.getAllByMonth(startTime, endTime)).thenReturn(dayResults)
+        val allDayResults = getAllDayResults.get(startTime, endTime)
         assertEquals(5, allDayResults.size)
     }
 
     @Test(expected = NotExistDayResultException::class)
     fun `getTest - DayResult가 존재하지 않으면 NotExistDayResultException을 던져야 한다`() {
         runBlocking {
-            `when`(dayResultRepository.getAll()).thenThrow(NotExistDayResultException())
-            getAllDayResults.get()
+            `when`(dayResultRepository.getAllByMonth(startTime, endTime)).thenThrow(NotExistDayResultException())
+            getAllDayResults.get(startTime, endTime)
         }
     }
 }

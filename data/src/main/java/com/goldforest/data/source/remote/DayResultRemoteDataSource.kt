@@ -12,7 +12,7 @@ class DayResultRemoteDataSource : DayResultDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getAll(): Array<DayResultEntity> {
+    override suspend fun getAllByMonth(startTime: kotlin.Long, endTime: kotlin.Long): Array<DayResultEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
