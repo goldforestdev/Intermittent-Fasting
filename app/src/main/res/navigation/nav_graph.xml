@@ -12,8 +12,12 @@
     </fragment>
     <fragment android:id="@+id/mainFragment" android:name="com.goldforest.capdiet.view.MainFragment"
               android:label="fragment_main" tools:layout="@layout/fragment_main">
-        <action android:id="@+id/action_mainFragment_to_planFragment" app:destination="@id/planFragment"/>
-        <action android:id="@+id/action_mainFragment_to_calendarFragment" app:destination="@id/calendarFragment"/>
+        <action android:id="@+id/action_mainFragment_to_planFragment" app:destination="@id/planFragment"
+                app:enterAnim="@anim/slide_from_left"
+                app:popExitAnim="@anim/slide_to_left"/>
+        <action android:id="@+id/action_mainFragment_to_calendarFragment" app:destination="@id/calendarFragment"
+                app:enterAnim="@anim/slide_from_left"
+                app:popExitAnim="@anim/slide_to_left"/>
     </fragment>
     <fragment android:id="@+id/planFragment" android:name="com.goldforest.capdiet.view.PlanFragment"
               android:label="fragment_plan" tools:layout="@layout/fragment_plan"/>

@@ -22,11 +22,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.show()
 
-        btPlanViewTest.setOnClickListener {
+        fl_plan.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_planFragment)
         }
 
-        btCalendarViewTest.setOnClickListener {
+        fl_calendar.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_calendarFragment)
         }
     }

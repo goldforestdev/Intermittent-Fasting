@@ -16,5 +16,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="plan">Plan</string>
+    <string name="list">List</string>
+    <string name="calendar">Calendar</string>
+    <string name="setting">Setting</string>
+    <string name="plan_vertical">P\nl\na\nn</string>
+    <string name="list_vertical">L\ni\ns\nt</string>
+    <string name="calendar_vertical">C\na\nl\ne\nn\nd\na\nr</string>
+    <string name="setting_vertical">S\ne\nt\nt\ni\nn\ng</string>
 
 </resources>
