@@ -1,5 +1,7 @@
 package com.goldforest.capdiet.viewmodel
 
+import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.goldforest.capdiet.base.BaseViewModel
 import com.goldforest.capdiet.viewmodel.PlanType.*
@@ -10,12 +12,23 @@ enum class PlanType {
 }
 
 class PlanViewModel : BaseViewModel() {
-    var planType : MutableLiveData<PlanType> = MutableLiveData<PlanType>().apply { postValue(PLAN_16_8) }
+    private val _planType = MutableLiveData<PlanType>()
+    private val _timePicker = MutableLiveData<Int>()
+
+
+
+    val planType : LiveData<PlanType>  get() =_planType
+    val timePicker : LiveData<Int> get() = _timePicker
+
 
     fun setPlanType (planTypeOrdinal :Int) {
-        planType.value = when (planTypeOrdinal) {
-            PLAN_16_8.ordinal ->  PLAN_16_8
-            else -> PLAN_5_2
+        when (planTypeOrdinal) {
+            PLAN_16_8.ordinal ->  _planType.postValue(PLAN_16_8)
+            else -> _planType.postValue(PLAN_5_2)
         }
+    }
+
+    fun showTimePickerDialog(view : View) {
+        _timePicker.postValue(view.id)
     }
 }

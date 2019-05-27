@@ -58,10 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rgPlan">
 
                 <TextView
+                    android:id="@+id/tvPlan1Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="16_8 설정 화면"
@@ -70,6 +70,32 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginTop="5dp"
+                    android:onClick="@{vm.showTimePickerDialog}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvEndTime"
+                    app:layout_constraintTop_toBottomOf="@id/tvPlan1Title"
+                    android:text = "7시30분 오전"/>
+
+                <TextView
+                    android:id="@+id/tvEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginTop="5dp"
+                    android:onClick="@{vm.showTimePickerDialog}"
+                    app:layout_constraintStart_toEndOf="@id/tvStartTime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvStartTime"
+                    android:text = "7시30분 오전"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
