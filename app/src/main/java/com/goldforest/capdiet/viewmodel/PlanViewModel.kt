@@ -20,8 +20,8 @@ class PlanViewModel : BaseViewModel() {
 
     val planType : LiveData<PlanType>  get() =_planType
     val timePicker : LiveData<View> get() = _timePicker
-    val startTime : LiveData<Long> get() = _startTime
-    val endTime : LiveData<Long> get() = _endTime
+    var startTime : MutableLiveData<Long>  = MutableLiveData()
+    var endTime : MutableLiveData<Long> =MutableLiveData()
 
 
     fun setPlanType (planTypeOrdinal :Int) {

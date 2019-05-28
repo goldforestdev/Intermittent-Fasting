@@ -37,7 +37,7 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     }
 
     private fun initView () {
-        val calendar = getCurrentTime()
+        val calendar = getCalendar()
 
         setTimeTextView(viewDataBinding.tvStartTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
         setTimeTextView(viewDataBinding.tvEndTime, calendar.get(Calendar.HOUR_OF_DAY) + 5, calendar.get(Calendar.MINUTE))
@@ -49,40 +49,60 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         })
 
         viewModel.timePicker.observe(this, Observer {
-            showTimePicker(it)
+            val calendar = getCalendar()
+            when(it.id) {
+                R.id.tvStartTime -> {
+                    calendar.timeInMillis = viewModel.startTime.value!!
+                    showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+                }
+                else -> {
+                    calendar.timeInMillis = viewModel.endTime.value!!
+                    showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+                }
+            }
+
         })
     }
 
-    private fun showTimePicker (view : View) {
+    private fun showTimePicker (view : View, hourOfDay: Int, minute: Int) {
         timePickerView = view
 
         val timePickerDialog = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             setTimeTextView(view, hourOfDay, minute)
-        }, getCurrentTime().get(Calendar.HOUR_OF_DAY),getCurrentTime().get(Calendar.MINUTE),false)
+        }, hourOfDay,minute,false)
         timePickerDialog.show()
     }
 
     private fun setTimeTextView(view: View, hourOfDay: Int,  minute: Int) {
         val strAmPm: String
         val hour: Int
+        val calendar : Calendar = getCalendar()
+        calendar.set(Calendar.HOUR_OF_DAY,hourOfDay)
+        calendar.set(Calendar.MINUTE,minute)
 
         if (hourOfDay < 12) {
-            strAmPm = getString(R.string.am)
+            strAmPm = getString(R.string.time_am)
             hour = hourOfDay
+
         } else {
-            strAmPm = getString(R.string.pm)
+            strAmPm = getString(R.string.time_pm)
             hour = hourOfDay - 12
         }
 
         when (view.id) {
             R.id.tvStartTime -> {
                 viewDataBinding.tvStartTime.text = "$hour : $minute $strAmPm"
+                viewModel.startTime.value = calendar.timeInMillis
             }
-            else -> viewDataBinding.tvEndTime.text = "$hour : $minute $strAmPm"
+            else -> {
+                viewDataBinding.tvEndTime.text = "$hour : $minute $strAmPm"
+                viewModel.endTime.value = calendar.timeInMillis
+            }
+
         }
     }
 
-    private fun getCurrentTime() : Calendar {
+    private fun getCalendar() : Calendar {
         return Calendar.getInstance()
     }
 

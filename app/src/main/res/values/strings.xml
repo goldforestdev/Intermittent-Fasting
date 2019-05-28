@@ -22,6 +22,8 @@
     <string name="calendar_vertical">C\na\nl\ne\nn\nd\na\nr</string>
     <string name="setting_vertical">S\ne\nt\nt\ni\nn\ng</string>
 
-    <string name="am">AM</string>
-    <string name="pm">PM</string>
+    <string name="time_am">AM</string>
+    <string name="time_pm">PM</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
 </resources>

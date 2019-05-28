@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/menuLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tvPlanTypeTile"
@@ -41,6 +41,7 @@
                     android:id="@+id/rbPlan1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="23sp"
                     android:checked="true"
                     android:onClick="@{() -> vm.setPlanType(0)}"
                     android:text="@string/plan_type_16_8" />
@@ -49,6 +50,8 @@
                     android:id="@+id/rbPlan2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="23sp"
                     android:onClick="@{() -> vm.setPlanType(1)}"
                     android:text="@string/plan_type_5_2" />
             </RadioGroup>
@@ -57,7 +60,7 @@
                 android:id="@+id/plan1Layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintTop_toBottomOf="@id/rgPlan">
 
                 <TextView
@@ -66,10 +69,32 @@
                     android:layout_height="wrap_content"
                     android:text="16_8 설정 화면"
                     android:textSize="23sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                        android:id="@+id/tvStartTimeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:text = "@string/start_time"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tvEndTime"
+                        app:layout_constraintTop_toBottomOf="@id/tvPlan1Title"/>
+
+                <TextView
+                        android:id="@+id/tvEndTimeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="23sp"
+                        android:textStyle="bold"
+                        android:text = "@string/end_time"
+                        app:layout_constraintStart_toEndOf="@id/tvStartTimeTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tvStartTimeTitle"/>
 
                 <TextView
                     android:id="@+id/tvStartTime"
@@ -81,7 +106,7 @@
                     android:onClick="@{vm.showTimePickerDialog}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvEndTime"
-                    app:layout_constraintTop_toBottomOf="@id/tvPlan1Title"
+                    app:layout_constraintTop_toBottomOf="@id/tvStartTimeTitle"
                     android:text = "7시30분 오전"/>
 
                 <TextView
