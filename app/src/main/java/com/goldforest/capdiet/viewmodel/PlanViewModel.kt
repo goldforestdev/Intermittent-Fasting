@@ -13,12 +13,15 @@ enum class PlanType {
 
 class PlanViewModel : BaseViewModel() {
     private val _planType = MutableLiveData<PlanType>()
-    private val _timePicker = MutableLiveData<Int>()
-
+    private val _timePicker = MutableLiveData<View>()
+    private val _startTime = MutableLiveData<Long>()
+    private val _endTime = MutableLiveData<Long>()
 
 
     val planType : LiveData<PlanType>  get() =_planType
-    val timePicker : LiveData<Int> get() = _timePicker
+    val timePicker : LiveData<View> get() = _timePicker
+    val startTime : LiveData<Long> get() = _startTime
+    val endTime : LiveData<Long> get() = _endTime
 
 
     fun setPlanType (planTypeOrdinal :Int) {
@@ -29,6 +32,6 @@ class PlanViewModel : BaseViewModel() {
     }
 
     fun showTimePickerDialog(view : View) {
-        _timePicker.postValue(view.id)
+        _timePicker.postValue(view)
     }
 }

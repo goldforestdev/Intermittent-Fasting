@@ -1,0 +1,25 @@
+<resources>
+    <string name="plan_1_title">간헐적 단식의 종류를 선택 하세요.</string>
+    <string name="plan_type_16_8">16/8 간헐적 단식</string>
+    <string name="plan_type_5_2">5/2 간헐적 단식</string>
+    <string name="sunday">일</string>
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="saturday">토</string>
+
+    <string name="plan">Plan</string>
+    <string name="list">List</string>
+    <string name="calendar">Calendar</string>
+    <string name="setting">Setting</string>
+    <string name="plan_vertical">P\nl\na\nn</string>
+    <string name="list_vertical">L\ni\ns\nt</string>
+    <string name="calendar_vertical">C\na\nl\ne\nn\nd\na\nr</string>
+    <string name="setting_vertical">S\ne\nt\nt\ni\nn\ng</string>
+
+    <string name="am">오전</string>
+    <string name="pm">오후</string>
+
+</resources>

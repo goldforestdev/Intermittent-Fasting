@@ -4,6 +4,7 @@ package com.goldforest.capdiet.view
 
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TimePicker
 import android.widget.Toast
@@ -22,25 +23,24 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_plan
     override val viewModel: PlanViewModel by viewModel()
+
     private var currentPlanType : PlanType = PlanType.PLAN_16_8
+    private lateinit var timePickerView : View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewDataBinding.vm = viewModel
-        initView()
+
         initLiveDataObserver()
+        initView()
     }
 
     private fun initView () {
         val calendar = getCurrentTime()
-        val am_pm  = when(calendar.get(Calendar.AM_PM)) {
-            Calendar.AM -> "오전"
-            else -> "오후"
-        }
 
-        viewDataBinding.tvStartTime.text = "${getCurrentTime().get(Calendar.HOUR_OF_DAY)} 시 ${getCurrentTime().get(Calendar.MINUTE)} 분 $am_pm"
-        viewDataBinding.tvEndTime.text = "${getCurrentTime().get(Calendar.HOUR_OF_DAY) + 3} 시 ${getCurrentTime().get(Calendar.MINUTE)} 분 $am_pm"
+        setTimeTextView(viewDataBinding.tvStartTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+        setTimeTextView(viewDataBinding.tvEndTime, calendar.get(Calendar.HOUR_OF_DAY) + 5, calendar.get(Calendar.MINUTE))
     }
 
     private fun initLiveDataObserver() {
@@ -49,24 +49,43 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         })
 
         viewModel.timePicker.observe(this, Observer {
-            showTimePicker()
+            showTimePicker(it)
         })
     }
 
-    private fun showTimePicker () {
-        val timePickerDialog = TimePickerDialog(activity, TimePickerListener,getCurrentTime().get(Calendar.HOUR_OF_DAY),getCurrentTime().get(Calendar.MINUTE),false)
+    private fun showTimePicker (view : View) {
+        timePickerView = view
+
+        val timePickerDialog = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+            setTimeTextView(view, hourOfDay, minute)
+        }, getCurrentTime().get(Calendar.HOUR_OF_DAY),getCurrentTime().get(Calendar.MINUTE),false)
         timePickerDialog.show()
+    }
+
+    private fun setTimeTextView(view: View, hourOfDay: Int,  minute: Int) {
+        val strAmPm: String
+        val hour: Int
+
+        if (hourOfDay < 12) {
+            strAmPm = getString(R.string.am)
+            hour = hourOfDay
+        } else {
+            strAmPm = getString(R.string.pm)
+            hour = hourOfDay - 12
+        }
+
+        when (view.id) {
+            R.id.tvStartTime -> {
+                viewDataBinding.tvStartTime.text = "$hour : $minute $strAmPm"
+            }
+            else -> viewDataBinding.tvEndTime.text = "$hour : $minute $strAmPm"
+        }
     }
 
     private fun getCurrentTime() : Calendar {
         return Calendar.getInstance()
     }
 
-    object TimePickerListener : TimePickerDialog.OnTimeSetListener {
-        override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-            Toast.makeText(view!!.context, "$hourOfDay 시 $minute 시",Toast.LENGTH_LONG).show()
-        }
-    }
 
     private fun setPlanTypeView (planType: PlanType) {
         if (currentPlanType == planType) {
