@@ -1,10 +1,12 @@
-package com.goldforest.capdiet.view.plan
+package com.goldforest.capdiet.view
 
 
 
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.goldforest.capdiet.R
@@ -17,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 
-class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
+class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_plan
     override val viewModel: PlanViewModel by viewModel()
@@ -38,14 +40,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         val calendar = getCalendar()
 
         setTimeTextView(viewDataBinding.tvStartTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
-        //setTimeTextView(viewDataBinding.tvEndTime, calendar.get(Calendar.HOUR_OF_DAY) + 5, calendar.get(Calendar.MINUTE))
-        viewDataBinding.npTimeHour.minValue = 16
-        viewDataBinding.npTimeHour.maxValue = 24
-        viewDataBinding.npTimeHour.wrapSelectorWheel = true
-
-        viewDataBinding.npTimeMin.minValue = 0
-        viewDataBinding.npTimeMin.maxValue = 59
-        viewDataBinding.npTimeHour.wrapSelectorWheel = true
+        setTimeTextView(viewDataBinding.tvEndTime, calendar.get(Calendar.HOUR_OF_DAY) + 5, calendar.get(Calendar.MINUTE))
     }
 
     private fun initLiveDataObserver() {
@@ -100,7 +95,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
                 viewModel.startTime.value = calendar.timeInMillis
             }
             else -> {
-                //viewDataBinding.tvEndTime.text = "$hour : $minute $strAmPm"
+                viewDataBinding.tvEndTime.text = "$hour : $minute $strAmPm"
                 viewModel.endTime.value = calendar.timeInMillis
             }
 

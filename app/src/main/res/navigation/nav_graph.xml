@@ -19,7 +19,7 @@
                 app:enterAnim="@anim/slide_from_left"
                 app:popExitAnim="@anim/slide_to_left"/>
     </fragment>
-    <fragment android:id="@+id/planFragment" android:name="com.goldforest.capdiet.view.plan.PlanMainFragment"
+    <fragment android:id="@+id/planFragment" android:name="com.goldforest.capdiet.view.PlanFragment"
               android:label="@string/plan" tools:layout="@layout/fragment_plan"/>
     <fragment android:id="@+id/listFragment" android:name="com.goldforest.capdiet.view.ListFragment"
               android:label="@string/list" tools:layout="@layout/fragment_list"/>
