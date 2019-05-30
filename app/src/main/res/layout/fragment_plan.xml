@@ -13,7 +13,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/R221G207B226"
+        android:background="@android:color/white"
         tools:context=".view.PlanFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +48,7 @@
                     android:checked="true"
                     android:onClick="@{() -> vm.setPlanType(0)}"
                     android:text="@string/plan_type_16_8"
-                    app:buttonTint="@color/colorPrimaryDark"/>
+                    app:buttonTint="@color/colorAccent"/>
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/rbPlan2"
@@ -58,7 +58,7 @@
                     android:textSize="18sp"
                     android:onClick="@{() -> vm.setPlanType(1)}"
                     android:text="@string/plan_type_5_2"
-                    app:buttonTint="@color/colorPrimaryDark"/>
+                    app:buttonTint="@color/colorAccent"/>
             </RadioGroup>
 
             <androidx.constraintlayout.widget.ConstraintLayout
