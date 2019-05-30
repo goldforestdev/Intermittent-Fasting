@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">GoldForest Diet</string>
-
+    <string name="splash_title">Intermittent Fasting</string>
     <string name="splash_bottom_text" translatable="false">Copyright<![CDATA[ⓒ]]> 2019 Gold Forest Team.</string>
     <string name="plan_1_title">Select IF type</string>
     <string name="plan_type_16_8">16/8 간헐적 단식</string>
@@ -26,4 +26,5 @@
     <string name="time_pm">PM</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
+    <string name="fasting_time">Fasting time</string>
 </resources>

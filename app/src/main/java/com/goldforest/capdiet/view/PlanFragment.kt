@@ -40,7 +40,7 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         val calendar = getCalendar()
 
         setTimeTextView(viewDataBinding.tvStartTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
-        setTimeTextView(viewDataBinding.tvEndTime, calendar.get(Calendar.HOUR_OF_DAY) + 5, calendar.get(Calendar.MINUTE))
+        setTimeTextView(viewDataBinding.tvFastingTime, calendar.get(Calendar.HOUR_OF_DAY) + 5, calendar.get(Calendar.MINUTE))
     }
 
     private fun initLiveDataObserver() {
@@ -67,7 +67,7 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     private fun showTimePicker (view : View, hourOfDay: Int, minute: Int) {
         timePickerView = view
 
-        val timePickerDialog = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+        val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             setTimeTextView(view, hourOfDay, minute)
         }, hourOfDay,minute,false)
         timePickerDialog.show()
@@ -95,7 +95,7 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
                 viewModel.startTime.value = calendar.timeInMillis
             }
             else -> {
-                viewDataBinding.tvEndTime.text = "$hour : $minute $strAmPm"
+                viewDataBinding.tvFastingTime.text = "$hour : $minute $strAmPm"
                 viewModel.endTime.value = calendar.timeInMillis
             }
 

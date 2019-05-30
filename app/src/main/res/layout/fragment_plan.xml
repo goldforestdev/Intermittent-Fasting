@@ -26,7 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:textSize="22sp"
                 android:text="@string/plan_1_title"
+                android:textColor="@android:color/black"
+                android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
@@ -37,23 +40,25 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/tvPlanTypeTile">
 
-                <RadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/rbPlan1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="23sp"
+                    android:textSize="18sp"
                     android:checked="true"
                     android:onClick="@{() -> vm.setPlanType(0)}"
-                    android:text="@string/plan_type_16_8" />
+                    android:text="@string/plan_type_16_8"
+                    app:buttonTint="@color/colorPrimaryDark"/>
 
-                <RadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/rbPlan2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="23sp"
+                    android:textSize="18sp"
                     android:onClick="@{() -> vm.setPlanType(1)}"
-                    android:text="@string/plan_type_5_2" />
+                    android:text="@string/plan_type_5_2"
+                    app:buttonTint="@color/colorPrimaryDark"/>
             </RadioGroup>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="16_8 설정 화면"
-                    android:textSize="23sp"
+                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +87,7 @@
                         android:text = "@string/start_time"
                         android:layout_marginTop="10dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tvEndTime"
+                        app:layout_constraintEnd_toStartOf="@id/tvFastingTime"
                         app:layout_constraintTop_toBottomOf="@id/tvPlan1Title"/>
 
                 <TextView
@@ -91,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="23sp"
                         android:textStyle="bold"
-                        android:text = "@string/end_time"
+                        android:text = "@string/fasting_time"
                         app:layout_constraintStart_toEndOf="@id/tvStartTimeTitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/tvStartTimeTitle"/>
@@ -105,12 +110,12 @@
                     android:layout_marginTop="10dp"
                     android:onClick="@{vm.showTimePickerDialog}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvEndTime"
+                    app:layout_constraintEnd_toStartOf="@id/tvFastingTime"
                     app:layout_constraintTop_toBottomOf="@id/tvStartTimeTitle"
                     android:text = "7시30분 오전"/>
 
                 <TextView
-                    android:id="@+id/tvEndTime"
+                    android:id="@+id/tvFastingTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="23sp"
@@ -119,7 +124,7 @@
                     app:layout_constraintStart_toEndOf="@id/tvStartTime"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvStartTime"
-                    android:text = "7시30분 오전"/>
+                    android:text = "16시간 30분"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

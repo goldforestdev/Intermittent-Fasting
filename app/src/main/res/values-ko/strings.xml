@@ -1,5 +1,6 @@
 <resources>
-    <string name="plan_1_title">간헐적 단식의 종류를 선택 하세요.</string>
+    <string name="splash_title">간헐적 단식</string>
+    <string name="plan_1_title">간헐적 단식 종류 선택</string>
     <string name="plan_type_16_8">16/8 간헐적 단식</string>
     <string name="plan_type_5_2">5/2 간헐적 단식</string>
     <string name="sunday">일</string>
@@ -24,5 +25,7 @@
 
     <string name="start_time">시작 시간</string>
     <string name="end_time">완료 시간</string>
+
+    <string name="fasting_time">단식 시간</string>
 
 </resources>
