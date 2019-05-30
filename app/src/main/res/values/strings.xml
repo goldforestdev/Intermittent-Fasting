@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">GoldForest Diet</string>
+    <string name="app_name">GoldForest Diet</string>
     <string name="splash_title">Intermittent Fasting</string>
     <string name="splash_bottom_text" translatable="false">Copyright<![CDATA[ⓒ]]> 2019 Gold Forest Team.</string>
     <string name="plan_1_title">Select IF type</string>

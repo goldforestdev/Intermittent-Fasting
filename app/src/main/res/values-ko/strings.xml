@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">GoldForest 간헐적 단식</string>
     <string name="splash_title">간헐적 단식</string>
     <string name="plan_1_title">간헐적 단식 종류 선택</string>
     <string name="plan_type_16_8">16/8 간헐적 단식</string>
