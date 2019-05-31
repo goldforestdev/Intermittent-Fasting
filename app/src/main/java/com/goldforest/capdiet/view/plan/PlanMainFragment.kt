@@ -1,12 +1,10 @@
-package com.goldforest.capdiet.view
+package com.goldforest.capdiet.view.plan
 
 
 
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.goldforest.capdiet.R
@@ -19,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 
-class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
+class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_plan
     override val viewModel: PlanViewModel by viewModel()
@@ -56,8 +54,8 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
                     showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
                 }
                 else -> {
-                    calendar.timeInMillis = viewModel.endTime.value!!
-                    showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+                    //calendar.timeInMillis = viewModel.endTime.value!!
+                    showNumberPicker()
                 }
             }
 
@@ -71,6 +69,10 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
             setTimeTextView(view, hourOfDay, minute)
         }, hourOfDay,minute,false)
         timePickerDialog.show()
+    }
+
+    private fun showNumberPicker () {
+
     }
 
     private fun setTimeTextView(view: View, hourOfDay: Int,  minute: Int) {

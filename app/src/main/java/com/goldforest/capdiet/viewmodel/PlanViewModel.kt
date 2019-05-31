@@ -4,7 +4,8 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.goldforest.capdiet.base.BaseViewModel
-import com.goldforest.capdiet.viewmodel.PlanType.*
+import com.goldforest.capdiet.viewmodel.PlanType.PLAN_16_8
+import com.goldforest.capdiet.viewmodel.PlanType.PLAN_5_2
 
 enum class PlanType {
     PLAN_16_8,
