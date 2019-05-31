@@ -4,16 +4,14 @@ package com.goldforest.capdiet.view
 
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseFragment
 import com.goldforest.capdiet.databinding.FragmentPlanBinding
-import com.goldforest.capdiet.viewmodel.PlanType
 import com.goldforest.capdiet.viewmodel.PlanViewModel
+import com.goldforest.domain.model.PlanType
 import kotlinx.android.synthetic.main.fragment_plan.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
