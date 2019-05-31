@@ -12,7 +12,14 @@ data class Plan(
     var done: Boolean
 )
 
-enum class PlanType {
-    PLAN_16_8,
-    PLAN_5_2
+enum class PlanType(val code: Int) {
+    PLAN_16_8(0),
+    PLAN_5_2(1);
+
+    companion object {
+        fun of(code: Int): PlanType = when (code) {
+            0 -> PLAN_16_8
+            else -> PLAN_5_2
+        }
+    }
 }

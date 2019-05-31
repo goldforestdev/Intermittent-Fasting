@@ -3,6 +3,7 @@ package com.goldforest.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.goldforest.domain.model.Plan
+import com.goldforest.domain.model.PlanType
 
 @Entity(tableName = "plan_entity")
 data class PlanEntity (
@@ -18,6 +19,6 @@ data class PlanEntity (
     var done: Boolean
 )
 
-fun Plan.toEntity() = PlanEntity(id, planName, type, startTime, endTime, day, startDate, endDate, done)
+fun Plan.toEntity() = PlanEntity(id, planName, type.code, startTime, endTime, day, startDate, endDate, done)
 
-fun PlanEntity.toModel() = Plan(id, planName, type, startTime, endTime, day, startDate, endDate, done)
+fun PlanEntity.toModel() = Plan(id, planName, PlanType.of(type), startTime, endTime, day, startDate, endDate, done)
