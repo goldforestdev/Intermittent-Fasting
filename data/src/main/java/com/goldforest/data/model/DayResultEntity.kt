@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 
 @Entity(
     tableName = "day_result_entity",
@@ -16,11 +17,11 @@ import com.goldforest.domain.model.DayResult
 )
 data class DayResultEntity(
     @PrimaryKey
-    var id: String, // Date
-    var isSuccess: Int,
+    var id: Long, // Date
+    var type: Int,
     var planId: Long // ForeignKey
 )
 
-fun DayResult.toEntity() = DayResultEntity(id, isSuccess, planId)
+fun DayResult.toEntity() = DayResultEntity(id, type.code, planId)
 
-fun DayResultEntity.toModel() = DayResult(id, isSuccess, planId)
+fun DayResultEntity.toModel() = DayResult(id, DayResultType.of(type), planId)
