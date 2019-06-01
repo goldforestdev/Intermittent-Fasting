@@ -2,10 +2,10 @@ package com.goldforest.capdiet.view.plan
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.NumberPicker
 import androidx.appcompat.app.AlertDialog
 import com.goldforest.capdiet.R
-import kotlinx.android.synthetic.main.number_picker_dialg.*
 
 
 class PlanPickerDialog(context: Context)
@@ -13,6 +13,13 @@ class PlanPickerDialog(context: Context)
 
     private var hourNumberPicker: NumberPicker
     private var minNumberPicker : NumberPicker
+
+    val HOUR_MIN_NUMER = 16
+    val HOUR_MAX_NUMER = 24
+
+    val MINUTE_MIN_NUMER = 0
+    val MINUTE_MAX_NUMER = 59
+
     init {
 
         val inflater = LayoutInflater.from(context)
@@ -21,16 +28,19 @@ class PlanPickerDialog(context: Context)
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok),this)
         setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), this)
 
+        setNumberPickerView(view)
 
+    }
+
+    private fun setNumberPickerView(view: View) {
         hourNumberPicker = view.findViewById(R.id.npHour) as NumberPicker
         minNumberPicker = view.findViewById(R.id.npMin) as NumberPicker
 
-        hourNumberPicker.maxValue = 24
-        hourNumberPicker.minValue = 16
+        hourNumberPicker.maxValue = HOUR_MAX_NUMER
+        hourNumberPicker.minValue = HOUR_MIN_NUMER
 
-        minNumberPicker.maxValue = 59
-        minNumberPicker.minValue = 0
-
+        minNumberPicker.maxValue = MINUTE_MAX_NUMER
+        minNumberPicker.minValue = MINUTE_MIN_NUMER
     }
 
 
