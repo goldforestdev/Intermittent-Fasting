@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        tools:context=".view.PlanFragment">
+        tools:context=".view.plan.PlanMainFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/menuLayout"
@@ -108,7 +108,7 @@
                     android:textSize="23sp"
                     android:textColor="@android:color/holo_blue_dark"
                     android:layout_marginTop="10dp"
-                    android:onClick="@{vm.showTimePickerDialog}"
+                    android:onClick="@{vm::showTimePickerDialog}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvFastingTime"
                     app:layout_constraintTop_toBottomOf="@id/tvStartTimeTitle"
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="23sp"
                     android:textColor="@android:color/holo_blue_dark"
-                    android:onClick="@{vm.showTimePickerDialog}"
+                    android:onClick="@{vm::showTimePickerDialog}"
                     app:layout_constraintStart_toEndOf="@id/tvStartTime"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvStartTime"

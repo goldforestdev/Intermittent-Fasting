@@ -1,4 +1,4 @@
-package com.goldforest.capdiet.view
+package com.goldforest.capdiet.view.plan
 
 
 
@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 
-class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
+class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_plan
     override val viewModel: PlanViewModel by viewModel()
@@ -54,8 +54,8 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
                     showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
                 }
                 else -> {
-                    calendar.timeInMillis = viewModel.endTime.value!!
-                    showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+                    //calendar.timeInMillis = viewModel.endTime.value!!
+                    showNumberPicker()
                 }
             }
 
@@ -69,6 +69,13 @@ class PlanFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
             setTimeTextView(view, hourOfDay, minute)
         }, hourOfDay,minute,false)
         timePickerDialog.show()
+    }
+
+    private fun showNumberPicker () {
+        val numberPickerDialog = PlanPickerDialog(activity!!)
+        numberPickerDialog.setTitle(R.string.set_intermittent_fast_time)
+        numberPickerDialog.setMessage("간헐적 단식 시간을 설정 하세요")
+        numberPickerDialog.show()
     }
 
     private fun setTimeTextView(view: View, hourOfDay: Int,  minute: Int) {
