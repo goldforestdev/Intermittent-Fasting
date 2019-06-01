@@ -14,11 +14,13 @@ class PlanPickerDialog(context: Context)
     private var hourNumberPicker: NumberPicker
     private var minNumberPicker : NumberPicker
 
-    val HOUR_MIN_NUMER = 16
-    val HOUR_MAX_NUMER = 24
+    companion object {
+        const val HOUR_MIN_NUMBER = 16
+        const val HOUR_MAX_NUMBER = 24
 
-    val MINUTE_MIN_NUMER = 0
-    val MINUTE_MAX_NUMER = 59
+        const val MINUTE_MIN_NUMBER = 0
+        const val MINUTE_MAX_NUMBER = 59
+    }
 
     init {
 
@@ -27,20 +29,19 @@ class PlanPickerDialog(context: Context)
         setView(view)
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok),this)
         setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), this)
-
-        setNumberPickerView(view)
-
-    }
-
-    private fun setNumberPickerView(view: View) {
         hourNumberPicker = view.findViewById(R.id.npHour) as NumberPicker
         minNumberPicker = view.findViewById(R.id.npMin) as NumberPicker
 
-        hourNumberPicker.maxValue = HOUR_MAX_NUMER
-        hourNumberPicker.minValue = HOUR_MIN_NUMER
+        setNumberPickerView()
 
-        minNumberPicker.maxValue = MINUTE_MAX_NUMER
-        minNumberPicker.minValue = MINUTE_MIN_NUMER
+    }
+
+    private fun setNumberPickerView() {
+        hourNumberPicker.maxValue = HOUR_MAX_NUMBER
+        hourNumberPicker.minValue = HOUR_MIN_NUMBER
+
+        minNumberPicker.maxValue = MINUTE_MAX_NUMBER
+        minNumberPicker.minValue = MINUTE_MIN_NUMBER
     }
 
 
@@ -52,11 +53,5 @@ class PlanPickerDialog(context: Context)
             DialogInterface.BUTTON_NEGATIVE -> cancel()
         }
     }
-
-
-
-
-
-
 
 }
