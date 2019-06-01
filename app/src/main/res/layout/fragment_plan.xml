@@ -112,7 +112,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvFastingTime"
                     app:layout_constraintTop_toBottomOf="@id/tvStartTimeTitle"
-                    android:text = "7시30분 오전"/>
+                    android:text = "@{vm.startTimeViewString}"/>
 
                 <TextView
                     android:id="@+id/tvFastingTime"
@@ -124,7 +124,7 @@
                     app:layout_constraintStart_toEndOf="@id/tvStartTime"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvStartTime"
-                    android:text = "16시간 30분"/>
+                    android:text = "@{vm.fastingTimeViewString}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -24,6 +24,8 @@
 
     <string name="time_am">AM</string>
     <string name="time_pm">PM</string>
+    <string name="hours">hours</string>
+    <string name="minutes">minutes</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
     <string name="fasting_time">Fasting time</string>

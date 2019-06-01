@@ -2,17 +2,24 @@ package com.goldforest.capdiet.view.plan
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.NumberPicker
 import androidx.appcompat.app.AlertDialog
 import com.goldforest.capdiet.R
 
-
-class PlanPickerDialog(context: Context)
+class PlanPickerDialog(context: Context,
+                       val setListener: OnNumberSetListener,
+                       val hour : Int,
+                       val min : Int)
     : AlertDialog(context), DialogInterface.OnClickListener {
 
     private var hourNumberPicker: NumberPicker
     private var minNumberPicker : NumberPicker
+
+
+    interface OnNumberSetListener {
+
+        fun onNumberSet(hourOfDay: Int, minute: Int)
+    }
 
     companion object {
         const val HOUR_MIN_NUMBER = 16
@@ -48,10 +55,13 @@ class PlanPickerDialog(context: Context)
     override fun onClick(dialog: DialogInterface, which: Int) {
         when (which) {
             DialogInterface.BUTTON_POSITIVE -> {
-
+                setListener.onNumberSet(hourNumberPicker.value, minNumberPicker.value)
+                dismiss()
             }
             DialogInterface.BUTTON_NEGATIVE -> cancel()
         }
     }
+
+
 
 }

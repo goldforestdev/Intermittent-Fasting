@@ -4,6 +4,7 @@ package com.goldforest.capdiet.view.plan
 
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -29,6 +30,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         viewDataBinding.vm = viewModel
+        viewDataBinding.lifecycleOwner = this
 
         initLiveDataObserver()
         initView()
@@ -37,8 +39,8 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     private fun initView () {
         val calendar = getCalendar()
 
-        setTimeTextView(viewDataBinding.tvStartTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
-        setTimeTextView(viewDataBinding.tvFastingTime, calendar.get(Calendar.HOUR_OF_DAY) + 5, calendar.get(Calendar.MINUTE))
+        setStartTime(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+        setFastingTime(16, 0)
     }
 
     private fun initLiveDataObserver() {
@@ -46,7 +48,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
             setPlanTypeView(it)
         })
 
-        viewModel.timePicker.observe(this, Observer {
+        viewModel.setTimeValue.observe(this, Observer {
             val calendar = getCalendar()
             when(it.id) {
                 R.id.tvStartTime -> {
@@ -54,7 +56,6 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
                     showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
                 }
                 else -> {
-                    //calendar.timeInMillis = viewModel.endTime.value!!
                     showNumberPicker()
                 }
             }
@@ -65,20 +66,24 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     private fun showTimePicker (view : View, hourOfDay: Int, minute: Int) {
         timePickerView = view
 
-        val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            setTimeTextView(view, hourOfDay, minute)
+        val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hour, min ->
+            setStartTime(hour, min)
         }, hourOfDay,minute,false)
         timePickerDialog.show()
     }
 
     private fun showNumberPicker () {
-        val numberPickerDialog = PlanPickerDialog(activity!!)
+        val numberPickerDialog = PlanPickerDialog(activity!!,object :PlanPickerDialog.OnNumberSetListener {
+            override fun onNumberSet(hourOfDay: Int, minute: Int) {
+                setFastingTime(hourOfDay, minute)
+            }
+        },16,0)
         numberPickerDialog.setTitle(R.string.set_intermittent_fast_time)
         numberPickerDialog.setMessage("간헐적 단식 시간을 설정 하세요")
         numberPickerDialog.show()
     }
 
-    private fun setTimeTextView(view: View, hourOfDay: Int,  minute: Int) {
+    private fun setStartTime(hourOfDay: Int,  minute: Int) {
         val strAmPm: String
         val hour: Int
         val calendar : Calendar = getCalendar()
@@ -94,17 +99,25 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
             hour = hourOfDay - 12
         }
 
-        when (view.id) {
-            R.id.tvStartTime -> {
-                viewDataBinding.tvStartTime.text = "$hour : $minute $strAmPm"
-                viewModel.startTime.value = calendar.timeInMillis
-            }
-            else -> {
-                viewDataBinding.tvFastingTime.text = "$hour : $minute $strAmPm"
-                viewModel.endTime.value = calendar.timeInMillis
-            }
+        viewModel.setStartTimeString("$hour : $minute $strAmPm")
+        viewModel.startTime.value = calendar.timeInMillis
+    }
 
-        }
+    private fun setFastingTime(hourOfDay: Int,  minute: Int) {
+        val calendar : Calendar = getCalendar()
+        calendar.set(Calendar.HOUR_OF_DAY,hourOfDay)
+        calendar.set(Calendar.MINUTE,minute)
+
+        val endTime = viewModel.startTime.value?.plus(calendar.timeInMillis)
+
+        viewModel.setFastingTimeString("$hourOfDay ${getString(R.string.hours)} $minute ${getString(R.string.minutes)}")
+        viewModel.endTime.value = endTime
+
+
+        //for Test
+        val calendar2 = getCalendar()
+        calendar2.timeInMillis = viewModel.endTime.value!!
+        Toast.makeText(activity, "End Time : ${calendar2.get(Calendar.HOUR_OF_DAY)} 시 ${calendar2.get(Calendar.MINUTE)} 분",Toast.LENGTH_LONG).show()
     }
 
     private fun getCalendar() : Calendar {
