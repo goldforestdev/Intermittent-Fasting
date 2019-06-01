@@ -72,7 +72,10 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     }
 
     private fun showNumberPicker () {
-
+        val numberPickerDialog = PlanPickerDialog(activity!!)
+        numberPickerDialog.setTitle(R.string.set_intermittent_fast_time)
+        numberPickerDialog.setMessage("간헐적 단식 시간을 설정 하세요")
+        numberPickerDialog.show()
     }
 
     private fun setTimeTextView(view: View, hourOfDay: Int,  minute: Int) {

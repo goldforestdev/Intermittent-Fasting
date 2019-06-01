@@ -27,4 +27,8 @@
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
     <string name="fasting_time">Fasting time</string>
+
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="set_intermittent_fast_time">Set intermittent fast time</string>
 </resources>
