@@ -7,32 +7,21 @@
                 name="vm"
                 type="com.goldforest.capdiet.viewmodel.PlanViewModel"/>
     </data>
+
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.plan.PlanTermFragment">
+            tools:context=".view.plan.PlanNotificationFragment">
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="나는 기간 설정 프래그먼트"/>
+                android:text="나는 노티 프래그먼트"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/menuLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-            <Button
-                    android:id="@+id/btNextFragment"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:background="@color/colorPrimary"
-                    android:layout_margin="10dp"
-                    android:textSize="23sp"
-                    android:textColor="@android:color/white"
-                    android:text="다음"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             <FrameLayout
                     android:id="@+id/fl_plan"
@@ -149,4 +138,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
+
 </layout>
