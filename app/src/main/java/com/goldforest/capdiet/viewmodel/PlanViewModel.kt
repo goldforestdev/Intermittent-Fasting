@@ -4,10 +4,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseViewModel
 import com.goldforest.domain.model.PlanType
-import java.util.*
 
 
 class PlanViewModel : BaseViewModel() {
@@ -18,15 +16,20 @@ class PlanViewModel : BaseViewModel() {
     private val _endTime = MutableLiveData<Long>()
 
     private var _startTimeViewString = MutableLiveData<String>()
-    private var _fastringTimeViewString = MutableLiveData<String>()
+    private var _fastingTimeViewString = MutableLiveData<String>()
+
+    private var _nextFragmentShowValue = MutableLiveData<Boolean>()
 
     val planType: LiveData<PlanType> get() = _planType
     val setTimeValue: LiveData<View> get() = _setTimeValue
+
     var startTime: MutableLiveData<Long> = MutableLiveData()
     var endTime: MutableLiveData<Long> = MutableLiveData()
 
     val startTimeViewString : MutableLiveData<String> get() = _startTimeViewString
-    val fastingTimeViewString : MutableLiveData<String> get() = _fastringTimeViewString
+    val fastingTimeViewString : MutableLiveData<String> get() = _fastingTimeViewString
+
+    val nextFragmentShow : LiveData<Boolean> get() = _nextFragmentShowValue
 
     fun setPlanType (planTypeOrdinal: Int) {
         when (planTypeOrdinal) {
@@ -45,6 +48,10 @@ class PlanViewModel : BaseViewModel() {
     }
 
     fun setFastingTimeString(fastingTime : String) {
-        _fastringTimeViewString.value = fastingTime
+        _fastingTimeViewString.value = fastingTime
+    }
+
+    fun nextButtonClick () {
+        _nextFragmentShowValue.value = true
     }
 }

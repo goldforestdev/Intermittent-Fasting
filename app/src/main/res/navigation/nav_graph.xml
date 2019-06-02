@@ -20,11 +20,15 @@
                 app:popExitAnim="@anim/slide_to_left"/>
     </fragment>
     <fragment android:id="@+id/planFragment" android:name="com.goldforest.capdiet.view.plan.PlanMainFragment"
-              android:label="@string/plan" tools:layout="@layout/fragment_plan"/>
+              android:label="@string/plan" tools:layout="@layout/fragment_plan">
+        <action android:id="@+id/action_planFragment_to_planTermFragment" app:destination="@id/planTermFragment"/>
+    </fragment>
     <fragment android:id="@+id/listFragment" android:name="com.goldforest.capdiet.view.ListFragment"
               android:label="@string/list" tools:layout="@layout/fragment_list"/>
     <fragment android:id="@+id/settingsFragment" android:name="com.goldforest.capdiet.view.SettingsFragment"
               android:label="@string/setting" tools:layout="@layout/fragment_settings"/>
     <fragment android:id="@+id/calendarFragment" android:name="com.goldforest.capdiet.view.calendar.CalendarMainFragment"
               android:label="@string/calendar" tools:layout="@layout/fragment_calendar_main"/><action android:id="@+id/action_global_mainFragment" app:destination="@id/mainFragment"/>
+    <fragment android:id="@+id/planTermFragment" android:name="com.goldforest.capdiet.view.plan.PlanTermFragment"
+              android:label="PlanTermFragment"/>
 </navigation>

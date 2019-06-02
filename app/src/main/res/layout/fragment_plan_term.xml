@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+                name="vm"
+                type="com.goldforest.capdiet.viewmodel.PlanViewModel"/>
+    </data>
+<FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.plan.PlanTermFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menuLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <FrameLayout
+                android:id="@+id/fl_plan"
+                android:layout_width="@dimen/menu_image_width_size"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/fl_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintVertical_chainStyle="packed">
+
+            <ImageView
+                    android:id="@+id/iv_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/plan"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_p"/>
+
+            <TextView
+                    android:id="@+id/tv_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/plan_vertical"
+                    android:textColor="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/fl_list"
+                android:visibility="invisible"
+                android:layout_width="@dimen/menu_image_width_size"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/fl_calendar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fl_plan">
+
+            <ImageView
+                    android:id="@+id/iv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_l"
+                    android:contentDescription="@string/list"/>
+
+            <TextView
+                    android:id="@+id/tv_list"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/list_vertical"
+                    android:textColor="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/fl_calendar"
+                android:visibility="invisible"
+                android:layout_width="@dimen/menu_image_width_size"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/fl_setting"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fl_list">
+
+            <ImageView
+                    android:id="@+id/iv_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_c"
+                    android:contentDescription="@string/calendar"/>
+
+            <TextView
+                    android:id="@+id/tv_calendar"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/calendar_vertical"
+                    android:textColor="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/fl_setting"
+                android:visibility="invisible"
+                android:layout_width="@dimen/menu_image_width_size"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fl_calendar">
+
+            <ImageView
+                    android:id="@+id/iv_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_s"
+                    android:contentDescription="@string/setting"/>
+
+            <TextView
+                    android:id="@+id/tv_setting"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/setting_vertical"
+                    android:textColor="@android:color/white"/>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
+</layout>
