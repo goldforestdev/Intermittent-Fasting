@@ -6,7 +6,6 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R

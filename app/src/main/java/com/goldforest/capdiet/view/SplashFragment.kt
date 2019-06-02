@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class SplashFragment : Fragment() {
@@ -32,7 +33,7 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.hide()
+        (activity as AppCompatActivity).toolbar?.visibility = View.GONE
 
     }
 }
