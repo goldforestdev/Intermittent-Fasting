@@ -42,6 +42,10 @@ class PlanViewModel : BaseViewModel() {
         _setTimeValue.postValue(view)
     }
 
+    fun initTimPickerValue () {
+        _setTimeValue.postValue(null)
+    }
+
     fun setStartTimeString(startTime : String) {
         Log.e("HJ", "[HJ] start time : $startTime")
         _startTimeViewString.value = startTime
