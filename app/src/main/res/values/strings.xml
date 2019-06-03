@@ -3,6 +3,7 @@
     <string name="splash_title">Intermittent Fasting</string>
     <string name="splash_bottom_text" translatable="false">Copyright<![CDATA[ⓒ]]> 2019 Gold Forest Team.</string>
     <string name="plan_1_title">Select IF type</string>
+    <string name="plan_2_title">Select IF term</string>
     <string name="plan_type_16_8">Fasting at a specific time</string>
     <string name="plan_type_5_2">Fast on a specific day</string>
     <string name="sunday">SUN</string>
@@ -26,14 +27,20 @@
     <string name="time_pm">PM</string>
     <string name="hours">hours</string>
     <string name="minutes">minutes</string>
-    <string name="start_time">Start Time</string>
-    <string name="end_time">End Time</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
     <string name="fasting_time">Fasting time</string>
 
+    <string name="next">Next</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="set_intermittent_fast_time">Set intermittent fast time</string>
+    <string name="plan_term_no_period">No period</string>
+    <string name="plan_term_one_week">one week</string>
+    <string name="plan_term_two_week">two week</string>
+    <string name="plan_term_one_month">one month</string>
+    <string name="plan_term_user_settings">User settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -2,6 +2,7 @@
     <string name="app_name">GoldForest 간헐적 단식</string>
     <string name="splash_title">간헐적 단식</string>
     <string name="plan_1_title">간헐적 단식 종류 선택</string>
+    <string name="plan_2_title">간헐적 단신 기간 선택</string>
     <string name="plan_type_16_8">특정 시간에 단식 하기</string>
     <string name="plan_type_5_2">특정 요일에 단식 하기</string>
     <string name="sunday">일</string>
@@ -28,10 +29,18 @@
 
     <string name="start_time">시작 시간</string>
     <string name="end_time">완료 시간</string>
-
+    <string name="start_date">시작 날짜</string>
+    <string name="end_date">완료 날짜</string>
     <string name="fasting_time">단식 시간</string>
+
+    <string name="next">다음</string>
     <string name="ok">확인</string>
     <string name="cancel">취소</string>
     <string name="set_intermittent_fast_time">간헐적 단식 시간 설정</string>
+    <string name="plan_term_no_period">기간 없음</string>
+    <string name="plan_term_one_week">1 주</string>
+    <string name="plan_term_two_week">2 주</string>
+    <string name="plan_term_one_month">한 달</string>
+    <string name="plan_term_user_settings">사용자 설정</string>
 
 </resources>
