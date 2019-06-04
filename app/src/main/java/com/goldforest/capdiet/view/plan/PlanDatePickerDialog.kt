@@ -9,25 +9,26 @@ import com.goldforest.capdiet.R
 import java.util.*
 
 
-class PlanDatePickerDialog(private val onDateClickListener: OnDateClickListener?)
+class PlanDatePickerDialog(private val onDateClickListener: OnDateClickListener?,
+                           private val year : Int,
+                           private val month : Int,
+                           private val dayOfMonth : Int)
     : DialogFragment() {
 
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val c = Calendar.getInstance()
-        val calendarYear = c.get(Calendar.YEAR)
-        val calendarMonth = c.get(Calendar.MONTH)
-        val calendarDay = c.get(Calendar.DAY_OF_MONTH)
+
+
+
 
         return DatePickerDialog(activity!!, R.style.TimePickerTheme,
-            DatePickerDialog.OnDateSetListener { datePicker, year, month, dayOfMonth ->
+            DatePickerDialog.OnDateSetListener { datePicker, selectedYear, selectedMonth, selectedDayOfMonth ->
                 onDateClickListener?.onDateSet(
                     datePicker,
-                    year,
-                    month,
-                    dayOfMonth
+                    selectedYear,
+                    selectedMonth,
+                    selectedDayOfMonth
                 )
-            }, calendarYear, calendarMonth, calendarDay
+            }, year, month, dayOfMonth
         )
     }
     interface OnDateClickListener {

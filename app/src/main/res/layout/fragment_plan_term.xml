@@ -52,7 +52,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/text_contents_size"
                                 android:checked="true"
-                                android:onClick="@{() -> vm.setPlanType(0)}"
+                                android:onClick="@{() -> vm.setPlanTermType(0)}"
                                 android:text="@string/plan_term_one_week"
                                 app:buttonTint="@color/colorAccent"/>
 
@@ -62,7 +62,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="@dimen/text_contents_size"
-                                android:onClick="@{() -> vm.setPlanType(1)}"
+                                android:onClick="@{() -> vm.setPlanTermType(1)}"
                                 android:text="@string/plan_term_two_week"
                                 app:buttonTint="@color/colorAccent"/>
 
@@ -72,7 +72,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="@dimen/text_contents_size"
-                                android:onClick="@{() -> vm.setPlanType(1)}"
+                                android:onClick="@{() -> vm.setPlanTermType(2)}"
                                 android:text="@string/plan_term_one_month"
                                 app:buttonTint="@color/colorAccent"/>
 
@@ -82,7 +82,17 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="@dimen/text_contents_size"
-                                android:onClick="@{() -> vm.setPlanType(1)}"
+                                android:onClick="@{() -> vm.setPlanTermType(3)}"
+                                android:text="@string/plan_term_no_period"
+                                app:buttonTint="@color/colorAccent"/>
+
+                        <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbPlan5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:textSize="@dimen/text_contents_size"
+                                android:onClick="@{() -> vm.setPlanTermType(4)}"
                                 android:text="@string/plan_term_user_settings"
                                 app:buttonTint="@color/colorAccent"/>
                     </RadioGroup>
@@ -133,12 +143,12 @@
                                 android:textColor="@android:color/holo_blue_dark"
                                 android:layout_marginTop="10dp"
                                 android:padding="5dp"
-                                android:onClick="@{vm::showTimePickerDialog}"
+                                android:onClick="@{vm::showDateViewDialog}"
                                 android:background="@drawable/round_corner"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/tvEndDate"
                                 app:layout_constraintTop_toBottomOf="@id/tvStartTimeTitle"
-                                android:text="@{vm.startTimeViewString}"/>
+                                android:text="@{vm.startDateString}"/>
 
                         <TextView
                                 android:id="@+id/tvEndDate"
@@ -146,13 +156,13 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="23sp"
                                 android:textColor="@android:color/holo_blue_dark"
-                                android:onClick="@{vm::showTimePickerDialog}"
+                                android:onClick="@{vm::showDateViewDialog}"
                                 android:padding="5dp"
                                 android:background="@drawable/round_corner"
                                 app:layout_constraintStart_toEndOf="@id/tvStartDate"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="@id/tvStartDate"
-                                android:text="@{vm.fastingTimeViewString}"/>
+                                android:text="@{vm.endDateString}"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <Button

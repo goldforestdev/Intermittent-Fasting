@@ -23,7 +23,6 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     override val viewModel: PlanViewModel by viewModel()
 
     private var currentPlanType : PlanType = PlanType.PLAN_16_8
-    private lateinit var timePickerView : View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +58,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
                 when(it.id) {
                     R.id.tvStartTime -> {
                         calendar.timeInMillis = viewModel.startTime.value!!
-                        showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+                        showTimePicker(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
                     }
                     R.id.tvFastingTime -> {
                         showNumberPicker()
@@ -67,14 +66,9 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
                 }
             }
         })
-
-        viewModel.nextFragmentShow.observe(this, Observer {
-
-        })
     }
 
-    private fun showTimePicker (view : View, hourOfDay: Int, minute: Int) {
-        timePickerView = view
+    private fun showTimePicker (hourOfDay: Int, minute: Int) {
 
         val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hour, min ->
             setStartTime(hour, min)
