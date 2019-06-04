@@ -1,8 +1,10 @@
 package com.goldforest.capdiet.view.plan
 
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.DatePicker
 import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseFragment
@@ -19,9 +21,20 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>() 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewDataBinding.vm = viewModel
+        viewDataBinding.lifecycleOwner = this
 
         btNextFragment.setOnClickListener {
             findNavController().navigate(R.id.action_planTermFragment_to_planNotificationFragment)
+        }
+
+        viewDataBinding.tvStartTimeTitle.setOnClickListener {
+            val datePickerDialog = PlanDatePickerDialog(object:PlanDatePickerDialog.OnDateClickListener{
+                override fun onDateSet(datePicker: DatePicker, i: Int, i1: Int, i2: Int) {
+
+                }
+            })
+            datePickerDialog.show(activity!!.supportFragmentManager, "datePicker")
         }
 
     }

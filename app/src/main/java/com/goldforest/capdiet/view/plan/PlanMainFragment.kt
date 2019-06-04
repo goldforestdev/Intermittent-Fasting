@@ -43,6 +43,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
 
 
         btNextFragment.setOnClickListener {
+            viewModel.initTimPickerValue()
             findNavController().navigate(R.id.action_planFragment_to_planTermFragment)
         }
     }
@@ -54,13 +55,15 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
 
         viewModel.setTimeValue.observe(this, Observer {
             val calendar = getCalendar()
-            when(it.id) {
-                R.id.tvStartTime -> {
-                    calendar.timeInMillis = viewModel.startTime.value!!
-                    showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
-                }
-                else -> {
-                    showNumberPicker()
+            if(it != null) {
+                when(it.id) {
+                    R.id.tvStartTime -> {
+                        calendar.timeInMillis = viewModel.startTime.value!!
+                        showTimePicker(it, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+                    }
+                    R.id.tvFastingTime -> {
+                        showNumberPicker()
+                    }
                 }
             }
         })
@@ -80,14 +83,14 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     }
 
     private fun showNumberPicker () {
-        val numberPickerDialog = PlanPickerDialog(activity!!,object :PlanPickerDialog.OnNumberSetListener {
+        val planPickerDialog = PlanPickerDialog(activity!!,object :PlanPickerDialog.OnNumberSetListener {
             override fun onNumberSet(hourOfDay: Int, minute: Int) {
                 setFastingTime(hourOfDay, minute)
             }
         },16,0)
-        numberPickerDialog.setTitle(R.string.set_intermittent_fast_time)
-        numberPickerDialog.setMessage("간헐적 단식 시간을 설정 하세요")
-        numberPickerDialog.show()
+        planPickerDialog.setTitle(R.string.set_intermittent_fast_time)
+        planPickerDialog.setMessage("간헐적 단식 시간을 설정 하세요")
+        planPickerDialog.show()
     }
 
     private fun setStartTime(hourOfDay: Int,  minute: Int) {
