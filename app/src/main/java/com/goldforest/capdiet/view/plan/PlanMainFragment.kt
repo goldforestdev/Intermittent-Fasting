@@ -13,7 +13,6 @@ import com.goldforest.capdiet.base.BaseFragment
 import com.goldforest.capdiet.databinding.FragmentPlanBinding
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.goldforest.domain.model.PlanType
-import kotlinx.android.synthetic.main.fragment_plan.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -41,9 +40,16 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         setFastingTime(16, 0)
 
 
-        btNextFragment.setOnClickListener {
-            viewModel.initTimPickerValue()
+        viewDataBinding.btNextFragment.setOnClickListener {
             findNavController().navigate(R.id.action_planFragment_to_planTermFragment)
+        }
+
+        viewDataBinding.tvStartTime.setOnClickListener {
+            showTimePicker()
+        }
+
+        viewDataBinding.tvFastingTime.setOnClickListener {
+            showNumberPicker()
         }
     }
 
@@ -51,28 +57,14 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         viewModel.planType.observe(this, Observer {
             setPlanTypeView(it)
         })
-
-        viewModel.setTimeValue.observe(this, Observer {
-            val calendar = getCalendar()
-            if(it != null) {
-                when(it.id) {
-                    R.id.tvStartTime -> {
-                        calendar.timeInMillis = viewModel.startTime.value!!
-                        showTimePicker(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
-                    }
-                    R.id.tvFastingTime -> {
-                        showNumberPicker()
-                    }
-                }
-            }
-        })
     }
 
-    private fun showTimePicker (hourOfDay: Int, minute: Int) {
-
+    private fun showTimePicker () {
+        val calendar = getCalendar()
+        calendar.timeInMillis = viewModel.startTime.value!!
         val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hour, min ->
             setStartTime(hour, min)
-        }, hourOfDay,minute,false)
+        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),false)
         timePickerDialog.show()
     }
 
@@ -139,13 +131,13 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
         when (currentPlanType) {
             PlanType.PLAN_16_8 -> {
                 Toast.makeText(activity, "16/8 다이어트 타입을 설정 합니다.", Toast.LENGTH_LONG).show()
-                plan1Layout.visibility = View.VISIBLE
-                plan2Layout.visibility = View.GONE
+                viewDataBinding.plan1Layout.visibility = View.VISIBLE
+                viewDataBinding.plan2Layout.visibility = View.GONE
             }
             else -> {
                 Toast.makeText(activity, "5/2 다이어트 타입을 설정 합니다.", Toast.LENGTH_LONG).show()
-                plan1Layout.visibility = View.GONE
-                plan2Layout.visibility = View.VISIBLE
+                viewDataBinding.plan1Layout.visibility = View.GONE
+                viewDataBinding.plan2Layout.visibility = View.VISIBLE
             }
         }
     }

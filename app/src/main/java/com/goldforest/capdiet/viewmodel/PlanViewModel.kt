@@ -18,8 +18,6 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
     private val _planType = MutableLiveData<PlanType>()
     private val _planTermType = MutableLiveData<Int>()
-    private val _setTimeValue = MutableLiveData<View>()
-    private val _setDateValue = MutableLiveData<View>()
     private var _startTimeViewString = MutableLiveData<String>()
     private var _fastingTimeViewString = MutableLiveData<String>()
     private var _startDateString = MutableLiveData<String>()
@@ -27,8 +25,6 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
     val planType: LiveData<PlanType> get() = _planType
     val termType : LiveData<Int> get() = _planTermType
-    val setTimeValue: LiveData<View> get() = _setTimeValue
-    val setDateValue: LiveData<View> get() = _setDateValue
 
     var startTime: MutableLiveData<Long> = MutableLiveData()
     var endTime: MutableLiveData<Long> = MutableLiveData()
@@ -47,22 +43,6 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
             PlanType.PLAN_16_8.ordinal -> _planType.postValue(PlanType.PLAN_16_8)
             else -> _planType.postValue(PlanType.PLAN_5_2)
         }
-    }
-
-    fun showTimePickerDialog (view: View) {
-        _setTimeValue.postValue(view)
-    }
-
-    fun initTimPickerValue () {
-        _setTimeValue.postValue(null)
-    }
-
-    fun showDateViewDialog (view: View) {
-        _setDateValue.postValue(view)
-    }
-
-    fun initDateViewValue () {
-        _setTimeValue.postValue(null)
     }
 
     fun setStartTimeString(startTime : String) {
