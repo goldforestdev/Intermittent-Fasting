@@ -24,8 +24,6 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
 
     private var currentPlanType : PlanType = PlanType.PLAN_16_8
     private lateinit var timePickerView : View
-    private lateinit var planPickerDialog : PlanPickerDialog
-    private lateinit var timePickerDialog : TimePickerDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,14 +76,15 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     private fun showTimePicker (view : View, hourOfDay: Int, minute: Int) {
         timePickerView = view
 
-        timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hour, min ->
+
+        val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hour, min ->
             setStartTime(hour, min)
         }, hourOfDay,minute,false)
         timePickerDialog.show()
     }
 
     private fun showNumberPicker () {
-        planPickerDialog = PlanPickerDialog(activity!!,object :PlanPickerDialog.OnNumberSetListener {
+        val planPickerDialog = PlanPickerDialog(activity!!,object :PlanPickerDialog.OnNumberSetListener {
             override fun onNumberSet(hourOfDay: Int, minute: Int) {
                 setFastingTime(hourOfDay, minute)
             }
