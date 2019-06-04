@@ -76,7 +76,6 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>() {
     private fun showTimePicker (view : View, hourOfDay: Int, minute: Int) {
         timePickerView = view
 
-
         val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hour, min ->
             setStartTime(hour, min)
         }, hourOfDay,minute,false)
