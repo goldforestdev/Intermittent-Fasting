@@ -29,10 +29,6 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
 
         initLiveDataObserver()
         initView()
-
-        activity?.apply {
-            this.title = "계획 시간 설정"
-        }
     }
 
     private fun initView () {
