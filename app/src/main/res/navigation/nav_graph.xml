@@ -30,11 +30,11 @@
     <fragment android:id="@+id/calendarFragment" android:name="com.goldforest.capdiet.view.calendar.CalendarMainFragment"
               android:label="@string/calendar" tools:layout="@layout/fragment_calendar_main"/><action android:id="@+id/action_global_mainFragment" app:destination="@id/mainFragment"/>
     <fragment android:id="@+id/planTermFragment" android:name="com.goldforest.capdiet.view.plan.PlanTermFragment"
-              android:label="PlanTermFragment">
+              android:label="@string/plan">
         <action android:id="@+id/action_planTermFragment_to_planNotificationFragment"
                 app:destination="@id/planNotificationFragment"/>
     </fragment>
     <fragment android:id="@+id/planNotificationFragment"
               android:name="com.goldforest.capdiet.view.plan.PlanNotificationFragment"
-              android:label="PlanNotificationFragment"/>
+              android:label="@string/plan"/>
 </navigation>

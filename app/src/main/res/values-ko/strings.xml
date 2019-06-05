@@ -13,10 +13,10 @@
     <string name="friday">금</string>
     <string name="saturday">토</string>
 
-    <string name="plan">Plan</string>
-    <string name="list">List</string>
-    <string name="calendar">Calendar</string>
-    <string name="setting">Setting</string>
+    <string name="plan">계획</string>
+    <string name="list">목록</string>
+    <string name="calendar">달력</string>
+    <string name="setting">설정</string>
     <string name="plan_vertical">P\nl\na\nn</string>
     <string name="list_vertical">L\ni\ns\nt</string>
     <string name="calendar_vertical">C\na\nl\ne\nn\nd\na\nr</string>

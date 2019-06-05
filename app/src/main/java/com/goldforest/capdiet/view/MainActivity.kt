@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController, appBarConfiguration)
         findViewById<NavigationView>(R.id.nav_view).setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+       navController.addOnDestinationChangedListener { _, destination, _ ->
             if (isDrawerLocked(destination)) {
                 drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             } else {

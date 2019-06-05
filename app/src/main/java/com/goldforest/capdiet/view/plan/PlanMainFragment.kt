@@ -11,6 +11,7 @@ import com.goldforest.capdiet.base.BaseFragment
 import com.goldforest.capdiet.databinding.FragmentPlanBinding
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.goldforest.domain.model.PlanType
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -28,6 +29,10 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
 
         initLiveDataObserver()
         initView()
+
+        activity?.apply {
+            this.title = "계획 시간 설정"
+        }
     }
 
     private fun initView () {
