@@ -38,9 +38,8 @@
     <string name="cancel">취소</string>
     <string name="set_intermittent_fast_time">간헐적 단식 시간 설정</string>
     <string name="plan_term_no_period">기간 없음</string>
-    <string name="plan_term_one_week">1 주</string>
-    <string name="plan_term_two_week">2 주</string>
-    <string name="plan_term_one_month">한 달</string>
+    <string name="plan_term_four_week">4 주</string>
+    <string name="plan_term_eight_week">8 주</string>
     <string name="plan_term_user_settings">사용자 설정</string>
 
 </resources>

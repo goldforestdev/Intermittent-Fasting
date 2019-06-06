@@ -37,10 +37,9 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="set_intermittent_fast_time">Set intermittent fast time</string>
-    <string name="plan_term_one_week">One week</string>
-    <string name="plan_term_two_week">Two week</string>
+    <string name="plan_term_four_week">4 week</string>
+    <string name="plan_term_eight_week">8 week</string>
     <string name="plan_term_no_period">No period</string>
-    <string name="plan_term_one_month">One month</string>
     <string name="plan_term_user_settings">User settings</string>
 
 </resources>

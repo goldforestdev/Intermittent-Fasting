@@ -20,6 +20,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     private val _planType = MutableLiveData<PlanType>()
     private val _planTermType = MutableLiveData<Int>()
     private var _startTimeViewString = MutableLiveData<String>()
+    private var _endTimeViewString = MutableLiveData<String>()
     private var _fastingTimeViewString = MutableLiveData<String>()
     private var _startDateString = MutableLiveData<String>()
     private var _endDateString = MutableLiveData<String>()
@@ -35,6 +36,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     var startTime: MutableLiveData<Long> = _startTime
     var endTime: MutableLiveData<Long> = _endTime
     val startTimeViewString : MutableLiveData<String> get() = _startTimeViewString
+    val endTimeViewString : MutableLiveData<String> get() = _endTimeViewString
     val fastingTimeViewString : MutableLiveData<String> get() = _fastingTimeViewString
 
     var startDate: MutableLiveData<String> = MutableLiveData()
@@ -49,18 +51,31 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
         }
     }
 
-    fun setStartTimeString(startTime : String) {
-        Log.e("HJ", "[HJ] start time : $startTime")
-        _startTimeViewString.value = startTime
-    }
-
     fun setStartTime(hourOfDay: Int, minute: Int) {
-        val strAmPm: String
-        val hour: Int
         val calendar : Calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY,hourOfDay)
         calendar.set(Calendar.MINUTE,minute)
 
+        val (strAmPm: String, hour: Int) = getHourOfDay(hourOfDay)
+        _startTimeViewString.value = "$hour : $minute $strAmPm"
+        _startTime.value = calendar.timeInMillis
+        _endTime.value = getEndTime(fastingTimeHour, fastingTimeMin)
+    }
+
+    private fun getEndTime(hourOfDay: Int, minute: Int) : Long {
+        val calendar : Calendar = Calendar.getInstance()
+        calendar.timeInMillis = startTime.value!!
+        calendar.add(Calendar.HOUR_OF_DAY,hourOfDay)
+        calendar.add(Calendar.MINUTE,minute)
+
+        val (strAmPm: String, hour: Int) = getHourOfDay(calendar.get(Calendar.HOUR_OF_DAY))
+        _endTimeViewString.value = "$hour : ${calendar.get(Calendar.MINUTE)} $strAmPm"
+        return calendar.timeInMillis
+    }
+
+    private fun getHourOfDay(hourOfDay: Int): Pair<String, Int> {
+        val strAmPm: String
+        val hour: Int
         if (hourOfDay < 12) {
             strAmPm = androidContext.getString(R.string.time_am)
             hour = hourOfDay
@@ -69,9 +84,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
             strAmPm = androidContext.getString(R.string.time_pm)
             hour = hourOfDay - 12
         }
-        _startTimeViewString.value = "$hour : $minute $strAmPm"
-        _startTime.value = calendar.timeInMillis
-        _endTime.value = getEndTime(fastingTimeHour, fastingTimeMin)
+        return Pair(strAmPm, hour)
     }
 
     fun setFastingTime(hourOfDay: Int,  minute: Int) {
@@ -80,15 +93,6 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
         _fastingTimeViewString.value = "$hourOfDay ${androidContext.getString(R.string.hours)} $minute ${androidContext.getString(R.string.minutes)}"
         _endTime.value = getEndTime(hourOfDay, minute)
-    }
-
-    private fun getEndTime(hourOfDay: Int, minute: Int) : Long {
-        val calendar : Calendar = Calendar.getInstance()
-        calendar.timeInMillis = startTime.value!!
-        calendar.add(Calendar.HOUR_OF_DAY,hourOfDay)
-        calendar.add(Calendar.MINUTE,minute)
-        Log.e("HJ", "[HJ] End time : ${calendar.get(Calendar.HOUR_OF_DAY)} : ${calendar.get(Calendar.MINUTE)}")
-        return calendar.timeInMillis
     }
 
     fun setPlanTermType(termType  : Int) {
