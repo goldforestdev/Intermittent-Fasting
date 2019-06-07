@@ -53,7 +53,7 @@
                                 android:textSize="@dimen/text_contents_size"
                                 android:checked="true"
                                 android:onClick="@{() -> vm.setPlanTermType(0)}"
-                                android:text="@string/plan_term_one_week"
+                                android:text="@string/plan_term_four_week"
                                 app:buttonTint="@color/colorAccent"/>
 
                         <androidx.appcompat.widget.AppCompatRadioButton
@@ -63,21 +63,11 @@
                                 android:layout_marginTop="5dp"
                                 android:textSize="@dimen/text_contents_size"
                                 android:onClick="@{() -> vm.setPlanTermType(1)}"
-                                android:text="@string/plan_term_two_week"
+                                android:text="@string/plan_term_eight_week"
                                 app:buttonTint="@color/colorAccent"/>
 
                         <androidx.appcompat.widget.AppCompatRadioButton
                                 android:id="@+id/rbPlan3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:textSize="@dimen/text_contents_size"
-                                android:onClick="@{() -> vm.setPlanTermType(2)}"
-                                android:text="@string/plan_term_one_month"
-                                app:buttonTint="@color/colorAccent"/>
-
-                        <androidx.appcompat.widget.AppCompatRadioButton
-                                android:id="@+id/rbPlan4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
@@ -87,7 +77,7 @@
                                 app:buttonTint="@color/colorAccent"/>
 
                         <androidx.appcompat.widget.AppCompatRadioButton
-                                android:id="@+id/rbPlan5"
+                                android:id="@+id/rbPlan4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"

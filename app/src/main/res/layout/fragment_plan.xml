@@ -107,7 +107,7 @@
                                 android:text="@string/start_time"
                                 android:layout_marginTop="10dp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/tvFastingTime"
+                                app:layout_constraintEnd_toStartOf="@id/tvEndTime"
                                 app:layout_constraintTop_toBottomOf="@id/tvPlan1Title"/>
 
                         <TextView
@@ -116,7 +116,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/text_sub_title_size"
                                 android:textStyle="bold"
-                                android:text="@string/fasting_time"
+                                android:text="@string/end_time"
                                 app:layout_constraintStart_toEndOf="@id/tvStartTimeTitle"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="@id/tvStartTimeTitle"/>
@@ -131,9 +131,33 @@
                                 android:padding="5dp"
                                 android:background="@drawable/round_corner"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/tvFastingTime"
+                                app:layout_constraintEnd_toStartOf="@id/tvEndTime"
                                 app:layout_constraintTop_toBottomOf="@id/tvStartTimeTitle"
                                 android:text="@{vm.startTimeViewString}"/>
+
+                        <TextView
+                                android:id="@+id/tvEndTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="23sp"
+                                android:textColor="@android:color/holo_blue_dark"
+                                android:padding="5dp"
+                                app:layout_constraintStart_toEndOf="@id/tvStartTime"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tvStartTime"
+                                android:text="@{vm.endTimeViewString}"/>
+
+                        <TextView
+                                android:id="@+id/tvFastingTimeTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textSize="@dimen/text_sub_title_size"
+                                android:textStyle="bold"
+                                android:text="@string/fasting_time"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tvStartTime"/>
 
                         <TextView
                                 android:id="@+id/tvFastingTime"
@@ -141,11 +165,12 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="23sp"
                                 android:textColor="@android:color/holo_blue_dark"
+                                android:layout_marginTop="10dp"
                                 android:padding="5dp"
                                 android:background="@drawable/round_corner"
-                                app:layout_constraintStart_toEndOf="@id/tvStartTime"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@id/tvStartTime"
+                                app:layout_constraintTop_toBottomOf="@id/tvFastingTimeTitle"
                                 android:text="@{vm.fastingTimeViewString}"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
