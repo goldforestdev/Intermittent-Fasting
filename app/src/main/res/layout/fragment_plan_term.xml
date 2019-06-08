@@ -154,14 +154,14 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <Button
-                            android:id="@+id/btNextFragment"
+                            android:id="@+id/btDoneFragment"
                             android:layout_width="100dp"
                             android:layout_height="50dp"
                             android:background="@color/colorPrimary"
                             android:layout_margin="10dp"
                             android:textSize="23sp"
                             android:textColor="@android:color/white"
-                            android:text="@string/next"
+                            android:text="@string/done"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>

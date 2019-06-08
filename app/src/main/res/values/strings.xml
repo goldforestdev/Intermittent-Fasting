@@ -23,6 +23,8 @@
     <string name="calendar_vertical">C\na\nl\ne\nn\nd\na\nr</string>
     <string name="setting_vertical">S\ne\nt\nt\ni\nn\ng</string>
 
+    <string name="time">Time</string>
+    <string name="period">Period</string>
     <string name="time_am">AM</string>
     <string name="time_pm">PM</string>
     <string name="hours">hours</string>
@@ -36,10 +38,13 @@
     <string name="next">Next</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
     <string name="set_intermittent_fast_time">Set intermittent fast time</string>
     <string name="plan_term_four_week">4 week</string>
     <string name="plan_term_eight_week">8 week</string>
     <string name="plan_term_no_period">No period</string>
     <string name="plan_term_user_settings">User settings</string>
+
+    <string name="my_plan_title">My Plan</string>
 
 </resources>

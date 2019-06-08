@@ -9,15 +9,16 @@ import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseFragment
 import com.goldforest.capdiet.databinding.FragmentPlanBinding
+import com.goldforest.capdiet.view.plan.dialog.PlanPickerDialog
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.goldforest.domain.model.PlanType
-import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), View.OnClickListener {
     override val layoutResourceId: Int = R.layout.fragment_plan
-    override val viewModel: PlanViewModel by viewModel()
+    override val viewModel: PlanViewModel by sharedViewModel()
 
     private var currentPlanType : PlanType = PlanType.PLAN_16_8
 
@@ -58,11 +59,16 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
 
     private fun showNumberPicker () {
         activity?.apply{
-            val planPickerDialog = PlanPickerDialog(this,object :PlanPickerDialog.OnNumberSetListener {
-                override fun onNumberSet(hourOfDay: Int, minute: Int) {
-                    viewModel.setFastingTime(hourOfDay, minute)
-                }
-            },16,0)
+            val planPickerDialog = PlanPickerDialog(
+                this,
+                object : PlanPickerDialog.OnNumberSetListener {
+                    override fun onNumberSet(hourOfDay: Int, minute: Int) {
+                        viewModel.setFastingTime(hourOfDay, minute)
+                    }
+                },
+                16,
+                0
+            )
             planPickerDialog.setTitle(R.string.set_intermittent_fast_time)
             planPickerDialog.setMessage("간헐적 단식 시간을 설정 하세요")
             planPickerDialog.show()
@@ -104,4 +110,6 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
             }
         }
     }
+
+
 }

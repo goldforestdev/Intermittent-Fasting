@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseViewModel
+import com.goldforest.capdiet.data.PlanData
+import com.goldforest.domain.model.Plan
 import com.goldforest.domain.model.PlanType
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,8 +50,8 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     val planType: LiveData<PlanType> get() = _planType
     val termType : LiveData<PlanTermType> get() = _planTermType
 
-    var startTime: MutableLiveData<Long> = _startTime
-    var endTime: MutableLiveData<Long> = _endTime
+    val startTime: MutableLiveData<Long> get() = _startTime
+    val endTime: MutableLiveData<Long> get() = _endTime
     val startTimeViewString : MutableLiveData<String> get() = _startTimeViewString
     val endTimeViewString : MutableLiveData<String> get() = _endTimeViewString
     val fastingTimeViewString : MutableLiveData<String> get() = _fastingTimeViewString
@@ -57,6 +60,8 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     var endDate: MutableLiveData<String> = MutableLiveData()
     val startDateString : MutableLiveData<String> get() = _startDateString
     val endDateString : MutableLiveData<String> get() = _endDateString
+
+    private var planData : PlanData? = null
 
     fun setPlanType (planTypeOrdinal: Int) {
         when (planTypeOrdinal) {
@@ -73,6 +78,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
         val (strAmPm: String, hour: Int) = getHourOfDay(hourOfDay)
         _startTimeViewString.value = "$hour : $minute $strAmPm"
         _startTime.value = calendar.timeInMillis
+        Log.e("HJ","[HJ]Start time : ${_startTime.value}")
         _endTime.value = getEndTime(fastingTimeHour, fastingTimeMin)
     }
 
@@ -146,26 +152,45 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
     private fun setPeriodEndDate() {
         val calendar = getDateCalendar(_startDateString.value)
-        when(_planTermType.value) {
-            PlanTermType.PLAN_TERM_4WEEK -> {
-                calendar.add(Calendar.WEEK_OF_YEAR, 4)
-                _endDateString.value = getDateFormatter().format(calendar.time)
-            }
-            PlanTermType.PLAN_TERM_8WEEK -> {
-                calendar.add(Calendar.WEEK_OF_YEAR, 8)
-                _endDateString.value = getDateFormatter().format(calendar.time)
-            }
+        if (_planTermType.value == PlanTermType.PLAN_TERM_4WEEK) {
+            calendar.add(Calendar.WEEK_OF_YEAR, 4)
+            _endDateString.value = getDateFormatter().format(calendar.time)
+        }
+        else if (_planTermType.value == PlanTermType.PLAN_TERM_8WEEK) {
+            calendar.add(Calendar.WEEK_OF_YEAR, 8)
+            _endDateString.value = getDateFormatter().format(calendar.time)
         }
     }
 
-    fun getDateCalendar(dateString: String?) : Calendar{
+    fun getDateCalendar(dateString: String?) : Calendar {
         val calendar = Calendar.getInstance()
         val sdf : SimpleDateFormat = getDateFormatter()
         calendar.time = sdf.parse(dateString)
         return calendar
     }
 
-    fun getDateCalendar(year: Int, month: Int, day: Int): Calendar {
+    fun getPlanStartCalendar() : Calendar {
+        val cal = Calendar.getInstance()
+        cal.timeInMillis = _startTime.value!!
+
+        val startCalendar = getDateCalendar(_startDateString.value)
+        startCalendar.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY))
+        startCalendar.set(Calendar.MINUTE, cal.get(Calendar.MINUTE))
+
+        return startCalendar
+    }
+
+    fun getPlanEndCalendar() : Calendar {
+        val cal = Calendar.getInstance()
+        cal.timeInMillis = _endTime.value!!
+        val endCalendar = getDateCalendar(_endDateString.value)
+        endCalendar.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY))
+        endCalendar.set(Calendar.MINUTE, cal.get(Calendar.MINUTE))
+
+        return endCalendar
+    }
+
+    private fun getDateCalendar(year: Int, month: Int, day: Int): Calendar {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
