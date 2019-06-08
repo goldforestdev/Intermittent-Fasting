@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.DatePicker
+import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseFragment
 import com.goldforest.capdiet.databinding.FragmentPlanTermBinding
@@ -33,7 +34,6 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
         viewModel.initPlanDate()
         viewDataBinding.btDoneFragment.setOnClickListener {
             activity?.apply{
-                Log.e("TAG","[HJ] StartTime : ${viewModel.startTimeViewString.value}")
                 val planPickerDialog = PlanConfirmDialog(this,
                     viewModel.startDateString.value!!,
                     viewModel.endDateString.value!!,
@@ -41,7 +41,7 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
                     viewModel.endTimeViewString.value!!,
                     object : PlanConfirmDialog.AttachedCallback {
                         override fun done() {
-
+                            findNavController().navigate(R.id.action_planTermFragment_to_mainFragment)
                         }
                     })
                 planPickerDialog.setTitle(R.string.my_plan_title)
