@@ -32,7 +32,7 @@ class PlanDatePickerDialog(private val onDateClickListener: OnDateClickListener?
         )
     }
     interface OnDateClickListener {
-        fun onDateSet(datePicker: DatePicker, i: Int, i1: Int, i2: Int)
+        fun onDateSet(datePicker: DatePicker, year: Int, month: Int, day: Int)
     }
 }
 

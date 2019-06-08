@@ -37,23 +37,27 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
     }
 
 
-    private fun showDatePicker (view: View) {
-        val c = Calendar.getInstance()
-        val calendarYear = c.get(Calendar.YEAR)
-        val calendarMonth = c.get(Calendar.MONTH)
-        val calendarDay = c.get(Calendar.DAY_OF_MONTH)
+    private fun showDatePicker (view: View, calendar: Calendar) {
+        val calendarYear = calendar.get(Calendar.YEAR)
+        val calendarMonth = calendar.get(Calendar.MONTH)
+        val calendarDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = PlanDatePickerDialog(object:PlanDatePickerDialog.OnDateClickListener{
-            override fun onDateSet(datePicker: DatePicker, i: Int, i1: Int, i2: Int) {
-
+         val datePickerDialog = PlanDatePickerDialog(object:PlanDatePickerDialog.OnDateClickListener{
+            override fun onDateSet(datePicker: DatePicker, year: Int, month: Int, day: Int) {
+                when(view.id) {
+                    R.id.tvStartDate -> viewModel.setStartDate(year, month, day)
+                    R.id.tvEndDate -> viewModel.setEndDate(year,month,day)
+                }
             }
         }, calendarYear, calendarMonth, calendarDay)
         datePickerDialog.show(activity!!.supportFragmentManager, "datePicker")
     }
 
+
     override fun onClick(v: View?) {
         when(v!!.id) {
-            R.id.tvStartDate, R.id.tvEndDate -> showDatePicker(v)
+            R.id.tvStartDate -> showDatePicker(v, viewModel.getDateCalendar(viewModel.startDateString.value))
+            R.id.tvEndDate -> showDatePicker(v,viewModel.getDateCalendar(viewModel.endDateString.value))
         }
     }
 

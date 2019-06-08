@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Build
-import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.goldforest.capdiet.R
@@ -17,8 +15,24 @@ import java.util.*
 
 class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
+    enum class PlanTermType(val code: Int) {
+        PLAN_TERM_4WEEK(0),
+        PLAN_TERM_8WEEK(1),
+        PLAN_TERM_NO_PERIOD(2),
+        PLAN_TERM_USER_SETTING(3);
+
+        companion object {
+            fun of(code: Int): PlanTermType = when (code) {
+                0 -> PLAN_TERM_4WEEK
+                1 -> PLAN_TERM_8WEEK
+                2 -> PLAN_TERM_NO_PERIOD
+                else -> PLAN_TERM_USER_SETTING
+            }
+        }
+    }
+
     private val _planType = MutableLiveData<PlanType>()
-    private val _planTermType = MutableLiveData<Int>()
+    private val _planTermType = MutableLiveData<PlanTermType>()
     private var _startTimeViewString = MutableLiveData<String>()
     private var _endTimeViewString = MutableLiveData<String>()
     private var _fastingTimeViewString = MutableLiveData<String>()
@@ -31,7 +45,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     private var fastingTimeMin : Int = 0
 
     val planType: LiveData<PlanType> get() = _planType
-    val termType : LiveData<Int> get() = _planTermType
+    val termType : LiveData<PlanTermType> get() = _planTermType
 
     var startTime: MutableLiveData<Long> = _startTime
     var endTime: MutableLiveData<Long> = _endTime
@@ -96,23 +110,67 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     }
 
     fun setPlanTermType(termType  : Int) {
-        _planTermType.value = termType
+        _planTermType.value = PlanTermType.of(termType)
+        setPeriodEndDate()
     }
 
     fun initPlanDate () {
+        _planTermType.value = PlanTermType.PLAN_TERM_4WEEK
+
         if (_startDateString.value.isNullOrEmpty()) {
             _startDateString.value = getDateFormatter().format(Calendar.getInstance().time)
         }
 
         val calendar  = Calendar.getInstance()
-        calendar.add(Calendar.WEEK_OF_YEAR, +1)
+        calendar.add(Calendar.WEEK_OF_YEAR, +4)
         if (_endDateString.value.isNullOrEmpty()) {
-            _endDateString.value = getDateFormatter().format(Calendar.getInstance().time)
+            _endDateString.value = getDateFormatter().format(calendar.time)
         }
     }
 
     private fun getDateFormatter() : SimpleDateFormat {
         return SimpleDateFormat("yyyy-MM-dd", getSystemLocale())
+    }
+
+    fun setStartDate(year: Int, month : Int, day : Int) {
+        val calendar = getDateCalendar(year, month, day)
+        _startDateString.value = getDateFormatter().format(calendar.time)
+
+        setPeriodEndDate()
+    }
+
+    fun setEndDate(year: Int, month : Int, day : Int) {
+        val calendar = getDateCalendar(year, month, day)
+        _endDateString.value = getDateFormatter().format(calendar.time)
+    }
+
+    private fun setPeriodEndDate() {
+        val calendar = getDateCalendar(_startDateString.value)
+        when(_planTermType.value) {
+            PlanTermType.PLAN_TERM_4WEEK -> {
+                calendar.add(Calendar.WEEK_OF_YEAR, 4)
+                _endDateString.value = getDateFormatter().format(calendar.time)
+            }
+            PlanTermType.PLAN_TERM_8WEEK -> {
+                calendar.add(Calendar.WEEK_OF_YEAR, 8)
+                _endDateString.value = getDateFormatter().format(calendar.time)
+            }
+        }
+    }
+
+    fun getDateCalendar(dateString: String?) : Calendar{
+        val calendar = Calendar.getInstance()
+        val sdf : SimpleDateFormat = getDateFormatter()
+        calendar.time = sdf.parse(dateString)
+        return calendar
+    }
+
+    fun getDateCalendar(year: Int, month: Int, day: Int): Calendar {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.DAY_OF_MONTH, day)
+        return calendar
     }
 
     fun setPlanDate(startDate : String, endDate : String) {
@@ -135,7 +193,6 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
-
         return locale
     }
 }
