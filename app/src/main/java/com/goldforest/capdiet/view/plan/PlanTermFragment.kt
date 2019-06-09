@@ -44,7 +44,6 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
                             findNavController().navigate(R.id.action_planTermFragment_to_mainFragment)
                         }
                     })
-                planPickerDialog.setTitle(R.string.my_plan_title)
                 planPickerDialog.show()
             }
         }

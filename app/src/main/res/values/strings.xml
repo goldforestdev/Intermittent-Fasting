@@ -5,7 +5,7 @@
     <string name="plan_1_title">Select IF type</string>
     <string name="plan_2_title">Select IF term</string>
     <string name="plan_type_16_8">Fasting at a specific time</string>
-    <string name="plan_type_5_2">Fast on a specific day</string>
+    <string name="plan_type_5_2">Fasting on a specific day</string>
     <string name="sunday">SUN</string>
     <string name="monday">MON</string>
     <string name="tuesday">TUE</string>
@@ -45,6 +45,7 @@
     <string name="plan_term_no_period">No period</string>
     <string name="plan_term_user_settings">User settings</string>
 
-    <string name="my_plan_title">My Plan</string>
+    <string name="my_plan_title">My diet plan</string>
+    <string name="share_my_diet_plan">Share my diet plan</string>
 
 </resources>
