@@ -1,4 +1,4 @@
-package com.goldforest.capdiet.view.plan
+package com.goldforest.capdiet.view.plan.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.DialogFragment
 import android.widget.DatePicker
 import android.app.DatePickerDialog
 import com.goldforest.capdiet.R
-import java.util.*
 
 
 class PlanDatePickerDialog(private val onDateClickListener: OnDateClickListener?,
@@ -32,7 +31,7 @@ class PlanDatePickerDialog(private val onDateClickListener: OnDateClickListener?
         )
     }
     interface OnDateClickListener {
-        fun onDateSet(datePicker: DatePicker, i: Int, i1: Int, i2: Int)
+        fun onDateSet(datePicker: DatePicker, year: Int, month: Int, day: Int)
     }
 }
 

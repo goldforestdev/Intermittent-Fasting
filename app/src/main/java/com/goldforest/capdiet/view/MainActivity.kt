@@ -13,11 +13,14 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.goldforest.capdiet.R
+import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private val planViewModel by viewModel<PlanViewModel>()
     private val navController by lazy {
         findNavController(R.id.fragment)
     }

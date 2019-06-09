@@ -1,4 +1,4 @@
-package com.goldforest.capdiet.view.plan
+package com.goldforest.capdiet.view.plan.dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import com.goldforest.capdiet.R
 
 class PlanPickerDialog(context: Context,
-                       val setListener: OnNumberSetListener,
+                       private val setListener: OnNumberSetListener,
                        val hour : Int,
                        val min : Int)
     : AlertDialog(context), DialogInterface.OnClickListener {
@@ -33,6 +33,7 @@ class PlanPickerDialog(context: Context,
 
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.number_picker_dialg, null)
+        setCancelable(false)
         setView(view)
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.ok),this)
         setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), this)
