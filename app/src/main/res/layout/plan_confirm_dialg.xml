@@ -2,18 +2,42 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
+                                                   android:background="@android:color/white"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools">
-    <ImageView
-            android:id="@+id/ivImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/gf"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="50dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/planLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="10dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent">
+    <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/gf"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvMyPlan"/>
+
+        <TextView
+                android:id="@+id/tvMyPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="@dimen/text_title_size"
+                android:textColor="@android:color/black"
+                android:text="@string/my_plan_title"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/ivImage"
+                app:layout_constraintStart_toEndOf="@id/ivImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text = "My diet plan"/>
 
     <TextView
             android:id="@+id/tvPeriodTitle"
@@ -64,5 +88,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text = "10:30 PM ~ 6:30 AM"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+            android:id="@+id/btShare"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:layout_margin="10dp"
+            android:textSize="@dimen/text_contents_size"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:text="@string/share_my_diet_plan"
+            app:layout_constraintTop_toBottomOf="@id/planLayout"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

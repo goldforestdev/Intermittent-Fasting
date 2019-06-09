@@ -204,6 +204,7 @@
                             android:textSize="23sp"
                             android:textColor="@android:color/white"
                             android:text="@string/next"
+                            android:textAllCaps="false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>

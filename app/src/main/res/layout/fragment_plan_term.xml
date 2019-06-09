@@ -161,6 +161,7 @@
                             android:layout_margin="10dp"
                             android:textSize="23sp"
                             android:textColor="@android:color/white"
+                            android:textAllCaps="false"
                             android:text="@string/done"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
