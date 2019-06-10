@@ -13,7 +13,7 @@ interface DayResultRepository {
     suspend fun getAllByMonth(startTime: Long, endTime: Long): List<DayResult>
 
     @Throws(NotExistDayResultException::class)
-    suspend fun get(id: String): DayResult
+    suspend fun get(id: Long): DayResult
 
     suspend fun delete(vararg dayResult: DayResult)
 }

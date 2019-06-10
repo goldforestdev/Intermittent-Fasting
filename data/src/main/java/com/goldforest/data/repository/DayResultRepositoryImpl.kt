@@ -21,7 +21,7 @@ class DayResultRepositoryImpl(
 
     override suspend fun getAllByMonth(startTime: Long, endTime: Long): List<DayResult> = dayResultLocalDataSource.getAllByMonth(startTime, endTime).map { it.toModel() }
 
-    override suspend fun get(id: String): DayResult = dayResultLocalDataSource.get(id).toModel()
+    override suspend fun get(id: Long): DayResult = dayResultLocalDataSource.get(id).toModel()
 
     override suspend fun delete(vararg dayResult: DayResult) {
         val dayResultEntityList = dayResult.map { it.toEntity() }.toTypedArray()

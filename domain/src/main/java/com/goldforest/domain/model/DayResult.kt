@@ -3,6 +3,8 @@ package com.goldforest.domain.model
 data class DayResult(
     var id: Long, // Date
     var type: DayResultType,
+    var month: Int, // 1 ~ 12
+    var dayOfMonth: Int,
     var planId: Long // ForeignKey
 )
 

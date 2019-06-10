@@ -1,29 +1,25 @@
 package com.goldforest.capdiet.view.calendar
 
 import android.content.Context
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
-import android.widget.BaseAdapter
-import android.widget.GridView
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.goldforest.capdiet.R
-import com.goldforest.capdiet.extentions.getDayOfMonth
-import com.goldforest.capdiet.extentions.month
-
-private const val ROW_NUMBER = 6
+import com.goldforest.capdiet.common.getStatusIcon
+import com.goldforest.capdiet.common.month
+import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 
 class CalendarAdapter(
-    private val context: Context,
-    private val gridView: GridView,
-    private val dateList: MutableList<Long> = mutableListOf()
-) : BaseAdapter() {
+    private val dateList: MutableList<DayResult> = mutableListOf()
+) : RecyclerView.Adapter<CalendarAdapter.CalendarHolder>() {
 
     private var month: Long = 0
 
-    fun setData(baseTime: Long, dateList: List<Long>) {
+    fun setData(baseTime: Long, dateList: List<DayResult>) {
         month = baseTime.month()
         this.dateList.clear()
         this.dateList.addAll(dateList)
@@ -31,38 +27,24 @@ class CalendarAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getCount() = dateList.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarHolder =
+        CalendarHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_calendar, parent, false))
 
-    override fun getItem(position: Int) = null
+    override fun getItemCount(): Int = dateList.size
 
-    override fun getItemId(position: Int) = 0L
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var v: View? = convertView
-        if (v == null) {
-            v = LayoutInflater.from(context).inflate(R.layout.item_calendar, null)
-            v.tag = CalendarHolder().apply {
-                tvDate = v!!.findViewById(R.id.tv_date)
-            }
-        }
-
+    override fun onBindViewHolder(holder: CalendarHolder, position: Int) {
         val date = dateList[position]
-        val holder = (v?.tag as CalendarHolder).apply {
-            tvDate?.text = date.getDayOfMonth()
-        }
 
-        if (month == date.month()) {
-            holder.tvDate?.setBackgroundColor(context.resources.getColor(getLabelColor(date)))
-        }
+        holder.tvDate.text = "${date.dayOfMonth}"
 
-        v.layoutParams = AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, gridView.height / ROW_NUMBER)
-        return v
+        if (date.type != DayResultType.NOT_INPUT) {
+            holder.ivStatus.setImageResource(date.getStatusIcon())
+        }
     }
 
-    private fun getLabelColor(id: Long) = if (DateUtils.isToday(id)) R.color.colorAccent else R.color.colorPrimaryLight
-
-    internal inner class CalendarHolder {
-        var tvDate: TextView? = null
+    inner class CalendarHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var tvDate: TextView = itemView.findViewById(R.id.tvDate)
+        var ivStatus: ImageView = itemView.findViewById(R.id.ivStatus)
     }
 
 }

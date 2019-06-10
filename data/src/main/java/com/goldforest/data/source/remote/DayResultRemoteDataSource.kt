@@ -16,7 +16,7 @@ class DayResultRemoteDataSource : DayResultDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun get(id: String): DayResultEntity {
+    override suspend fun get(id: Long): DayResultEntity {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

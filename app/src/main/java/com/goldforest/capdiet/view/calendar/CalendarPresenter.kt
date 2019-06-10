@@ -1,22 +1,26 @@
 package com.goldforest.capdiet.view.calendar
 
-import com.goldforest.capdiet.extentions.getStartEndTimes
+import com.goldforest.capdiet.common.dayOfMonth
+import com.goldforest.capdiet.common.get42Days
+import com.goldforest.capdiet.common.month
+import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 import com.goldforest.domain.usercase.GetAllDayResultsByMonth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import java.util.*
+import kotlin.coroutines.CoroutineContext
+
+private const val INVALID_DATA = -1L
 
 class CalendarPresenter(
-    private val getAllDayResults: GetAllDayResultsByMonth
-) : CalendarContract.Presenter {
+    private val getAllDayResults: GetAllDayResultsByMonth,
+    private val uiContext: CoroutineContext = Dispatchers.Main,
+    private val ioContext: CoroutineContext = Dispatchers.IO
+) : CalendarContract.Presenter, CoroutineScope {
 
-    private val TAG = CalendarPresenter::class.java.simpleName
+    override val coroutineContext: CoroutineContext = Job() + ioContext
 
     private var view: CalendarContract.View? = null
-
-    private val job = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     override fun subscribe(v: CalendarContract.View) {
         view = v
@@ -27,9 +31,43 @@ class CalendarPresenter(
     }
 
     override fun getDayResults(time: Long) {
-        uiScope.launch {
-            val (startTime, endTime) = time.getStartEndTimes()
-            view?.onDayResultsLoaded(getAllDayResults.get(startTime, endTime))
+        val dayOfMonthList = time.get42Days()
+        val calendar = Calendar.getInstance()
+        val dayResultList = dayOfMonthList.map {
+            calendar.timeInMillis = it
+            DayResult(INVALID_DATA, DayResultType.NOT_INPUT, calendar.month(), calendar.dayOfMonth(), INVALID_DATA)
+        }.toList()
+
+        launch {
+            println("real[${Thread.currentThread().name}] - ${dayOfMonthList.first()}, ${dayOfMonthList.last()}")
+            withContext(ioContext) {
+                getAllDayResults.get(dayOfMonthList.first(), dayOfMonthList.last())
+            }.forEach { dFromRepo ->
+                dayResultList.find {
+                    it.month == dFromRepo.month && it.dayOfMonth == dFromRepo.dayOfMonth
+                }?.apply {
+                    id = dFromRepo.id
+                    type = dFromRepo.type
+                    planId = dFromRepo.planId
+                }
+            }
+
+            dayResultList[7].apply {
+                id = System.currentTimeMillis()
+                type = DayResultType.NOT_INPUT
+            }
+            dayResultList[8].apply {
+                id = System.currentTimeMillis()
+                type = DayResultType.SUCCESS
+            }
+            dayResultList[9].apply {
+                id = System.currentTimeMillis()
+                type = DayResultType.FAILED
+            }
+
+            withContext(uiContext) {
+                view?.onDayResultsLoaded(dayResultList)
+            }
         }
     }
 }

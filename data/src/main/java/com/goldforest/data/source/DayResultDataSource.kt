@@ -9,7 +9,7 @@ interface DayResultDataSource {
 
     suspend fun getAllByMonth(startTime: Long, endTime: Long): Array<DayResultEntity>
 
-    suspend fun get(id: String): DayResultEntity
+    suspend fun get(id: Long): DayResultEntity
 
     suspend fun delete(vararg dayResult: DayResultEntity)
 }
