@@ -2,6 +2,7 @@ package com.goldforest.domain.usecase.impl
 
 import com.goldforest.domain.exceptions.NotExistDayResultException
 import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 import com.goldforest.domain.repository.DayResultRepository
 import com.goldforest.domain.usercase.GetAllDayResultsByMonth
 import com.goldforest.domain.usercase.impl.GetAllDayResultsByMonthUsecase
@@ -12,6 +13,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import java.util.*
 
 class GetAllDayResultsUsecaseTest {
 
@@ -32,11 +34,11 @@ class GetAllDayResultsUsecaseTest {
     @Test
     fun getTest() = runBlocking {
         val dayResults = listOf(
-            DayResult("1", 0, 1L),
-            DayResult("2", 1, 1L),
-            DayResult("3", 1, 1L),
-            DayResult("1", 0, 2L),
-            DayResult("2", 2, 2L)
+            DayResult(1, DayResultType.FAILED, Calendar.JUNE, 5, 1L),
+            DayResult(2, DayResultType.SUCCESS, Calendar.JUNE, 6, 1L),
+            DayResult(3, DayResultType.SUCCESS, Calendar.JUNE, 7, 1L),
+            DayResult(4, DayResultType.FAILED, Calendar.JUNE, 8, 2L),
+            DayResult(5, DayResultType.SUCCESS, Calendar.JUNE, 9, 2L)
         )
 
         `when`(dayResultRepository.getAllByMonth(startTime, endTime)).thenReturn(dayResults)

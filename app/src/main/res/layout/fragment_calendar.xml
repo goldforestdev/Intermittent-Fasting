@@ -91,8 +91,8 @@
             app:layout_constraintStart_toEndOf="@+id/tvFri"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    <GridView
-            android:id="@+id/gvCalendar"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCalendar"
             android:background="#e5e5e5"
             android:layout_width="0dp"
             android:layout_height="0dp"

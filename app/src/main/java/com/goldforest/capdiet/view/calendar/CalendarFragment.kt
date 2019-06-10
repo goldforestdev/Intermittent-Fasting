@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.goldforest.capdiet.R
-import com.goldforest.capdiet.extentions.getDateList
+import com.goldforest.capdiet.common.getDateList
 import com.goldforest.domain.model.DayResult
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.android.ext.android.inject
@@ -23,8 +24,9 @@ class CalendarFragment : Fragment(), CalendarContract.View {
 
     private val presenter: CalendarContract.Presenter by inject()
 
-    private val calendarAdapter: CalendarAdapter by lazy { CalendarAdapter(context!!, gvCalendar) }
+    private val calendarAdapter: CalendarAdapter by lazy { CalendarAdapter() }
     private val dateFormat = SimpleDateFormat("yyyy MMMM")
+    private var time: Long = System.currentTimeMillis()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +37,13 @@ class CalendarFragment : Fragment(), CalendarContract.View {
         super.onViewCreated(view, savedInstanceState)
         presenter.subscribe(this)
 
-        gvCalendar!!.adapter = calendarAdapter
-        arguments?.getLong(TIME_IN_MILLIS)?.let { time ->
-            tvMonth.text = dateFormat.format(Date(time))
-            calendarAdapter.setData(time, time.getDateList())
-            presenter.getDayResults(time)
-        }
+        rvCalendar.layoutManager = GridLayoutManager(context, 7)
+        rvCalendar.adapter = calendarAdapter
+
+        time = arguments?.getLong(TIME_IN_MILLIS)?:System.currentTimeMillis()
+
+        tvMonth.text = dateFormat.format(Date(time))
+        presenter.getDayResults(time)
     }
 
     override fun onStop() {
@@ -50,5 +53,6 @@ class CalendarFragment : Fragment(), CalendarContract.View {
 
     override fun onDayResultsLoaded(dayResults: List<DayResult>) {
         Log.d(TAG, "[GF] onDayResultsLoaded - result: $dayResults")
+        calendarAdapter.setData(time, dayResults)
     }
 }

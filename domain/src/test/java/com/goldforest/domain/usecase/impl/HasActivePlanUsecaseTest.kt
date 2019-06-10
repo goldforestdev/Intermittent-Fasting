@@ -2,6 +2,7 @@ package com.goldforest.domain.usecase.impl
 
 import com.goldforest.domain.exceptions.NotExistPlanException
 import com.goldforest.domain.model.Plan
+import com.goldforest.domain.model.PlanType
 import com.goldforest.domain.repository.PlanRepository
 import com.goldforest.domain.usercase.HasActivePlan
 import com.goldforest.domain.usercase.impl.HasActivePlanUsecase
@@ -20,7 +21,7 @@ class HasActivePlanUsecaseTest {
 
     private lateinit var hasActivePlan: HasActivePlan
 
-    private val activePlan = Plan(6L, "active plan", 6, "stime", "etime", 1, "sdate", "edate", false)
+    private val activePlan = Plan(6L, "active plan", PlanType.PLAN_16_8, "stime", "etime", 1, "sdate", "edate", false)
 
     @Before
     fun setup() {

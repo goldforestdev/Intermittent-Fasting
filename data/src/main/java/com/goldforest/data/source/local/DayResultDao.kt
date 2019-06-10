@@ -18,7 +18,7 @@ interface DayResultDao : DayResultDataSource {
     override suspend fun getAllByMonth(startTime: Long, endTime: Long): Array<DayResultEntity>
 
     @Query("SELECT * FROM day_result_entity WHERE id=:id")
-    override suspend fun get(id: String): DayResultEntity
+    override suspend fun get(id: Long): DayResultEntity
 
     @Delete
     override suspend fun delete(vararg dayResult: DayResultEntity)

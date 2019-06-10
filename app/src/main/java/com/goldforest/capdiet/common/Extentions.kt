@@ -1,5 +1,8 @@
 package com.goldforest.capdiet.common
 
+import com.goldforest.capdiet.R
+import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 import java.util.*
 
 fun Long.month(): Long {
@@ -91,3 +94,9 @@ fun Long.get42Days(): List<Long> {
 fun Calendar.month(): Int = get(Calendar.MONTH) + 1
 
 fun Calendar.dayOfMonth(): Int = get(Calendar.DAY_OF_MONTH)
+
+fun DayResult.getStatusIcon() = when (type) {
+    DayResultType.SUCCESS -> R.drawable.ic_check
+    DayResultType.FAILED -> R.drawable.ic_clear
+    else -> -1
+}

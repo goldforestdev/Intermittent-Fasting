@@ -8,6 +8,7 @@ import com.goldforest.data.source.DayResultDataSource
 import com.goldforest.data.source.PlanDataSource
 import com.goldforest.data.source.local.AppDatabase
 import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -15,6 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import java.util.*
 
 
 @RunWith(AndroidJUnit4::class)
@@ -39,11 +41,12 @@ class DayResultRepositoryImplTest {
         val p1 = PlanEntity(1L, "test plan1", 1, "stime", "etime", 1, "sdate", "edate", true)
         val p2 = PlanEntity(2L, "test plan2", 2, "stime", "etime", 1, "sdate", "edate", true)
         val planArray = arrayOf(p1, p2)
-        val dr1 = DayResult("1", 1, 1L)
-        val dr2 = DayResult("2", 2, 1L)
-        val dr3 = DayResult("3", 3, 1L)
-        val dr4 = DayResult("4", 1, 2L)
-        val dr5 = DayResult("5", 2, 2L)
+        val dr1 = DayResult(1, DayResultType.FAILED, Calendar.JUNE, 5, 1L)
+        val dr2 = DayResult(2, DayResultType.SUCCESS, Calendar.JUNE, 6, 1L)
+        val dr3 = DayResult(3, DayResultType.SUCCESS, Calendar.JUNE, 7, 1L)
+        val dr4 = DayResult(4, DayResultType.FAILED, Calendar.JUNE, 8, 2L)
+        val dr5 = DayResult(5, DayResultType.SUCCESS, Calendar.JUNE, 9, 2L)
+
         val dayResultArray = arrayOf(dr1, dr2, dr3, dr4, dr5)
 
         runBlocking {
@@ -54,8 +57,8 @@ class DayResultRepositoryImplTest {
 
     @Test
     fun saveAndGetTest() = runBlocking {
-        val dr1 = DayResult("1", 1, 1L)
-        val dayResultFromRepository = dayResultRepository.get("1")
+        val dr1 = DayResult(1, DayResultType.SUCCESS, Calendar.JUNE, 5, 1L)
+        val dayResultFromRepository = dayResultRepository.get(1)
         assertEquals(dr1, dayResultFromRepository)
     }
 
@@ -67,11 +70,11 @@ class DayResultRepositoryImplTest {
 
     @Test
     fun deleteTest() = runBlocking {
-        val dr1 = DayResult("1", 1, 1L)
-        val dr2 = DayResult("2", 2, 1L)
-        val dr3 = DayResult("3", 3, 1L)
-        val dr4 = DayResult("4", 1, 2L)
-        val dr5 = DayResult("5", 2, 2L)
+        val dr1 = DayResult(1, DayResultType.FAILED, Calendar.JUNE, 5, 1L)
+        val dr2 = DayResult(2, DayResultType.SUCCESS, Calendar.JUNE, 6, 1L)
+        val dr3 = DayResult(3, DayResultType.SUCCESS, Calendar.JUNE, 7, 1L)
+        val dr4 = DayResult(4, DayResultType.FAILED, Calendar.JUNE, 8, 2L)
+        val dr5 = DayResult(5, DayResultType.SUCCESS, Calendar.JUNE, 9, 2L)
 
         assertEquals(3, dayResultRepository.getAllByPlanId(1L).size)
 
