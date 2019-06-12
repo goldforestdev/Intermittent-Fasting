@@ -13,8 +13,10 @@ import com.goldforest.capdiet.view.plan.dialog.PlanPickerDialog
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.goldforest.domain.model.PlanType
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import android.view.ViewGroup
+
+
 
 class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), View.OnClickListener {
     override val layoutResourceId: Int = R.layout.fragment_plan
@@ -65,9 +67,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
                     override fun onNumberSet(hourOfDay: Int, minute: Int) {
                         viewModel.setFastingTime(hourOfDay, minute)
                     }
-                },
-                16,
-                0
+                }
             )
             planPickerDialog.setTitle(R.string.set_intermittent_fast_time)
             planPickerDialog.setMessage("간헐적 단식 시간을 설정 하세요")
