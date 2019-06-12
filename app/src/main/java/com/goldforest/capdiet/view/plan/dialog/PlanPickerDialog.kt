@@ -7,9 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import com.goldforest.capdiet.R
 
 class PlanPickerDialog(context: Context,
-                       private val setListener: OnNumberSetListener,
-                       val hour : Int,
-                       val min : Int)
+                       private val setListener: OnNumberSetListener)
     : AlertDialog(context), DialogInterface.OnClickListener {
 
     private var hourNumberPicker: NumberPicker
