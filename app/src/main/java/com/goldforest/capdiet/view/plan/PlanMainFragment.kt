@@ -40,7 +40,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
         viewModel.setFastingTime(16, 0)
 
         viewDataBinding.btNextFragment.setOnClickListener(this)
-        viewDataBinding.tvStartTime.setOnClickListener(this)
+        viewDataBinding.tvTime.setOnClickListener(this)
         viewDataBinding.tvFastingTime.setOnClickListener(this)
     }
 
@@ -83,7 +83,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
         v?.apply {
             when(v.id) {
                 R.id.btNextFragment ->  findNavController().navigate(R.id.action_planFragment_to_planTermFragment)
-                R.id.tvStartTime -> showTimePicker()
+                R.id.tvTime -> showTimePicker()
                 R.id.tvFastingTime -> showNumberPicker()
             }
         }
