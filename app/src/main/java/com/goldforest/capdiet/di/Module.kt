@@ -2,6 +2,8 @@ package com.goldforest.capdiet.di
 
 import com.goldforest.capdiet.view.calendar.CalendarContract
 import com.goldforest.capdiet.view.calendar.CalendarPresenter
+import com.goldforest.capdiet.view.dayResult.DayResultContract
+import com.goldforest.capdiet.view.dayResult.DayResultPresenter
 import com.goldforest.capdiet.viewmodel.MainViewModel
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.goldforest.data.di.dataModule
@@ -19,6 +21,7 @@ var viewModelModule = module {
     }
 
     factory<CalendarContract.Presenter> { CalendarPresenter(get()) }
+    factory<DayResultContract.Presenter> { DayResultPresenter(get()) }
 }
 
 var DiModule = listOf(viewModelModule, dataModule, domainModule)

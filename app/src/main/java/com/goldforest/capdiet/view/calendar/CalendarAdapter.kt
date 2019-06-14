@@ -1,6 +1,5 @@
 package com.goldforest.capdiet.view.calendar
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,13 @@ import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.model.DayResultType
 
 class CalendarAdapter(
-    private val dateList: MutableList<DayResult> = mutableListOf()
+    private val dateList: MutableList<DayResult> = mutableListOf(),
+    private val clickListener: CalendarClickListener
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarHolder>() {
+
+    interface CalendarClickListener {
+        fun onCalendarClick(dayResultId: Long)
+    }
 
     private var month: Long = 0
 
@@ -33,12 +37,16 @@ class CalendarAdapter(
     override fun getItemCount(): Int = dateList.size
 
     override fun onBindViewHolder(holder: CalendarHolder, position: Int) {
-        val date = dateList[position]
+        val dayResult = dateList[position]
 
-        holder.tvDate.text = "${date.dayOfMonth}"
+        holder.tvDate.text = "${dayResult.dayOfMonth}"
 
-        if (date.type != DayResultType.NOT_INPUT) {
-            holder.ivStatus.setImageResource(date.getStatusIcon())
+        if (dayResult.type != DayResultType.NOT_INPUT) {
+            holder.ivStatus.setImageResource(dayResult.getStatusIcon())
+        }
+
+        holder.itemView.setOnClickListener {
+            clickListener.onCalendarClick(dayResult.id)
         }
     }
 
