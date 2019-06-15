@@ -25,13 +25,7 @@ class CalendarMainFragment : Fragment() {
 
         // The pager adapter, which provides the pages to the view pager widget.
         val startIdx = Integer.MAX_VALUE / 2 - 1
-        val pagerAdapter = fragmentManager?.let {
-            CalendarPagerAdapter(
-                it,
-                startIdx
-            )
-        }
-        calendarPager.adapter = pagerAdapter
+        calendarPager.adapter = fragmentManager?.let { CalendarPagerAdapter(it, startIdx) }
         calendarPager.currentItem = startIdx
     }
 
