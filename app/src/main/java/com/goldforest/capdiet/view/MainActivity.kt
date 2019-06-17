@@ -79,12 +79,14 @@ class MainActivity : AppCompatActivity() {
             SplashFragment.REQUEST_PERMISSION -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "데이터 저장을 위한 저장소의 권한이 승인됨", Toast.LENGTH_LONG).show()
-                    Handler().postDelayed({
-                        findNavController(R.id.fragment).navigate(R.id.action_splashFragment_to_mainFragment)
-                    }, 2000)
+
                 } else {
                     Toast.makeText(this, "데이터 저장을 위한 저장소의 권한이 거부됨", Toast.LENGTH_LONG).show()
                 }
+
+                Handler().postDelayed({
+                    findNavController(R.id.fragment).navigate(R.id.action_splashFragment_to_mainFragment)
+                }, 2000)
             }
 
 

@@ -38,6 +38,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     private val _planTermType = MutableLiveData<PlanTermType>()
     private var _startTimeViewString = MutableLiveData<String>()
     private var _endTimeViewString = MutableLiveData<String>()
+    private var _fastingViewString = MutableLiveData<String>()
     private var _fastingTimeViewString = MutableLiveData<String>()
     private var _startDateString = MutableLiveData<String>()
     private var _endDateString = MutableLiveData<String>()
@@ -55,6 +56,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     val startTimeViewString : MutableLiveData<String> get() = _startTimeViewString
     val endTimeViewString : MutableLiveData<String> get() = _endTimeViewString
     val fastingTimeViewString : MutableLiveData<String> get() = _fastingTimeViewString
+    val fastingViewString get() = _fastingViewString
 
     var startDate: MutableLiveData<String> = MutableLiveData()
     var endDate: MutableLiveData<String> = MutableLiveData()
@@ -80,6 +82,8 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
         _startTime.value = calendar.timeInMillis
         Log.e("HJ","[HJ]Start time : ${_startTime.value}")
         _endTime.value = getEndTime(fastingTimeHour, fastingTimeMin)
+
+        setFastingString()
     }
 
     private fun getEndTime(hourOfDay: Int, minute: Int) : Long {
@@ -90,6 +94,8 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
         val (strAmPm: String, hour: Int) = getHourOfDay(calendar.get(Calendar.HOUR_OF_DAY))
         _endTimeViewString.value = "$hour : ${calendar.get(Calendar.MINUTE)} $strAmPm"
+
+        setFastingString()
         return calendar.timeInMillis
     }
 
@@ -202,6 +208,10 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
         _startDateString.value = startDate
         _endDateString.value = endDate
+    }
+
+    private fun setFastingString() {
+        _fastingViewString.value = "${_startTimeViewString.value} ~ ${_endTimeViewString.value}"
     }
 
     private fun getSystemLocale(): Locale? {

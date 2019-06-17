@@ -17,10 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R
+import com.goldforest.capdiet.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
-
-
-
 
 
 
@@ -33,20 +31,10 @@ class SplashFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        if (checkPermission()) {
+        if (Utils.checkPermission(activity!!)) {
             showNextFragment()
         } else {
             makeRequest()
-        }
-
-    }
-
-    private fun checkPermission() : Boolean {
-        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            true
-        } else {
-            val permissionCheck = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            permissionCheck == PackageManager.PERMISSION_GRANTED
         }
     }
 
