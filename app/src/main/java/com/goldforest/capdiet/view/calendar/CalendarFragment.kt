@@ -67,23 +67,10 @@ class CalendarFragment : Fragment(), CalendarContract.View, CalendarAdapter.Cale
 
     override fun onCalendarClick(dayResult: DayResult) {
         if (dayResult.planId == INVALID_DATA) {
-            presenter.findPlanId(dayResult)
-            return
-        }
-
-        moveToDayResultView(dayResult)
-    }
-
-    override fun onPlanIdFound(dayResult: DayResult) {
-        if (dayResult.planId == INVALID_DATA) {
             Toast.makeText(context, R.string.invalid_plan, Toast.LENGTH_SHORT).show()
             return
         }
 
-        moveToDayResultView(dayResult)
-    }
-
-    private fun moveToDayResultView(dayResult: DayResult) {
         val intent = Intent(context, DayResultActivity::class.java)
             .putExtra(DAY_RESULT_ID, dayResult.id)
             .putExtra(DAY_RESULT_Y, dayResult.year)

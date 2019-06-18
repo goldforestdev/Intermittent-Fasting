@@ -49,6 +49,8 @@ class CalendarPresenter(
         }.toList()
 
         launch {
+            val plans = withContext(ioContext) { getPlans.get() }
+
             withContext(ioContext) {
                 getAllDayResults.get(dayOfMonthList.first(), dayOfMonthList.last())
             }.forEach { dFromRepo ->
@@ -61,6 +63,16 @@ class CalendarPresenter(
                 }
             }
 
+            dayResultList.filter { d -> d.planId == INVALID_DATA }
+                .forEach { d ->
+                    val plan = plans.find { p ->
+                        d.id >= p.startDateTime && d.id <= p.endDateTime
+                    }
+                    d.planId = plan?.id ?: INVALID_DATA
+                }
+
+            ///////////////////
+            // Only for test //
             dayResultList[7].apply {
                 id = System.currentTimeMillis()
                 type = DayResultType.NOT_INPUT
@@ -73,6 +85,8 @@ class CalendarPresenter(
                 id = System.currentTimeMillis()
                 type = DayResultType.FAILED
             }
+            // Only for test //
+            ///////////////////
 
             withContext(uiContext) {
                 view?.onDayResultsLoaded(dayResultList)
@@ -80,19 +94,4 @@ class CalendarPresenter(
         }
     }
 
-    override fun findPlanId(dayResult: DayResult) {
-        launch {
-            val plan = withContext(ioContext) {
-                getPlans.get()
-            }.find { plan ->
-                dayResult.id >= plan.startDateTime && dayResult.id <= plan.endDateTime
-            }
-
-            dayResult.planId = plan?.id ?: INVALID_DATA
-
-            withContext(uiContext) {
-                view?.onPlanIdFound(dayResult)
-            }
-        }
-    }
 }
