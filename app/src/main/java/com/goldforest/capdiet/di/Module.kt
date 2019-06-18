@@ -20,7 +20,7 @@ var viewModelModule = module {
         PlanViewModel(androidContext())
     }
 
-    factory<CalendarContract.Presenter> { CalendarPresenter(get()) }
+    factory<CalendarContract.Presenter> { CalendarPresenter(get(), get()) }
     factory<DayResultContract.Presenter> { DayResultPresenter(get()) }
 }
 

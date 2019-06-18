@@ -7,6 +7,7 @@ import com.goldforest.capdiet.common.year
 import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.model.DayResultType
 import com.goldforest.domain.usercase.GetAllDayResultsByMonth
+import com.goldforest.domain.usercase.GetPlans
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.coroutines.CoroutineContext
@@ -15,6 +16,7 @@ const val INVALID_DATA = -1L
 
 class CalendarPresenter(
     private val getAllDayResults: GetAllDayResultsByMonth,
+    private val getPlans: GetPlans,
     private val uiContext: CoroutineContext = Dispatchers.Main,
     private val ioContext: CoroutineContext = Dispatchers.IO
 ) : CalendarContract.Presenter, CoroutineScope {
@@ -36,7 +38,14 @@ class CalendarPresenter(
         val calendar = Calendar.getInstance()
         val dayResultList = dayOfMonthList.map {
             calendar.timeInMillis = it
-            DayResult(INVALID_DATA, DayResultType.NOT_INPUT, calendar.year(), calendar.month(), calendar.dayOfMonth(), INVALID_DATA)
+            DayResult(
+                it,
+                DayResultType.NOT_INPUT,
+                calendar.year(),
+                calendar.month(),
+                calendar.dayOfMonth(),
+                INVALID_DATA
+            )
         }.toList()
 
         launch {
@@ -73,11 +82,17 @@ class CalendarPresenter(
 
     override fun findPlanId(dayResult: DayResult) {
         launch {
-            withContext(ioContext) {
-                TODO("Get all plans to find the plan id")
+            val plan = withContext(ioContext) {
+                getPlans.get()
+            }.find { plan ->
+                dayResult.id >= plan.startDateTime && dayResult.id <= plan.endDateTime
+            }
+
+            dayResult.planId = plan?.id ?: INVALID_DATA
+
+            withContext(uiContext) {
+                view?.onPlanIdFound(dayResult)
             }
         }
-
-        view?.onPlanIdFound(dayResult)
     }
 }

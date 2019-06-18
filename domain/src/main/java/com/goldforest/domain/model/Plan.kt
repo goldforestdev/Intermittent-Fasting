@@ -9,6 +9,8 @@ data class Plan(
     var day: Int,
     var startDate: String,
     var endDate: String,
+    var startDateTime: Long,
+    var endDateTime: Long,
     var done: Boolean
 )
 
