@@ -14,9 +14,11 @@ import android.os.Environment
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import android.content.Intent
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
 import com.goldforest.capdiet.BuildConfig
+import com.goldforest.capdiet.utils.checkExternalStoragePermission
 import java.io.File
 
 
@@ -34,7 +36,7 @@ class PlanConfirmDialog(
     }
 
     private var planLayout : ConstraintLayout? = null
-    val filePath = Environment.getExternalStorageDirectory().toString() + "/Download/capture.jpg"
+    private val filePath = Environment.getExternalStorageDirectory().toString() + "/Download/capture.jpg"
 
     init {
         val inflater = LayoutInflater.from(context)
@@ -47,15 +49,22 @@ class PlanConfirmDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         planLayout = findViewById(R.id.planLayout)
+
+        initView()
+    }
+
+    private fun initView() {
         tvDate.text = getDate()
         tvTime.text = getTime()
+
+        if (checkExternalStoragePermission(context)) {
+            btShare.visibility = View.GONE
+        }
 
         btShare.setOnClickListener {
             capture()
         }
     }
-
-
 
     private fun getTime(): String {
         return "$startTime ~ $endTime"
