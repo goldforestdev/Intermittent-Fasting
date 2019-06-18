@@ -40,8 +40,8 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
         viewModel.setFastingTime(16, 0)
 
         viewDataBinding.btNextFragment.setOnClickListener(this)
-        viewDataBinding.tvStartTime.setOnClickListener(this)
         viewDataBinding.tvFastingTime.setOnClickListener(this)
+        viewDataBinding.tvFastingTermTime.setOnClickListener(this)
     }
 
     private fun initLiveDataObserver() {
@@ -56,6 +56,7 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
         val timePickerDialog = TimePickerDialog(activity, R.style.TimePickerTheme, TimePickerDialog.OnTimeSetListener { _, hour, min ->
             viewModel.setStartTime(hour, min)
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),false)
+        timePickerDialog.setTitle(R.string.start_time)
         timePickerDialog.show()
     }
 
@@ -83,8 +84,8 @@ class PlanMainFragment : BaseFragment<FragmentPlanBinding, PlanViewModel>(), Vie
         v?.apply {
             when(v.id) {
                 R.id.btNextFragment ->  findNavController().navigate(R.id.action_planFragment_to_planTermFragment)
-                R.id.tvStartTime -> showTimePicker()
-                R.id.tvFastingTime -> showNumberPicker()
+                R.id.tvFastingTime -> showTimePicker()
+                R.id.tvFastingTermTime -> showNumberPicker()
             }
         }
     }
