@@ -1,7 +1,6 @@
 package com.goldforest.capdiet.view.plan.dialog
 
 
-import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Bitmap
@@ -15,14 +14,11 @@ import android.os.Environment
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.goldforest.capdiet.BuildConfig
-import com.goldforest.capdiet.utils.Utils
+import com.goldforest.capdiet.utils.checkExternalStoragePermission
 import java.io.File
 
 
@@ -61,7 +57,7 @@ class PlanConfirmDialog(
         tvDate.text = getDate()
         tvTime.text = getTime()
 
-        if (!Utils.checkPermission(context)) {
+        if (checkExternalStoragePermission(context)) {
             btShare.visibility = View.GONE
         }
 
