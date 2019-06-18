@@ -47,6 +47,6 @@
 
     <string name="my_plan_title">My diet plan</string>
     <string name="share_my_diet_plan">Share my diet plan</string>
-    <string name="no_results">No Results</string>
+    <string name="empty">Empty</string>
 
 </resources>

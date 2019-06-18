@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/no_results"
+            android:text="@string/empty"
             android:textSize="24sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
