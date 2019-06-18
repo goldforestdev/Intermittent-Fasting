@@ -47,5 +47,6 @@
 
     <string name="my_plan_title">나의 다이어트 계획</string>
     <string name="share_my_diet_plan">나의 다이어트 계획 공유 하기</string>
+    <string name="no_results">결과 없음</string>
 
 </resources>
