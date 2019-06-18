@@ -5,6 +5,7 @@ import com.goldforest.capdiet.view.calendar.CalendarPresenter
 import com.goldforest.capdiet.view.dayResult.DayResultContract
 import com.goldforest.capdiet.view.dayResult.DayResultPresenter
 import com.goldforest.capdiet.viewmodel.MainViewModel
+import com.goldforest.capdiet.viewmodel.PlanListViewModel
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.goldforest.data.di.dataModule
 import com.goldforest.domain.di.domainModule
@@ -20,6 +21,9 @@ var viewModelModule = module {
         PlanViewModel(androidContext())
     }
 
+    viewModel {
+        PlanListViewModel(get())
+    }
     factory<CalendarContract.Presenter> { CalendarPresenter(get()) }
     factory<DayResultContract.Presenter> { DayResultPresenter(get()) }
 }

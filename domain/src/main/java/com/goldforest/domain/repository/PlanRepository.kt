@@ -1,5 +1,7 @@
 package com.goldforest.domain.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.goldforest.domain.exceptions.NotExistPlanException
 import com.goldforest.domain.model.Plan
 
@@ -16,4 +18,7 @@ interface PlanRepository {
 
     @Throws(NotExistPlanException::class)
     suspend fun getActivePlan(): Plan
+
+    @Throws(NotExistPlanException::class)
+    fun getAllByIdDescPaging(): LiveData<PagedList<Plan>>
 }
