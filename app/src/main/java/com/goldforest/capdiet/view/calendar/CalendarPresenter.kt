@@ -3,6 +3,7 @@ package com.goldforest.capdiet.view.calendar
 import com.goldforest.capdiet.common.dayOfMonth
 import com.goldforest.capdiet.common.get42Days
 import com.goldforest.capdiet.common.month
+import com.goldforest.capdiet.common.year
 import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.model.DayResultType
 import com.goldforest.domain.usercase.GetAllDayResultsByMonth
@@ -10,7 +11,7 @@ import kotlinx.coroutines.*
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-private const val INVALID_DATA = -1L
+const val INVALID_DATA = -1L
 
 class CalendarPresenter(
     private val getAllDayResults: GetAllDayResultsByMonth,
@@ -35,11 +36,10 @@ class CalendarPresenter(
         val calendar = Calendar.getInstance()
         val dayResultList = dayOfMonthList.map {
             calendar.timeInMillis = it
-            DayResult(INVALID_DATA, DayResultType.NOT_INPUT, calendar.month(), calendar.dayOfMonth(), INVALID_DATA)
+            DayResult(INVALID_DATA, DayResultType.NOT_INPUT, calendar.year(), calendar.month(), calendar.dayOfMonth(), INVALID_DATA)
         }.toList()
 
         launch {
-            println("real[${Thread.currentThread().name}] - ${dayOfMonthList.first()}, ${dayOfMonthList.last()}")
             withContext(ioContext) {
                 getAllDayResults.get(dayOfMonthList.first(), dayOfMonthList.last())
             }.forEach { dFromRepo ->
@@ -69,5 +69,15 @@ class CalendarPresenter(
                 view?.onDayResultsLoaded(dayResultList)
             }
         }
+    }
+
+    override fun findPlanId(dayResult: DayResult) {
+        launch {
+            withContext(ioContext) {
+                TODO("Get all plans to find the plan id")
+            }
+        }
+
+        view?.onPlanIdFound(dayResult)
     }
 }

@@ -47,5 +47,6 @@
 
     <string name="my_plan_title">My diet plan</string>
     <string name="share_my_diet_plan">Share my diet plan</string>
+    <string name="invalid_plan">The date you select is not part of Plan.</string>
 
 </resources>

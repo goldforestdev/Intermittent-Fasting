@@ -91,6 +91,8 @@ fun Long.get42Days(): List<Long> {
     return months
 }
 
+fun Calendar.year(): Int = get(Calendar.YEAR)
+
 fun Calendar.month(): Int = get(Calendar.MONTH) + 1
 
 fun Calendar.dayOfMonth(): Int = get(Calendar.DAY_OF_MONTH)

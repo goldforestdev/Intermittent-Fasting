@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.goldforest.data.common.dayOfMonth
 import com.goldforest.data.common.month
+import com.goldforest.data.common.year
 import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.model.DayResultType
 
@@ -26,4 +27,4 @@ data class DayResultEntity(
 
 fun DayResult.toEntity() = DayResultEntity(id, type.code, planId)
 
-fun DayResultEntity.toModel() = DayResult(id, DayResultType.of(type), id.month(), id.dayOfMonth(), planId)
+fun DayResultEntity.toModel() = DayResult(id, DayResultType.of(type), id.year(), id.month(), id.dayOfMonth(), planId)
