@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
@@ -21,7 +20,6 @@ import com.goldforest.capdiet.viewmodel.PlanViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,19 +37,18 @@ class MainActivity : AppCompatActivity() {
         findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController, appBarConfiguration)
         findViewById<NavigationView>(R.id.nav_view).setupWithNavController(navController)
 
-       navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (isDrawerLocked(destination)) {
-                drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            } else {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (isDrawerUnLocked(destination)) {
                 drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
     }
 
-    private fun isDrawerLocked(destination: NavDestination): Boolean {
-        return (destination.id == R.id.planFragment
-                || destination.id == R.id.planTermFragment
-                || destination.id == R.id.calendarFragment)
+    private fun isDrawerUnLocked(destination: NavDestination): Boolean {
+        return (destination.id == R.id.planListFragment
+                || destination.id == R.id.settingsFragment)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -71,8 +68,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {

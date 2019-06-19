@@ -1,5 +1,6 @@
 package com.goldforest.data.source.local
 
+import androidx.paging.DataSource
 import androidx.room.*
 import com.goldforest.data.model.PlanEntity
 import com.goldforest.data.source.PlanDataSource
@@ -20,4 +21,7 @@ interface PlanDao : PlanDataSource {
 
     @Query("SELECT * FROM plan_entity WHERE done=0 LIMIT 1")
     override suspend fun getActivePlan(): PlanEntity?
+
+    @Query("SELECT * FROM plan_entity ORDER BY id DESC")
+    override fun getAllByIdDesc() : DataSource.Factory<Int, PlanEntity>
 }

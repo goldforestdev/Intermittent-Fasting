@@ -30,5 +30,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         fl_calendar.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_calendarFragment)
         }
+
+        fl_list.setOnClickListener{
+            findNavController().navigate(R.id.action_mainFragment_to_planListFragment)
+        }
     }
 }
