@@ -7,7 +7,7 @@ import com.goldforest.domain.model.PlanType
 
 @Entity(tableName = "plan_entity")
 data class PlanEntity (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var id: Long,
     var planName: String,
     var type: Int,
