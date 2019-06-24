@@ -7,13 +7,24 @@
         android:layout_height="match_parent"
         tools:context=".view.dayResult.DayResultActivity">
 
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:contentInsetStart="48dp"
+            app:titleTextColor="@android:color/white" />
+
     <TextView
             android:id="@+id/tvYearMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="56dp"
             tools:text="2019 June"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView

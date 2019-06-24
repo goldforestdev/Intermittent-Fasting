@@ -38,6 +38,15 @@ class DayResultActivity : AppCompatActivity(), DayResultContract.View {
 
         presenter.subscribe(this)
 
+        setSupportActionBar(toolbar)
+        supportActionBar?.let { actionBar ->
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setDisplayShowHomeEnabled(true)
+        }
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
         dayResultId = intent.getLongExtra(DAY_RESULT_ID, -1L)
         year = intent.getIntExtra(DAY_RESULT_Y, -1)
         month = intent.getIntExtra(DAY_RESULT_M, -1)
