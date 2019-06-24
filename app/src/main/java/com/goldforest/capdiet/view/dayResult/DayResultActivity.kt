@@ -47,6 +47,10 @@ class DayResultActivity : AppCompatActivity(), DayResultContract.View {
         showDateTime()
 
         Log.d(TAG, "[GF] onViewCreated - dayResultId: $dayResultId")
+
+        /**
+         * Temp code - for test
+         */
 //        if (dayResultId == INVALID_DATA) {
 //            showEditView(true)
 //        } else {
