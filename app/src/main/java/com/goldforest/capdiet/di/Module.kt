@@ -24,8 +24,10 @@ var viewModelModule = module {
     viewModel {
         PlanListViewModel(get())
     }
-    factory<CalendarContract.Presenter> { CalendarPresenter(get()) }
-    factory<DayResultContract.Presenter> { DayResultPresenter(get()) }
+
+    factory<CalendarContract.Presenter> { CalendarPresenter(get(), get()) }
+    factory<DayResultContract.Presenter> { DayResultPresenter(get(), get()) }
+
 }
 
 var DiModule = listOf(viewModelModule, dataModule, domainModule)

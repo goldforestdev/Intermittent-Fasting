@@ -7,12 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.goldforest.capdiet.R
-import com.goldforest.capdiet.view.dayResult.DAY_RESULT_ID
-import com.goldforest.capdiet.view.dayResult.DayResultActivity
+import com.goldforest.capdiet.view.dayResult.*
 import com.goldforest.domain.model.DayResult
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.android.ext.android.inject
@@ -65,9 +65,18 @@ class CalendarFragment : Fragment(), CalendarContract.View, CalendarAdapter.Cale
         calendarAdapter.setData(time, dayResults)
     }
 
-    override fun onCalendarClick(dayResultId: Long) {
+    override fun onCalendarClick(dayResult: DayResult) {
+//        if (dayResult.planId == INVALID_DATA) {
+//            Toast.makeText(context, R.string.invalid_plan, Toast.LENGTH_SHORT).show()
+//            return
+//        }
+
         val intent = Intent(context, DayResultActivity::class.java)
-            .putExtra(DAY_RESULT_ID, dayResultId)
+            .putExtra(DAY_RESULT_ID, dayResult.id)
+            .putExtra(DAY_RESULT_Y, dayResult.year)
+            .putExtra(DAY_RESULT_M, dayResult.month)
+            .putExtra(DAY_RESULT_D, dayResult.dayOfMonth)
+            .putExtra(DAY_RESULT_PLAN_ID, dayResult.planId)
         startActivity(intent)
     }
 }

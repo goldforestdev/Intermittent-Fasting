@@ -18,7 +18,7 @@ class CalendarAdapter(
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarHolder>() {
 
     interface CalendarClickListener {
-        fun onCalendarClick(dayResultId: Long)
+        fun onCalendarClick(dayResult: DayResult)
     }
 
     private var month: Long = 0
@@ -46,7 +46,7 @@ class CalendarAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            clickListener.onCalendarClick(dayResult.id)
+            clickListener.onCalendarClick(dayResult)
         }
     }
 

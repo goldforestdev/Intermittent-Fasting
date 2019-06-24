@@ -8,4 +8,11 @@
     <color name="colorAccent">#536DFE</color>
     <color name="R221G207B226">#DDCFE2</color>
     <color name="R255G172B214">#A5ACD6</color>
+
+    <color name="green_light">#dcedc8</color>
+    <color name="green_dark">#33691e</color>
+
+    <color name="red_light">#ffcdd2</color>
+    <color name="red_dark">#b71c1c</color>
+
 </resources>

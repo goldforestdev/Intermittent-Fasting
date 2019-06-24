@@ -5,7 +5,6 @@ import com.goldforest.domain.model.DayResult
 interface CalendarContract {
     interface View {
         fun onDayResultsLoaded(dayResults: List<DayResult>)
-
     }
 
     interface Presenter {

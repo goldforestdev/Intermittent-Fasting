@@ -2,6 +2,12 @@ package com.goldforest.data.common
 
 import java.util.*
 
+fun Long.year(): Int {
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = this
+    return calendar.get(Calendar.YEAR)
+}
+
 fun Long.month(): Int {
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = this

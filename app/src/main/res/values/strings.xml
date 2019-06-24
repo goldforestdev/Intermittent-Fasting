@@ -47,6 +47,13 @@
 
     <string name="my_plan_title">My diet plan</string>
     <string name="share_my_diet_plan">Share my diet plan</string>
+    <string name="invalid_plan">The date you select is not part of Plan.</string>
+    <string name="success_details">Success: I succeeded in fasting.</string>
+    <string name="failure_details">Failure: I ate...</string>
+    <string name="msg_input_fasting_result">Did you succeed in singles?\nPlease select the fasting result below.</string>
+    <string name="save">Save</string>
+    <string name="success_fasting">Success Fasting!</string>
+    <string name="failed_fasting">Failed Fasting...</string>
     <string name="empty">Empty</string>
 
 </resources>

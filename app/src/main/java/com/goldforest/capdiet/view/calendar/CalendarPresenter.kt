@@ -3,17 +3,20 @@ package com.goldforest.capdiet.view.calendar
 import com.goldforest.capdiet.common.dayOfMonth
 import com.goldforest.capdiet.common.get42Days
 import com.goldforest.capdiet.common.month
+import com.goldforest.capdiet.common.year
 import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.model.DayResultType
 import com.goldforest.domain.usercase.GetAllDayResultsByMonth
+import com.goldforest.domain.usercase.GetPlans
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-private const val INVALID_DATA = -1L
+const val INVALID_DATA = -1L
 
 class CalendarPresenter(
     private val getAllDayResults: GetAllDayResultsByMonth,
+    private val getPlans: GetPlans,
     private val uiContext: CoroutineContext = Dispatchers.Main,
     private val ioContext: CoroutineContext = Dispatchers.IO
 ) : CalendarContract.Presenter, CoroutineScope {
@@ -35,11 +38,19 @@ class CalendarPresenter(
         val calendar = Calendar.getInstance()
         val dayResultList = dayOfMonthList.map {
             calendar.timeInMillis = it
-            DayResult(INVALID_DATA, DayResultType.NOT_INPUT, calendar.month(), calendar.dayOfMonth(), INVALID_DATA)
+            DayResult(
+                it,
+                DayResultType.NOT_INPUT,
+                calendar.year(),
+                calendar.month(),
+                calendar.dayOfMonth(),
+                INVALID_DATA
+            )
         }.toList()
 
         launch {
-            println("real[${Thread.currentThread().name}] - ${dayOfMonthList.first()}, ${dayOfMonthList.last()}")
+            val plans = withContext(ioContext) { getPlans.get() }
+
             withContext(ioContext) {
                 getAllDayResults.get(dayOfMonthList.first(), dayOfMonthList.last())
             }.forEach { dFromRepo ->
@@ -52,6 +63,16 @@ class CalendarPresenter(
                 }
             }
 
+            dayResultList.filter { d -> d.planId == INVALID_DATA }
+                .forEach { d ->
+                    val plan = plans.find { p ->
+                        d.id >= p.startDateTime && d.id <= p.endDateTime
+                    }
+                    d.planId = plan?.id ?: INVALID_DATA
+                }
+
+            ///////////////////
+            // Only for test //
             dayResultList[7].apply {
                 id = System.currentTimeMillis()
                 type = DayResultType.NOT_INPUT
@@ -64,10 +85,13 @@ class CalendarPresenter(
                 id = System.currentTimeMillis()
                 type = DayResultType.FAILED
             }
+            // Only for test //
+            ///////////////////
 
             withContext(uiContext) {
                 view?.onDayResultsLoaded(dayResultList)
             }
         }
     }
+
 }
