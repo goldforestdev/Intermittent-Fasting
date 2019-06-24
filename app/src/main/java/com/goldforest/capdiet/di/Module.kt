@@ -18,7 +18,7 @@ var viewModelModule = module {
 
     viewModel {
         MainViewModel()
-        PlanViewModel(androidContext())
+        PlanViewModel(androidContext(),get())
     }
 
     viewModel {
