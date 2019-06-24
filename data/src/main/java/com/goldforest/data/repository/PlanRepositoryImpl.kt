@@ -17,7 +17,7 @@ class PlanRepositoryImpl(
     override suspend fun save(vararg plan: Plan) {
         val planEntityList = plan.map { it.toEntity() }.toTypedArray()
         planLocalDataSource.save(*planEntityList)
-        planRemoteDataSource.save(*planEntityList)
+        //planRemoteDataSource.save(*planEntityList)
     }
 
     override suspend fun getAll(): List<Plan> = planLocalDataSource.getAll().map { it.toModel() }

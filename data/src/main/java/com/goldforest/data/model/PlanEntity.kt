@@ -16,9 +16,11 @@ data class PlanEntity (
     var day: Int,
     var startDate: String,
     var endDate: String,
+    var startDateTime: Long,
+    var endDateTime: Long,
     var done: Boolean
 )
 
-fun Plan.toEntity() = PlanEntity(id, planName, type.code, startTime, endTime, day, startDate, endDate, done)
+fun Plan.toEntity() = PlanEntity(id, planName, type.code, startTime, endTime, day, startDate, endDate, startDateTime, endDateTime, done)
 
-fun PlanEntity.toModel() = Plan(id, planName, PlanType.of(type), startTime, endTime, day, startDate, endDate, done)
+fun PlanEntity.toModel() = Plan(id, planName, PlanType.of(type), startTime, endTime, day, startDate, endDate, startDateTime, endDateTime, done)

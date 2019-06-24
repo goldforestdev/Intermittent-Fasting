@@ -12,11 +12,20 @@ import com.goldforest.capdiet.base.BaseViewModel
 import com.goldforest.capdiet.data.PlanData
 import com.goldforest.domain.model.Plan
 import com.goldforest.domain.model.PlanType
+import com.goldforest.domain.usercase.CreatePlan
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 
-class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
+class PlanViewModel(
+    private val androidContext : Context,
+    private val createPlan: CreatePlan,
+    private val uiContext: CoroutineContext = Dispatchers.Main,
+    private val ioContext: CoroutineContext = Dispatchers.IO
+) : BaseViewModel(), CoroutineScope {
+    override val coroutineContext: CoroutineContext = Job() + ioContext
 
     enum class PlanTermType(val code: Int) {
         PLAN_TERM_4WEEK(0),
@@ -62,6 +71,8 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     var endDate: MutableLiveData<String> = MutableLiveData()
     val startDateString : MutableLiveData<String> get() = _startDateString
     val endDateString : MutableLiveData<String> get() = _endDateString
+    private var startDateTime : Long = 0L
+    private var endDateTime : Long = 0L
 
     private var planData : PlanData? = null
 
@@ -229,5 +240,15 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
             e.printStackTrace()
         }
         return locale
+    }
+
+    fun createPlan() {
+        launch {
+            withContext(ioContext) {
+                val plan : Plan = Plan(startDateTime,"Test",PlanType.PLAN_16_8,_startTimeViewString.value!!,_endTimeViewString.value!!,
+                    0, _startDateString.value!!, _endDateString.value!!, startDateTime, endDateTime, false )
+                createPlan.save(plan)
+            }
+        }
     }
 }
