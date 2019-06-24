@@ -12,11 +12,20 @@ import com.goldforest.capdiet.base.BaseViewModel
 import com.goldforest.capdiet.data.PlanData
 import com.goldforest.domain.model.Plan
 import com.goldforest.domain.model.PlanType
+import com.goldforest.domain.usercase.CreatePlan
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 
-class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
+class PlanViewModel(
+    private val androidContext : Context,
+    private val createPlan: CreatePlan,
+    private val uiContext: CoroutineContext = Dispatchers.Main,
+    private val ioContext: CoroutineContext = Dispatchers.IO
+) : BaseViewModel(), CoroutineScope {
+    override val coroutineContext: CoroutineContext = Job() + ioContext
 
     enum class PlanTermType(val code: Int) {
         PLAN_TERM_4WEEK(0),
@@ -38,6 +47,7 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     private val _planTermType = MutableLiveData<PlanTermType>()
     private var _startTimeViewString = MutableLiveData<String>()
     private var _endTimeViewString = MutableLiveData<String>()
+    private var _fastingViewString = MutableLiveData<String>()
     private var _fastingTimeViewString = MutableLiveData<String>()
     private var _startDateString = MutableLiveData<String>()
     private var _endDateString = MutableLiveData<String>()
@@ -55,11 +65,14 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
     val startTimeViewString : MutableLiveData<String> get() = _startTimeViewString
     val endTimeViewString : MutableLiveData<String> get() = _endTimeViewString
     val fastingTimeViewString : MutableLiveData<String> get() = _fastingTimeViewString
+    val fastingViewString get() = _fastingViewString
 
     var startDate: MutableLiveData<String> = MutableLiveData()
     var endDate: MutableLiveData<String> = MutableLiveData()
     val startDateString : MutableLiveData<String> get() = _startDateString
     val endDateString : MutableLiveData<String> get() = _endDateString
+    private var startDateTime : Long = 0L
+    private var endDateTime : Long = 0L
 
     private var planData : PlanData? = null
 
@@ -80,6 +93,8 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
         _startTime.value = calendar.timeInMillis
         Log.e("HJ","[HJ]Start time : ${_startTime.value}")
         _endTime.value = getEndTime(fastingTimeHour, fastingTimeMin)
+
+        setFastingString()
     }
 
     private fun getEndTime(hourOfDay: Int, minute: Int) : Long {
@@ -90,6 +105,8 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
         val (strAmPm: String, hour: Int) = getHourOfDay(calendar.get(Calendar.HOUR_OF_DAY))
         _endTimeViewString.value = "$hour : ${calendar.get(Calendar.MINUTE)} $strAmPm"
+
+        setFastingString()
         return calendar.timeInMillis
     }
 
@@ -152,13 +169,16 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
 
     private fun setPeriodEndDate() {
         val calendar = getDateCalendar(_startDateString.value)
+        startDateTime = calendar.timeInMillis
         if (_planTermType.value == PlanTermType.PLAN_TERM_4WEEK) {
             calendar.add(Calendar.WEEK_OF_YEAR, 4)
             _endDateString.value = getDateFormatter().format(calendar.time)
+            endDateTime = calendar.timeInMillis
         }
         else if (_planTermType.value == PlanTermType.PLAN_TERM_8WEEK) {
             calendar.add(Calendar.WEEK_OF_YEAR, 8)
             _endDateString.value = getDateFormatter().format(calendar.time)
+            endDateTime = calendar.timeInMillis
         }
     }
 
@@ -204,6 +224,10 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
         _endDateString.value = endDate
     }
 
+    private fun setFastingString() {
+        _fastingViewString.value = "${_startTimeViewString.value} ~ ${_endTimeViewString.value}"
+    }
+
     private fun getSystemLocale(): Locale? {
         val packageManager = androidContext.packageManager
         val resources: Resources
@@ -219,5 +243,15 @@ class PlanViewModel(private val androidContext : Context) : BaseViewModel() {
             e.printStackTrace()
         }
         return locale
+    }
+
+    fun createPlan() {
+        launch {
+            withContext(ioContext) {
+                val plan : Plan = Plan(startDateTime,"Test",PlanType.PLAN_16_8,_startTimeViewString.value!!,_endTimeViewString.value!!,
+                    0, _startDateString.value!!, _endDateString.value!!, startDateTime, endDateTime, false )
+                createPlan.save(plan)
+            }
+        }
     }
 }

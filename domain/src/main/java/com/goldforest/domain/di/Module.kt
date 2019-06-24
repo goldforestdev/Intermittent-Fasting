@@ -11,4 +11,5 @@ var domainModule = module {
     single<GetAllDayResultsByMonth> { GetAllDayResultsByMonthUsecase(get()) }
     single<GetDayResult> { GetDayResultUsecase(get()) }
     single<HasActivePlan> { HasActivePlanUsecase(get()) }
+    single<GetPlanListResultPaging> { GetPlanListResultPagingUsecase(get()) }
 }

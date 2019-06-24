@@ -1,5 +1,6 @@
 package com.goldforest.data.source
 
+import androidx.paging.DataSource
 import com.goldforest.data.model.PlanEntity
 
 
@@ -13,4 +14,6 @@ interface PlanDataSource {
     suspend fun delete(vararg plan: PlanEntity)
 
     suspend fun getActivePlan(): PlanEntity?
+
+    fun getAllByIdDesc() : DataSource.Factory<Int, PlanEntity>
 }

@@ -3,7 +3,6 @@ package com.goldforest.capdiet.view
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -17,10 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R
+import com.goldforest.capdiet.utils.checkExternalStoragePermission
 import kotlinx.android.synthetic.main.activity_main.*
-
-
-
 
 
 
@@ -33,20 +30,10 @@ class SplashFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        if (checkPermission()) {
+        if (checkExternalStoragePermission(activity!!)) {
             showNextFragment()
         } else {
             makeRequest()
-        }
-
-    }
-
-    private fun checkPermission() : Boolean {
-        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            true
-        } else {
-            val permissionCheck = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            permissionCheck == PackageManager.PERMISSION_GRANTED
         }
     }
 

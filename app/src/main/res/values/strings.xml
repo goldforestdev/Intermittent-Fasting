@@ -54,5 +54,6 @@
     <string name="save">Save</string>
     <string name="success_fasting">Success Fasting!</string>
     <string name="failed_fasting">Failed Fasting...</string>
+    <string name="empty">Empty</string>
 
 </resources>

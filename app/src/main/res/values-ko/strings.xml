@@ -54,5 +54,6 @@
     <string name="save">저장</string>
     <string name="success_fasting">단식 성공!</string>
     <string name="failed_fasting">단식 실패...</string>
+    <string name="empty">비어 있음</string>
 
 </resources>
