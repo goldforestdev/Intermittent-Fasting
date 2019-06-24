@@ -16,4 +16,138 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
+    <TextView
+            android:id="@+id/tvDayOfMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            tools:text="24 Monday"
+            app:layout_constraintTop_toBottomOf="@id/tvYearMonth"
+            app:layout_constraintStart_toStartOf="@id/tvYearMonth"/>
+
+    <TextView
+            android:id="@+id/tvGuideForNotInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_input_fasting_result"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <RadioGroup
+            android:id="@+id/rGrpDayResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="52dp"
+            app:layout_constraintTop_toBottomOf="@id/tvGuideForNotInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <RadioButton
+                android:id="@+id/rBtnSuccess"
+                android:background="@drawable/selector_rounded_corner_success"
+                android:button="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/success_details"
+                android:textColor="@color/green_dark"
+                android:drawableStart="@drawable/ic_check"
+                android:drawablePadding="8dp"
+                android:checked="true"
+                android:padding="12dp"/>
+
+        <RadioButton
+                android:id="@+id/rBtnFailure"
+                android:background="@drawable/selector_rounded_corner_failure"
+                android:button="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="64dp"
+                android:text="@string/failure_details"
+                android:textColor="@color/red_dark"
+                android:drawableStart="@drawable/ic_clear"
+                android:drawablePadding="8dp"
+                android:padding="12dp"/>
+    </RadioGroup>
+
+    <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="@color/colorAccent"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupEditView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="rGrpDayResult, btnSave, tvGuideForNotInput"/>
+
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupFailure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="avFailure, tvFailure"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/avFailure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/anim_failure"
+            app:lottie_autoPlay="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:id="@+id/tvFailure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/failed_fasting"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintTop_toBottomOf="@id/avFailure"
+            app:layout_constraintStart_toStartOf="@id/avFailure"
+            app:layout_constraintEnd_toEndOf="@id/avFailure"/>
+
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="avSuccess, tvSuccess"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/avSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/anim_success"
+            app:lottie_autoPlay="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:id="@+id/tvSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/success_fasting"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintTop_toBottomOf="@id/avSuccess"
+            app:layout_constraintStart_toStartOf="@id/avSuccess"
+            app:layout_constraintEnd_toEndOf="@id/avSuccess"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,20 @@
 package com.goldforest.capdiet.view.dayResult
 
+import android.util.Log
+import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.usercase.CreateDayResult
 import com.goldforest.domain.usercase.GetDayResult
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class DayResultPresenter (
     private val getDayResult: GetDayResult,
+    private val createDayResult: CreateDayResult,
     private val uiContext: CoroutineContext = Dispatchers.Main,
     private val ioContext: CoroutineContext = Dispatchers.IO
 ): DayResultContract.Presenter, CoroutineScope {
+
+    private val TAG = DayResultPresenter::class.java.simpleName
 
     override val coroutineContext: CoroutineContext = Job() + ioContext
 
@@ -34,7 +40,20 @@ class DayResultPresenter (
         }
     }
 
-    override fun test() {
-        view?.test("hello")
+    override fun save(dayResult: DayResult) {
+        launch {
+            withContext(ioContext) {
+                Log.d(TAG, "[IF] save - $dayResult")
+//                createDayResult.save(dayResult)
+            }
+
+            withContext(uiContext) {
+                view?.onDayResultLoaded(dayResult)
+            }
+        }
+    }
+
+    override fun update(dayResult: DayResult) {
+
     }
 }

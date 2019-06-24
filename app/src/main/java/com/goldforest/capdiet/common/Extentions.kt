@@ -3,7 +3,17 @@ package com.goldforest.capdiet.common
 import com.goldforest.capdiet.R
 import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.model.DayResultType
+import java.text.SimpleDateFormat
 import java.util.*
+
+private val FORMAT_YYYY_MMMM = SimpleDateFormat("yyyy MMMM")
+private val FORMAT_d_EEEE = SimpleDateFormat("d EEEE")
+
+fun Long.getYearMonth(): String = FORMAT_YYYY_MMMM.format(Date(this))
+
+fun Calendar.getYearMonth(): String = FORMAT_YYYY_MMMM.format(this.timeInMillis)
+
+fun Calendar.getDayOfMonthWithDayOfWeek(): String = FORMAT_d_EEEE.format(this.timeInMillis)
 
 fun Long.month(): Long {
     val calendar = Calendar.getInstance()

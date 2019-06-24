@@ -1,11 +1,11 @@
 package com.goldforest.capdiet.view.dayResult
 
 import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 
 interface DayResultContract {
     interface View {
         fun onDayResultLoaded(dayResult: DayResult)
-        fun test(s: String)
 
     }
 
@@ -13,6 +13,7 @@ interface DayResultContract {
         fun subscribe(view: View)
         fun unsubscribe()
         fun getDayResult(id: Long)
-        fun test()
+        fun save(dayResult: DayResult)
+        fun update(dayResult: DayResult)
     }
 }
