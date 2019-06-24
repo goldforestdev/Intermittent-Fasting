@@ -169,13 +169,16 @@ class PlanViewModel(
 
     private fun setPeriodEndDate() {
         val calendar = getDateCalendar(_startDateString.value)
+        startDateTime = calendar.timeInMillis
         if (_planTermType.value == PlanTermType.PLAN_TERM_4WEEK) {
             calendar.add(Calendar.WEEK_OF_YEAR, 4)
             _endDateString.value = getDateFormatter().format(calendar.time)
+            endDateTime = calendar.timeInMillis
         }
         else if (_planTermType.value == PlanTermType.PLAN_TERM_8WEEK) {
             calendar.add(Calendar.WEEK_OF_YEAR, 8)
             _endDateString.value = getDateFormatter().format(calendar.time)
+            endDateTime = calendar.timeInMillis
         }
     }
 
