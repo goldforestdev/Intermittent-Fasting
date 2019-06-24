@@ -7,8 +7,6 @@ import com.goldforest.domain.model.PlanType
 
 @Entity(tableName = "plan_entity")
 data class PlanEntity (
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0,
     var planName: String,
     var type: Int,
     var startTime: String,
@@ -19,8 +17,11 @@ data class PlanEntity (
     var startDateTime: Long,
     var endDateTime: Long,
     var done: Boolean
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+}
 
-fun Plan.toEntity() = PlanEntity(id, planName, type.code, startTime, endTime, day, startDate, endDate, startDateTime, endDateTime, done)
+fun Plan.toEntity() = PlanEntity(planName, type.code, startTime, endTime, day, startDate, endDate, startDateTime, endDateTime, done)
 
 fun PlanEntity.toModel() = Plan(id, planName, PlanType.of(type), startTime, endTime, day, startDate, endDate, startDateTime, endDateTime, done)
