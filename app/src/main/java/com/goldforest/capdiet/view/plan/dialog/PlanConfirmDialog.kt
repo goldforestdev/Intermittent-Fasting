@@ -15,6 +15,7 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
 import com.goldforest.capdiet.BuildConfig
@@ -32,7 +33,7 @@ class PlanConfirmDialog(
 ) : AlertDialog(context), DialogInterface.OnClickListener {
 
     interface AttachedCallback {
-        fun done()
+        fun done(planTitle : String)
     }
 
     private var planLayout : ConstraintLayout? = null
@@ -54,10 +55,13 @@ class PlanConfirmDialog(
     }
 
     private fun initView() {
+        etPlanTitle.setText(getPlanTitle())
+        etPlanTitle.setSelection(etPlanTitle.text.length)
+        etPlanTitle.requestFocus()
         tvDate.text = getDate()
         tvTime.text = getTime()
 
-        if (checkExternalStoragePermission(context)) {
+        if (!checkExternalStoragePermission(context)) {
             btShare.visibility = View.GONE
         }
 
@@ -74,14 +78,27 @@ class PlanConfirmDialog(
         return "$startDate ~ $endDate"
     }
 
+    private fun getPlanTitle() : String {
+        return  "$startDate ${context.getString(R.string.start)} ${context.getString(R.string.plan)}"
+    }
+
     override fun onClick(dialog: DialogInterface, which: Int) {
         when (which) {
             DialogInterface.BUTTON_POSITIVE -> {
-                fileDelete()
-                attachedCallback.done()
-                dismiss()
+                clickPositiveButton()
             }
         }
+    }
+
+    private fun clickPositiveButton() {
+        val planTitle = etPlanTitle.text.toString()
+        if (planTitle.isEmpty()) {
+            Toast.makeText(context, context.getString(R.string.empty_title_notify), Toast.LENGTH_LONG).show()
+            return
+        }
+        fileDelete()
+        attachedCallback.done(etPlanTitle.text.toString())
+        dismiss()
     }
 
     private fun capture () {
