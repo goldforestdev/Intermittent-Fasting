@@ -15,4 +15,17 @@
     <color name="red_light">#ffcdd2</color>
     <color name="red_dark">#b71c1c</color>
 
+    <color name="jan_color">#D40020</color>
+    <color name="feb_color">#B53F64</color>
+    <color name="mar_color">#AF4CAD</color>
+    <color name="apr_color">#610096</color>
+    <color name="may_color">#423AB7</color>
+    <color name="jun_color">#36B8F4</color>
+    <color name="jul_color">#1EE9C0</color>
+    <color name="aug_color">#22FF73</color>
+    <color name="sep_color">#90D82B</color>
+    <color name="oct_color">#DCC639</color>
+    <color name="nov_color">#D48600</color>
+    <color name="dec_color">#D45C00</color>
+
 </resources>

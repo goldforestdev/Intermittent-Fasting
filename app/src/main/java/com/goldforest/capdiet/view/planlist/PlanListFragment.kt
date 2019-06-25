@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class PlanListFragment : BaseFragment<FragmentPlanListBinding, PlanListViewModel>() {
-
+    private val TAG = PlanListFragment::class.java.simpleName
     override val layoutResourceId: Int = R.layout.fragment_plan_list
     override val viewModel: PlanListViewModel by viewModel()
     private val adapter = PlanListAdapter()
@@ -31,7 +31,7 @@ class PlanListFragment : BaseFragment<FragmentPlanListBinding, PlanListViewModel
     private fun initAdapter() {
         rv_plan_list.adapter = adapter
         viewModel.planList.observe(this, Observer<PagedList<Plan>> {
-            Log.d("Activity", "list: ${it?.size}")
+            Log.d(TAG, "list: ${it?.size}")
             showEmptyList(it?.size == 0)
             adapter.submitList(it)
         })

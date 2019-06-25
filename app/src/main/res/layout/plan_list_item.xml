@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -8,29 +9,42 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/iv_month"
+        <TextView
+            android:id="@+id/tv_month"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:importantForAccessibility="no"
+            android:background="@drawable/circle_jan"
+            android:gravity="center"
+            android:text="@string/january"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:color/holo_green_light" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_plan_period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:background="@drawable/round_corner"
             android:padding="5dp"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="23sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_month"
+            app:layout_constraintStart_toEndOf="@+id/tv_month" />
+
+        <TextView
+            android:id="@+id/tv_plan_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="23sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_plan_period"
+            app:layout_constraintStart_toEndOf="@+id/tv_month"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
