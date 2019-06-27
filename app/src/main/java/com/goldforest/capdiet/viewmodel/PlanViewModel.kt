@@ -245,13 +245,12 @@ class PlanViewModel(
         return locale
     }
 
-    fun createPlan() {
+    fun createPlan(planTitle : String) {
         launch {
             withContext(ioContext) {
-                val plan: Plan = Plan(
-                    0, "Test", PlanType.PLAN_16_8, _startTimeViewString.value!!, _endTimeViewString.value!!,
-                    0, _startDateString.value!!, _endDateString.value!!, startDateTime, endDateTime, false
-                )
+                val plan = Plan(0,planTitle,PlanType.PLAN_16_8,_startTimeViewString.value!!,_endTimeViewString.value!!,
+                    0, _startDateString.value!!, _endDateString.value!!, startDateTime, endDateTime, false )
+
                 createPlan.save(plan)
             }
         }

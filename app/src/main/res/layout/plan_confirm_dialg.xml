@@ -19,7 +19,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/gf"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text = "My diet plan"/>
 
+        <EditText
+                android:id="@+id/etPlanTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corner"
+                android:textSize="@dimen/text_sub_title_size"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_orange_dark"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:ellipsize="end"
+                app:layout_constraintTop_toBottomOf="@id/ivImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text = "2019-06-08 ~ 2019-07-22 plan"/>
+
     <TextView
             android:id="@+id/tvPeriodTitle"
             android:layout_width="wrap_content"
@@ -47,7 +67,7 @@
             android:textColor="@color/colorAccent"
             android:layout_marginTop="20dp"
             android:text="@string/period"
-            app:layout_constraintTop_toBottomOf="@id/ivImage"
+            app:layout_constraintTop_toBottomOf="@id/etPlanTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text = "Period"/>

@@ -55,4 +55,7 @@
     <string name="success_fasting">단식 성공!</string>
     <string name="failed_fasting">단식 실패&#8230;</string>
     <string name="empty">비어 있음</string>
+    <string name="start">시작</string>
+    <string name="empty_title_notify">계획의 제목을 입력 해주세요.</string>
+
 </resources>

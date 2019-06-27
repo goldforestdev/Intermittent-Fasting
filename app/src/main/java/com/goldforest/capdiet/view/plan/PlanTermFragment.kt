@@ -40,8 +40,8 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
                     viewModel.startTimeViewString.value!!,
                     viewModel.endTimeViewString.value!!,
                     object : PlanConfirmDialog.AttachedCallback {
-                        override fun done() {
-                            viewModel.createPlan()
+                        override fun done(planTitle: String) {
+                            viewModel.createPlan(planTitle)
                             findNavController().navigate(R.id.action_planTermFragment_to_mainFragment)
                         }
                     })

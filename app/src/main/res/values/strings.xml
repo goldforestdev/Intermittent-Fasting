@@ -55,4 +55,7 @@
     <string name="success_fasting">Success Fasting!</string>
     <string name="failed_fasting">Failed Fasting&#8230;</string>
     <string name="empty">Empty</string>
+  
+    <string name="start">start</string>
+    <string name="empty_title_notify">Please enter the title of the plan.</string>
 </resources>
