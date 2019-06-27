@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.DatePicker
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseFragment
@@ -51,6 +52,17 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
 
         viewDataBinding.tvStartDate.setOnClickListener(this)
         viewDataBinding.tvEndDate.setOnClickListener(this)
+
+        viewModel.termType.observe(this, Observer {
+            if (it == PlanViewModel.PlanTermType.PLAN_TERM_NO_PERIOD) {
+                viewDataBinding.tvEndDate.isEnabled = false
+                viewDataBinding.tvEndDate.background = null
+            } else {
+                viewDataBinding.tvEndDate.isEnabled = true
+                viewDataBinding.tvEndDate.background = activity?.getDrawable(R.drawable.round_corner_success_background)
+            }
+
+        })
     }
 
 

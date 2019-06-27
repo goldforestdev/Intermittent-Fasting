@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseViewModel
 import com.goldforest.capdiet.data.PlanData
+import com.goldforest.capdiet.viewmodel.PlanViewModel.PlanTermType.PLAN_TERM_NO_PERIOD
 import com.goldforest.domain.model.Plan
 import com.goldforest.domain.model.PlanType
 import com.goldforest.domain.usercase.CreatePlan
@@ -67,14 +68,15 @@ class PlanViewModel(
     val fastingTimeViewString: MutableLiveData<String> get() = _fastingTimeViewString
     val fastingViewString get() = _fastingViewString
 
-    var startDate: MutableLiveData<String> = MutableLiveData()
-    var endDate: MutableLiveData<String> = MutableLiveData()
     val startDateString: MutableLiveData<String> get() = _startDateString
     val endDateString: MutableLiveData<String> get() = _endDateString
     private var startDateTime: Long = 0L
     private var endDateTime: Long = 0L
 
     private var planData: PlanData? = null
+    companion object {
+        private const val LONG_MAX_VALUE : Long = 9223372036854775807L
+    }
 
     fun setPlanType(planTypeOrdinal: Int) {
         when (planTypeOrdinal) {
@@ -182,6 +184,9 @@ class PlanViewModel(
             calendar.add(Calendar.WEEK_OF_YEAR, 8)
             _endDateString.value = getDateFormatter().format(calendar.time)
             endDateTime = calendar.timeInMillis
+        } else if (_planTermType.value == PLAN_TERM_NO_PERIOD) {
+            _endDateString.value = "-"
+            endDateTime = LONG_MAX_VALUE
         }
     }
 
@@ -199,18 +204,22 @@ class PlanViewModel(
         val startCalendar = getDateCalendar(_startDateString.value)
         startCalendar.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY))
         startCalendar.set(Calendar.MINUTE, cal.get(Calendar.MINUTE))
-
         return startCalendar
     }
 
     fun getPlanEndCalendar(): Calendar {
         val cal = Calendar.getInstance()
         cal.timeInMillis = _endTime.value!!
+
         val endCalendar = getDateCalendar(_endDateString.value)
         endCalendar.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY))
         endCalendar.set(Calendar.MINUTE, cal.get(Calendar.MINUTE))
 
         return endCalendar
+    }
+
+    fun isEndDateEnable() : Boolean {
+        return _planTermType.value != PLAN_TERM_NO_PERIOD
     }
 
     private fun getDateCalendar(year: Int, month: Int, day: Int): Calendar {
@@ -222,7 +231,6 @@ class PlanViewModel(
     }
 
     fun setPlanDate(startDate: String, endDate: String) {
-
         _startDateString.value = startDate
         _endDateString.value = endDate
     }

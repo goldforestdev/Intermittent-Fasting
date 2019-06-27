@@ -72,7 +72,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="@dimen/text_contents_size"
-                                android:onClick="@{() -> vm.setPlanTermType(3)}"
+                                android:onClick="@{() -> vm.setPlanTermType(2)}"
                                 android:text="@string/plan_term_no_period"
                                 app:buttonTint="@color/colorAccent"/>
 
@@ -82,7 +82,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textSize="@dimen/text_contents_size"
-                                android:onClick="@{() -> vm.setPlanTermType(4)}"
+                                android:onClick="@{() -> vm.setPlanTermType(3)}"
                                 android:text="@string/plan_term_user_settings"
                                 app:buttonTint="@color/colorAccent"/>
                     </RadioGroup>
