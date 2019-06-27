@@ -143,12 +143,15 @@ class PlanViewModel(
 
         if (_startDateString.value.isNullOrEmpty()) {
             _startDateString.value = getDateFormatter().format(Calendar.getInstance().time)
+            startDateTime = Calendar.getInstance().timeInMillis
         }
 
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.WEEK_OF_YEAR, +4)
+
         if (_endDateString.value.isNullOrEmpty()) {
             _endDateString.value = getDateFormatter().format(calendar.time)
+            endDateTime = Calendar.getInstance().timeInMillis
         }
     }
 
@@ -250,7 +253,6 @@ class PlanViewModel(
             withContext(ioContext) {
                 val plan = Plan(0,planTitle,PlanType.PLAN_16_8,_startTimeViewString.value!!,_endTimeViewString.value!!,
                     0, _startDateString.value!!, _endDateString.value!!, startDateTime, endDateTime, false )
-
                 createPlan.save(plan)
             }
         }

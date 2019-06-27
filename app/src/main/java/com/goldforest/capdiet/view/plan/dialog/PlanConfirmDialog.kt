@@ -15,12 +15,15 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import android.content.Intent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
 import com.goldforest.capdiet.BuildConfig
 import com.goldforest.capdiet.utils.checkExternalStoragePermission
 import java.io.File
+
+import android.view.inputmethod.InputMethodManager
 
 
 class PlanConfirmDialog(
@@ -55,9 +58,7 @@ class PlanConfirmDialog(
     }
 
     private fun initView() {
-        etPlanTitle.setText(getPlanTitle())
-        etPlanTitle.setSelection(etPlanTitle.text.length)
-        etPlanTitle.requestFocus()
+        initPlanTitleEditText()
         tvDate.text = getDate()
         tvTime.text = getTime()
 
@@ -68,6 +69,24 @@ class PlanConfirmDialog(
         btShare.setOnClickListener {
             capture()
         }
+    }
+
+    private fun initPlanTitleEditText() {
+        etPlanTitle.setText(getPlanTitle())
+        etPlanTitle.setSelection(etPlanTitle.text.length)
+        etPlanTitle.requestFocus()
+        etPlanTitle.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboard()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
+    }
+
+    private fun hideKeyboard() {
+        val im = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        im!!.hideSoftInputFromWindow(etPlanTitle.windowToken, 0)
     }
 
     private fun getTime(): String {
@@ -116,7 +135,6 @@ class PlanConfirmDialog(
                 e.printStackTrace()
             }
         }
-
        imageFileShare()
 
     }
