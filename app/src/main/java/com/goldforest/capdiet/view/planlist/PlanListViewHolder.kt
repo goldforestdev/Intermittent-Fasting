@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.goldforest.capdiet.R
+import com.goldforest.capdiet.common.getAbbreviationMonth
 import com.goldforest.capdiet.common.month
 import com.goldforest.domain.model.Plan
 import java.util.Calendar.*
@@ -18,9 +19,7 @@ class PlanListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private var plan: Plan? = null
 
     fun bind(plan: Plan?) {
-        if (plan == null) {
-
-        } else {
+        if (plan != null) {
             showPlanData(plan)
         }
     }
@@ -29,59 +28,48 @@ class PlanListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.plan = plan
         name.text = plan.planName
         period.text = String.format("%s~%s", plan.startDate, plan.endDate)
-        showStartMonth(plan)
+        month.text = plan.startDateTime.getAbbreviationMonth()
+        setMonthBackground(plan)
     }
 
-    private fun showStartMonth(plan: Plan) {
+    private fun setMonthBackground(plan: Plan) {
         val resources = itemView.resources
-        when (plan.startDateTime.month()) {
-            JANUARY.toLong() -> {
+        when (plan.startDateTime.month().toInt()) {
+            JANUARY -> {
                 month.background = resources.getDrawable(R.drawable.circle_jan, null)
-                month.text = resources.getString(R.string.january)
             }
-            FEBRUARY.toLong() -> {
+            FEBRUARY -> {
                 month.background = resources.getDrawable(R.drawable.circle_feb, null)
-                month.text = resources.getString(R.string.february)
             }
-            MARCH.toLong() -> {
+            MARCH -> {
                 month.background = resources.getDrawable(R.drawable.circle_mar, null)
-                month.text = resources.getString(R.string.march)
             }
-            APRIL.toLong() -> {
+            APRIL -> {
                 month.background = resources.getDrawable(R.drawable.circle_apr, null)
-                month.text = resources.getString(R.string.april)
             }
-            MAY.toLong() -> {
+            MAY -> {
                 month.background = resources.getDrawable(R.drawable.circle_may, null)
-                month.text = resources.getString(R.string.may)
             }
-            JUNE.toLong() -> {
+            JUNE -> {
                 month.background = resources.getDrawable(R.drawable.circle_jun, null)
-                month.text = resources.getString(R.string.june)
             }
-            JULY.toLong() -> {
+            JULY -> {
                 month.background = resources.getDrawable(R.drawable.circle_jul, null)
-                month.text = resources.getString(R.string.july)
             }
-            AUGUST.toLong() -> {
+            AUGUST -> {
                 month.background = resources.getDrawable(R.drawable.circle_aug, null)
-                month.text = resources.getString(R.string.august)
             }
-            SEPTEMBER.toLong() -> {
+            SEPTEMBER -> {
                 month.background = resources.getDrawable(R.drawable.circle_sep, null)
-                month.text = resources.getString(R.string.september)
             }
-            OCTOBER.toLong() -> {
+            OCTOBER -> {
                 month.background = resources.getDrawable(R.drawable.circle_oct, null)
-                month.text = resources.getString(R.string.october)
             }
-            NOVEMBER.toLong() -> {
+            NOVEMBER -> {
                 month.background = resources.getDrawable(R.drawable.circle_nov, null)
-                month.text = resources.getString(R.string.november)
             }
-            DECEMBER.toLong() -> {
+            DECEMBER -> {
                 month.background = resources.getDrawable(R.drawable.circle_dec, null)
-                month.text = resources.getString(R.string.december)
             }
         }
     }

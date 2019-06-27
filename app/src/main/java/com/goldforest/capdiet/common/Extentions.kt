@@ -1,5 +1,6 @@
 package com.goldforest.capdiet.common
 
+import android.icu.text.DateFormat.getDateInstance
 import com.goldforest.capdiet.R
 import com.goldforest.domain.model.DayResult
 import com.goldforest.domain.model.DayResultType
@@ -8,8 +9,11 @@ import java.util.*
 
 private val FORMAT_YYYY_MMMM = SimpleDateFormat("yyyy MMMM")
 private val FORMAT_d_EEEE = SimpleDateFormat("d EEEE")
+private val FORMAT_MMM = SimpleDateFormat("MMM")
 
 fun Long.getYearMonth(): String = FORMAT_YYYY_MMMM.format(Date(this))
+
+fun Long.getAbbreviationMonth(): String = FORMAT_MMM.format(Date(this))
 
 fun Calendar.getYearMonth(): String = FORMAT_YYYY_MMMM.format(this.timeInMillis)
 
