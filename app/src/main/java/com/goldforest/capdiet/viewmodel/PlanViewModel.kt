@@ -10,7 +10,6 @@ import androidx.lifecycle.MutableLiveData
 import com.goldforest.capdiet.R
 import com.goldforest.capdiet.base.BaseViewModel
 import com.goldforest.capdiet.data.PlanData
-import com.goldforest.capdiet.viewmodel.PlanViewModel.PlanTermType.PLAN_TERM_NO_PERIOD
 import com.goldforest.domain.model.Plan
 import com.goldforest.domain.model.PlanType
 import com.goldforest.domain.usercase.CreatePlan
@@ -171,22 +170,27 @@ class PlanViewModel(
     fun setEndDate(year: Int, month: Int, day: Int) {
         val calendar = getDateCalendar(year, month, day)
         _endDateString.value = getDateFormatter().format(calendar.time)
+        endDateTime = calendar.timeInMillis
     }
 
     private fun setPeriodEndDate() {
         val calendar = getDateCalendar(_startDateString.value)
         startDateTime = calendar.timeInMillis
-        if (_planTermType.value == PlanTermType.PLAN_TERM_4WEEK) {
-            calendar.add(Calendar.WEEK_OF_YEAR, 4)
-            _endDateString.value = getDateFormatter().format(calendar.time)
-            endDateTime = calendar.timeInMillis
-        } else if (_planTermType.value == PlanTermType.PLAN_TERM_8WEEK) {
-            calendar.add(Calendar.WEEK_OF_YEAR, 8)
-            _endDateString.value = getDateFormatter().format(calendar.time)
-            endDateTime = calendar.timeInMillis
-        } else if (_planTermType.value == PLAN_TERM_NO_PERIOD) {
-            _endDateString.value = "-"
-            endDateTime = LONG_MAX_VALUE
+        when(_planTermType.value) {
+            PlanTermType.PLAN_TERM_4WEEK -> {
+                calendar.add(Calendar.WEEK_OF_YEAR, 4)
+                _endDateString.value = getDateFormatter().format(calendar.time)
+                endDateTime = calendar.timeInMillis
+            }
+            PlanTermType.PLAN_TERM_8WEEK, PlanTermType.PLAN_TERM_USER_SETTING  -> {
+                calendar.add(Calendar.WEEK_OF_YEAR, 8)
+                _endDateString.value = getDateFormatter().format(calendar.time)
+                endDateTime = calendar.timeInMillis
+            }
+            PlanTermType.PLAN_TERM_NO_PERIOD -> {
+                _endDateString.value = "-"
+                endDateTime = LONG_MAX_VALUE
+            }
         }
     }
 
@@ -219,7 +223,7 @@ class PlanViewModel(
     }
 
     fun isEndDateEnable() : Boolean {
-        return _planTermType.value != PLAN_TERM_NO_PERIOD
+        return _planTermType.value != PlanTermType.PLAN_TERM_NO_PERIOD
     }
 
     private fun getDateCalendar(year: Int, month: Int, day: Int): Calendar {
@@ -254,6 +258,11 @@ class PlanViewModel(
             e.printStackTrace()
         }
         return locale
+    }
+
+    fun validCheckEndDate() : Boolean {
+        Log.e("HJ","[HJ]startDate : $startDateTime, endDate : $endDateTime")
+        return startDateTime <= endDateTime
     }
 
     fun createPlan(planTitle : String) {
