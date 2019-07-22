@@ -11,7 +11,7 @@ fun Long.year(): Int {
 fun Long.month(): Int {
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = this
-    return calendar.get(Calendar.MONTH)
+    return calendar.get(Calendar.MONTH) + 1
 }
 
 fun Long.dayOfMonth(): Int {

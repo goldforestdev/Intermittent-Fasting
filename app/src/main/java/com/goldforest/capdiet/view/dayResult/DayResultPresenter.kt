@@ -41,10 +41,11 @@ class DayResultPresenter (
     }
 
     override fun save(dayResult: DayResult) {
+        Log.d(TAG, "[GF] save1 - $dayResult")
         launch {
             withContext(ioContext) {
-                Log.d(TAG, "[IF] save - $dayResult")
-//                createDayResult.save(dayResult)
+                Log.d(TAG, "[GF] save - $dayResult")
+                createDayResult.save(dayResult)
             }
 
             withContext(uiContext) {

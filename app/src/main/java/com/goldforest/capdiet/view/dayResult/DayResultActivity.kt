@@ -19,6 +19,7 @@ const val DAY_RESULT_M = "DAY_RESULT_MONTH"
 const val DAY_RESULT_D = "DAY_RESULT_DAY_OF_MONTH"
 const val DAY_RESULT_ID = "DAY_RESULT_ID"
 const val DAY_RESULT_PLAN_ID = "DAY_RESULT_PLAN_ID"
+const val DAY_RESULT_TYPE = "DAY_RESULT_TYPE"
 
 class DayResultActivity : AppCompatActivity(), DayResultContract.View {
 
@@ -31,6 +32,7 @@ class DayResultActivity : AppCompatActivity(), DayResultContract.View {
     private var month: Int = -1
     private var dayOfMonth: Int = -1
     private var planId: Long = -1
+    private var type: DayResultType = DayResultType.NOT_INPUT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,25 +54,23 @@ class DayResultActivity : AppCompatActivity(), DayResultContract.View {
         month = intent.getIntExtra(DAY_RESULT_M, -1)
         dayOfMonth = intent.getIntExtra(DAY_RESULT_D, -1)
         planId = intent.getLongExtra(DAY_RESULT_PLAN_ID, -1L)
+        type = intent.getSerializableExtra(DAY_RESULT_TYPE) as DayResultType
 
         showDateTime()
 
         Log.d(TAG, "[GF] onViewCreated - dayResultId: $dayResultId")
 
-        /**
-         * Temp code - for test
-         */
-//        if (dayResultId == INVALID_DATA) {
-//            showEditView(true)
-//        } else {
-//            presenter.getDayResult(dayResultId)
-//        }
-        showEditView(true)
+        if (type == DayResultType.NOT_INPUT) {
+            showEditView(true)
+        } else {
+            presenter.getDayResult(dayResultId)
+        }
 
         btnSave.setOnClickListener { saveDayResult() }
     }
 
     private fun saveDayResult() {
+        Log.d(TAG, "[GF] saveDayResult")
         val id = if (dayResultId == INVALID_DATA) System.currentTimeMillis() else dayResultId
         val type = if (rBtnSuccess.isChecked) DayResultType.SUCCESS else DayResultType.FAILED
         val dayResult = DayResult(

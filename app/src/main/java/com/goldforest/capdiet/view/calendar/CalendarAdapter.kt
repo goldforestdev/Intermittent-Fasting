@@ -1,5 +1,6 @@
 package com.goldforest.capdiet.view.calendar
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,9 @@ class CalendarAdapter(
         val dayResult = dateList[position]
 
         holder.tvDate.text = "${dayResult.dayOfMonth}"
+        if (dayResult.planId != INVALID_DATA) {
+            holder.tvDate.setTypeface(null, Typeface.BOLD)
+        }
 
         if (dayResult.type != DayResultType.NOT_INPUT) {
             holder.ivStatus.setImageResource(dayResult.getStatusIcon())
