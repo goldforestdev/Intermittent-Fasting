@@ -64,8 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/success_details"
-                android:textColor="@color/green_dark"
-                android:drawableStart="@drawable/ic_check"
+                android:textColor="@color/selector_success"
+                android:drawableStart="@drawable/selector_icon_success"
                 android:drawablePadding="8dp"
                 android:checked="true"
                 android:padding="12dp"/>
@@ -79,8 +79,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="64dp"
                 android:text="@string/failure_details"
-                android:textColor="@color/red_dark"
-                android:drawableStart="@drawable/ic_clear"
+                android:textColor="@color/selector_failure"
+                android:drawableStart="@drawable/selector_icon_failure"
                 android:drawablePadding="8dp"
                 android:padding="12dp"/>
     </RadioGroup>

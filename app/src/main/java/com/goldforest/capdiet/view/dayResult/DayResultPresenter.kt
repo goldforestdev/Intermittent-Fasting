@@ -2,6 +2,7 @@ package com.goldforest.capdiet.view.dayResult
 
 import android.util.Log
 import com.goldforest.domain.model.DayResult
+import com.goldforest.domain.model.DayResultType
 import com.goldforest.domain.usercase.CreateDayResult
 import com.goldforest.domain.usercase.GetDayResult
 import kotlinx.coroutines.*
@@ -14,11 +15,11 @@ class DayResultPresenter (
     private val ioContext: CoroutineContext = Dispatchers.IO
 ): DayResultContract.Presenter, CoroutineScope {
 
-    private val TAG = DayResultPresenter::class.java.simpleName
-
     override val coroutineContext: CoroutineContext = Job() + ioContext
 
     private var view: DayResultContract.View? = null
+
+    private lateinit var dayResult: DayResult
 
     override fun subscribe(v: DayResultContract.View) {
         view = v
@@ -30,7 +31,7 @@ class DayResultPresenter (
 
     override fun getDayResult(id: Long) {
         launch {
-            val dayResult = withContext(ioContext) {
+            dayResult = withContext(ioContext) {
                 getDayResult.get(id)
             }
 
@@ -41,16 +42,22 @@ class DayResultPresenter (
     }
 
     override fun save(dayResult: DayResult) {
-        Log.d(TAG, "[GF] save1 - $dayResult")
+        this.dayResult = dayResult
         launch {
             withContext(ioContext) {
-                Log.d(TAG, "[GF] save - $dayResult")
                 createDayResult.save(dayResult)
             }
 
             withContext(uiContext) {
                 view?.onDayResultLoaded(dayResult)
             }
+        }
+    }
+
+    override fun reset() {
+        if (::dayResult.isInitialized) {
+            dayResult.type = DayResultType.NOT_INPUT
+            save(dayResult)
         }
     }
 

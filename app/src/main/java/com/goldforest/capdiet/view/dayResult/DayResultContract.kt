@@ -15,5 +15,6 @@ interface DayResultContract {
         fun getDayResult(id: Long)
         fun save(dayResult: DayResult)
         fun update(dayResult: DayResult)
+        fun reset()
     }
 }

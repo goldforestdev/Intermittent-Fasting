@@ -2,6 +2,8 @@ package com.goldforest.capdiet.view.dayResult
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.goldforest.capdiet.R
@@ -69,6 +71,19 @@ class DayResultActivity : AppCompatActivity(), DayResultContract.View {
         btnSave.setOnClickListener { saveDayResult() }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.day_result, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_reset_day_result) {
+            presenter.reset()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun saveDayResult() {
         Log.d(TAG, "[GF] saveDayResult")
         val id = if (dayResultId == INVALID_DATA) System.currentTimeMillis() else dayResultId
@@ -111,10 +126,11 @@ class DayResultActivity : AppCompatActivity(), DayResultContract.View {
 
     override fun onDayResultLoaded(dayResult: DayResult) {
         showEditView(false)
-        if (dayResult.type == DayResultType.SUCCESS) {
-            groupSuccess.visibility = View.VISIBLE
-        } else {
-            groupFailure.visibility = View.VISIBLE
+
+        when(dayResult.type) {
+            DayResultType.SUCCESS -> groupSuccess.visibility = View.VISIBLE
+            DayResultType.FAILED -> groupFailure.visibility = View.VISIBLE
+            else -> showEditView(true)
         }
     }
 

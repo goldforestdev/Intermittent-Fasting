@@ -2,7 +2,6 @@ package com.goldforest.capdiet.view.plan
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
@@ -15,7 +14,6 @@ import com.goldforest.capdiet.view.plan.dialog.PlanConfirmDialog
 import com.goldforest.capdiet.view.plan.dialog.PlanDatePickerDialog
 import com.goldforest.capdiet.viewmodel.PlanViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Calendar
 
 
@@ -36,7 +34,7 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
         viewModel.initPlanDate()
         viewDataBinding.btDoneFragment.setOnClickListener {
             if (!viewModel.validCheckEndDate()) {
-                changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_failure_background)
+                changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_background_gray)
                 Toast.makeText(context, getString(R.string.end_date_setting_invalid), Toast.LENGTH_LONG).show()
             } else {
                 activity?.apply{
@@ -65,7 +63,7 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
                 viewDataBinding.tvEndDate.background = null
             } else {
                 viewDataBinding.tvEndDate.isEnabled = true
-                changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_success_background)
+                changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_background_gray)
             }
 
         })
@@ -84,7 +82,7 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
                      R.id.tvEndDate -> {
                          viewModel.setEndDate(year, month, day)
                          if (!viewModel.validCheckEndDate()) {
-                             changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_failure_background)
+                             changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_background_gray)
                          }
                      }
                  }
@@ -99,7 +97,7 @@ class PlanTermFragment : BaseFragment<FragmentPlanTermBinding, PlanViewModel>(),
             R.id.tvStartDate -> showDatePicker(v, viewModel.getDateCalendar(viewModel.startDateString.value))
             R.id.tvEndDate -> {
                 if(viewModel.termType.value == PlanViewModel.PlanTermType.PLAN_TERM_USER_SETTING) {
-                    changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_success_background)
+                    changeWidgetBackgroundColor(viewDataBinding.tvEndDate, R.drawable.round_corner_background_gray)
                 }
                 showDatePicker(v,viewModel.getDateCalendar(viewModel.endDateString.value))
             }
