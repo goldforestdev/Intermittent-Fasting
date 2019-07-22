@@ -59,4 +59,5 @@
     <string name="start">start</string>
     <string name="empty_title_notify">Please enter the title of the plan.</string>
     <string name="end_date_setting_invalid">The end date setting is invalid.</string>
+    <string name="reset">Reset</string>
 </resources>
