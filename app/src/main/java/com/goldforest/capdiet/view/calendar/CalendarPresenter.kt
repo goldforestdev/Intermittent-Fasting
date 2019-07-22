@@ -1,5 +1,6 @@
 package com.goldforest.capdiet.view.calendar
 
+import android.util.Log
 import com.goldforest.capdiet.common.dayOfMonth
 import com.goldforest.capdiet.common.get42Days
 import com.goldforest.capdiet.common.month
@@ -34,59 +35,46 @@ class CalendarPresenter(
     }
 
     override fun getDayResults(time: Long) {
-        val dayOfMonthList = time.get42Days()
-        val calendar = Calendar.getInstance()
-        val dayResultList = dayOfMonthList.map {
-            calendar.timeInMillis = it
-            DayResult(
-                it,
-                DayResultType.NOT_INPUT,
-                calendar.year(),
-                calendar.month(),
-                calendar.dayOfMonth(),
-                INVALID_DATA
-            )
-        }.toList()
+        var dayResultList = listOf<DayResult>()
 
         launch {
-            val plans = withContext(ioContext) { getPlans.get() }
-
             withContext(ioContext) {
+                val dayOfMonthList = time.get42Days()
+                val calendar = Calendar.getInstance()
+                dayResultList = dayOfMonthList.map {
+                    calendar.timeInMillis = it
+                    DayResult(
+                        it,
+                        DayResultType.NOT_INPUT,
+                        calendar.year(),
+                        calendar.month(),
+                        calendar.dayOfMonth(),
+                        INVALID_DATA
+                    )
+                }.toList()
+
+                val plans = getPlans.get()
                 getAllDayResults.get(dayOfMonthList.first(), dayOfMonthList.last())
-            }.forEach { dFromRepo ->
-                dayResultList.find {
-                    it.month == dFromRepo.month && it.dayOfMonth == dFromRepo.dayOfMonth
-                }?.apply {
-                    id = dFromRepo.id
-                    type = dFromRepo.type
-                    planId = dFromRepo.planId
-                }
-            }
-
-            dayResultList.filter { d -> d.planId == INVALID_DATA }
-                .forEach { d ->
-                    val plan = plans.find { p ->
-                        d.id >= p.startDateTime && d.id <= p.endDateTime
+                    .forEach { dFromRepo ->
+                        Log.d("TEST", "[GF] getDayResults - $dFromRepo")
+                        dayResultList.find {
+                            Log.d("TEST2", "[GF] getDayResults - \t$it")
+                            it.month == dFromRepo.month && it.dayOfMonth == dFromRepo.dayOfMonth
+                        }?.apply {
+                            id = dFromRepo.id
+                            type = dFromRepo.type
+                            planId = dFromRepo.planId
+                        }
                     }
-                    d.planId = plan?.id ?: INVALID_DATA
-                }
 
-            ///////////////////
-            // Only for test //
-            dayResultList[7].apply {
-                id = System.currentTimeMillis()
-                type = DayResultType.NOT_INPUT
+                dayResultList.filter { d -> d.planId == INVALID_DATA }
+                    .forEach { d ->
+                        val plan = plans.find { p ->
+                            d.id >= p.startDateTime && d.id <= p.endDateTime
+                        }
+                        d.planId = plan?.id ?: INVALID_DATA
+                    }
             }
-            dayResultList[8].apply {
-                id = System.currentTimeMillis()
-                type = DayResultType.SUCCESS
-            }
-            dayResultList[9].apply {
-                id = System.currentTimeMillis()
-                type = DayResultType.FAILED
-            }
-            // Only for test //
-            ///////////////////
 
             withContext(uiContext) {
                 view?.onDayResultsLoaded(dayResultList)

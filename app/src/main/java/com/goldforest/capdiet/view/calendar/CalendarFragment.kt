@@ -66,10 +66,10 @@ class CalendarFragment : Fragment(), CalendarContract.View, CalendarAdapter.Cale
     }
 
     override fun onCalendarClick(dayResult: DayResult) {
-//        if (dayResult.planId == INVALID_DATA) {
-//            Toast.makeText(context, R.string.invalid_plan, Toast.LENGTH_SHORT).show()
-//            return
-//        }
+        if (dayResult.planId == INVALID_DATA) {
+            Toast.makeText(context, R.string.invalid_plan, Toast.LENGTH_SHORT).show()
+            return
+        }
 
         val intent = Intent(context, DayResultActivity::class.java)
             .putExtra(DAY_RESULT_ID, dayResult.id)
@@ -77,6 +77,7 @@ class CalendarFragment : Fragment(), CalendarContract.View, CalendarAdapter.Cale
             .putExtra(DAY_RESULT_M, dayResult.month)
             .putExtra(DAY_RESULT_D, dayResult.dayOfMonth)
             .putExtra(DAY_RESULT_PLAN_ID, dayResult.planId)
+            .putExtra(DAY_RESULT_TYPE, dayResult.type)
         startActivity(intent)
     }
 }
