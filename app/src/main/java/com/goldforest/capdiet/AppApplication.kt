@@ -15,5 +15,4 @@ class AppApplication : Application() {
             modules(DiModule)
         }
     }
-
 }
